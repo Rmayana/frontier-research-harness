@@ -1,0 +1,20 @@
+{
+  "name": "frontier-research-local",
+  "interface": {
+    "displayName": "Frontier Research Local"
+  },
+  "plugins": [
+    {
+      "name": "frontier-science-model",
+      "source": {
+        "source": "local",
+        "path": "./plugins/frontier-science-model"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Education & Research"
+    }
+  ]
+}

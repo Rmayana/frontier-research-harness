@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "frontier-science-model": {
+      "cwd": "../..",
+      "command": "uv",
+      "args": ["run", "python", "-m", "frontier_research_harness.adapters.scientific_model_mcp"]
+    }
+  }
+}

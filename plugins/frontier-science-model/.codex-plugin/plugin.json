@@ -1,0 +1,27 @@
+{
+  "name": "frontier-science-model",
+  "version": "0.2.0+codex.20260829132417",
+  "description": "A lightweight Codex research workspace with current evidence, external scientific models, and reproducible experiment records.",
+  "author": {
+    "name": "Rmayana"
+  },
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Frontier Science Model",
+    "shortDescription": "Lean goal research with external models",
+    "longDescription": "Gives Codex a small persistent workspace, scholarly search, validated external-model connections, and reproducible experiment storage while Codex remains the sole reasoning agent and chooses the research path naturally.",
+    "developerName": "Rmayana",
+    "category": "Education",
+    "capabilities": [
+      "Scientific reasoning",
+      "Direct scholarly database search",
+      "Research workspace",
+      "External scientific model execution",
+      "Reproducible experiment history"
+    ],
+    "defaultPrompt": [
+      "Understand my goal naturally, research the most effective and efficient route using current evidence and relevant external scientific models, and preserve only useful findings and reproducible runs."
+    ]
+  }
+}

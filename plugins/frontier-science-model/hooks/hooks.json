@@ -1,0 +1,32 @@
+{
+  "description": "Recover failed research tools and prevent completion without read evidence, an actual external-model run, and validated goal coverage.",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "^mcp__frontier[-_]science[-_]model__.*$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$PLUGIN_ROOT/hooks/research_execution_guard.py\"",
+            "commandWindows": "python \"$env:PLUGIN_ROOT\\hooks\\research_execution_guard.py\"",
+            "timeout": 10,
+            "statusMessage": "Checking research tool execution"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$PLUGIN_ROOT/hooks/research_execution_guard.py\"",
+            "commandWindows": "python \"$env:PLUGIN_ROOT\\hooks\\research_execution_guard.py\"",
+            "timeout": 10,
+            "statusMessage": "Checking research completion"
+          }
+        ]
+      }
+    ]
+  }
+}

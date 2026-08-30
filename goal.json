@@ -1,0 +1,188 @@
+{
+  "schema_version": 1,
+  "goal_id": "combat_capability_beterbiev_style_v1",
+  "revision": 1,
+  "status": "USER_CONFIRMED",
+  "north_star": "체중 110–120 kg 상태에서 24개월 안에 아래 전투 피지컬 목표를 동시에 달성하고, 아르투르 베테르비예프의 복싱 스타일을 실제 복싱 수행에서 동일하게 구현한다.",
+  "horizon": {
+    "duration": 24,
+    "unit": "months",
+    "begins": "approved strategy activation date"
+  },
+  "performance_context": {
+    "target_body_mass_kg": "110–120",
+    "physical_target_count": 27,
+    "all_targets_required_simultaneously": true
+  },
+  "physical_targets": [
+    {
+      "id": "imtp_peak_force",
+      "capability": "최대힘",
+      "metric": "IMTP peak force",
+      "target": "60–70 N/kg"
+    },
+    {
+      "id": "rfd_0_50_ms",
+      "capability": "초기 힘 발휘",
+      "metric": "RFD 0–50 ms",
+      "target": "≥25 kN/s"
+    },
+    {
+      "id": "rfd_0_250_ms",
+      "capability": "초기 힘 발휘",
+      "metric": "RFD 0–250 ms",
+      "target": "≥12–15 kN/s"
+    },
+    {
+      "id": "cmj_height",
+      "capability": "폭발력",
+      "metric": "CMJ",
+      "target": "100 cm+"
+    },
+    {
+      "id": "cmj_relative_peak_power",
+      "capability": "전신 파워",
+      "metric": "CMJ peak power",
+      "target": "≥65 W/kg"
+    },
+    {
+      "id": "cmj_absolute_peak_power",
+      "capability": "전신 파워",
+      "metric": "absolute peak power",
+      "target": "≥7.5–8.5 kW"
+    },
+    {
+      "id": "wingate_peak_power",
+      "capability": "무산소 폭발력",
+      "metric": "Wingate peak",
+      "target": "18–20 W/kg"
+    },
+    {
+      "id": "wingate_mean_power",
+      "capability": "무산소 지속력",
+      "metric": "Wingate mean",
+      "target": "11–12 W/kg"
+    },
+    {
+      "id": "repeated_explosive_output_decrement",
+      "capability": "반복출력",
+      "metric": "반복 최대폭발 출력 감소",
+      "target": "≤5%"
+    },
+    {
+      "id": "one_hand_crush_grip",
+      "capability": "그립 최대힘",
+      "metric": "한손 crush",
+      "target": "110–120+ kgf"
+    },
+    {
+      "id": "grip_endurance_60s",
+      "capability": "그립 지속력",
+      "metric": "60초 반복/등척성",
+      "target": "초기 최대힘의 ≥70% 유지"
+    },
+    {
+      "id": "neck_flexion_force",
+      "capability": "목 최대힘",
+      "metric": "굴곡",
+      "target": "700–800 N"
+    },
+    {
+      "id": "neck_extension_force",
+      "capability": "목 최대힘",
+      "metric": "신전",
+      "target": "950–1100 N"
+    },
+    {
+      "id": "neck_lateral_flexion_force",
+      "capability": "목 최대힘",
+      "metric": "좌·우 측굴",
+      "target": "800–950 N급"
+    },
+    {
+      "id": "trunk_rotation_antirotation_torque",
+      "capability": "몸통 힘",
+      "metric": "최대 항회전/회전 torque",
+      "target": "동체급 최상위 1% 이상"
+    },
+    {
+      "id": "isometric_force_retention_30s",
+      "capability": "등척성 지속력",
+      "metric": "최대 등척성 힘 유지",
+      "target": "30초 후 ≥70%"
+    },
+    {
+      "id": "simple_visual_reaction_time",
+      "capability": "반응속도",
+      "metric": "단순 시각 반응",
+      "target": "≤130–140 ms"
+    },
+    {
+      "id": "choice_reaction_time",
+      "capability": "선택 반응",
+      "metric": "choice RT",
+      "target": "≤180–200 ms"
+    },
+    {
+      "id": "dynamic_balance_asymmetry",
+      "capability": "동적 균형",
+      "metric": "좌우 차이",
+      "target": "≤3%"
+    },
+    {
+      "id": "whole_body_force_power_asymmetry",
+      "capability": "전신 비대칭",
+      "metric": "주요 힘·파워 차이",
+      "target": "≤3%"
+    },
+    {
+      "id": "fatigued_dynamic_joint_stability_decrement",
+      "capability": "관절 안정성",
+      "metric": "피로 전후 동적 안정성 감소",
+      "target": "≤5%"
+    },
+    {
+      "id": "post_high_intensity_max_force_decrement",
+      "capability": "피로 저항성",
+      "metric": "고강도 후 최대힘 감소",
+      "target": "≤5%"
+    },
+    {
+      "id": "post_high_intensity_explosive_power_decrement",
+      "capability": "피로 저항성",
+      "metric": "고강도 후 폭발력 감소",
+      "target": "≤8%"
+    },
+    {
+      "id": "vo2max",
+      "capability": "유산소 능력",
+      "metric": "VO₂max",
+      "target": "60–70 ml/kg/min"
+    },
+    {
+      "id": "heart_rate_recovery_1min",
+      "capability": "회복 능력",
+      "metric": "HR recovery 1 min",
+      "target": "≥40–50 bpm 감소"
+    },
+    {
+      "id": "annual_training_adherence",
+      "capability": "훈련 내구성",
+      "metric": "계획 훈련 수행률",
+      "target": "≥95%/년"
+    },
+    {
+      "id": "major_injury_count",
+      "capability": "부상 내구성",
+      "metric": "장기 훈련 중 중대 부상",
+      "target": "0회"
+    }
+  ],
+  "technical_goal": {
+    "discipline": "boxing",
+    "reference_athlete": "Artur Beterbiev",
+    "target": "아르투르 베테르비예프의 복싱 스타일을 실제 수행에서 동일하게 구현",
+    "meaning": "외형적 모방이 아니라 스탠스·가드·압박·거리 절단·타격 선택·콤비네이션·공수 전환·리듬·타이밍·인파이팅과 상대 반응에 대한 의사결정까지 실제 스파링 및 시합 상황에서 동일하게 구현한다.",
+    "horizon": "24 months"
+  }
+}

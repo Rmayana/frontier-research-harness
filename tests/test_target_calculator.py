@@ -4,6 +4,7 @@ import unittest
 
 from frontier_research_harness.target_calculator import (
     CalculationStatus,
+    TARGET_REQUIRED_UNITS,
     TARGET_SPECS,
     TargetCalculationRequest,
     calculate_target,
@@ -13,6 +14,9 @@ from frontier_research_harness.target_calculator import (
 class TargetCalculatorTests(unittest.TestCase):
     def test_all_fixed_physical_targets_have_a_formula_contract(self):
         self.assertEqual(len(TARGET_SPECS), 27)
+        self.assertEqual(set(TARGET_REQUIRED_UNITS), set(TARGET_SPECS))
+        for target_id, spec in TARGET_SPECS.items():
+            self.assertEqual(set(TARGET_REQUIRED_UNITS[target_id]), set(spec.required))
 
     def test_imtp_normalization_is_exact_and_unit_checked(self):
         result = calculate_target(TargetCalculationRequest(
@@ -52,6 +56,10 @@ class TargetCalculatorTests(unittest.TestCase):
         self.assertEqual(
             result.missing_inputs,
             ("oxygen_consumption_ml_min", "body_mass_kg"),
+        )
+        self.assertEqual(
+            result.details["required_units"],
+            {"oxygen_consumption_ml_min": "ml/min", "body_mass_kg": "kg"},
         )
 
     def test_asymmetry_and_adherence_boundaries(self):

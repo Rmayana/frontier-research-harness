@@ -269,6 +269,37 @@ TARGET_SPECS: dict[str, _TargetSpec] = {
 }
 
 
+TARGET_REQUIRED_UNITS: dict[str, dict[str, str]] = {
+    "imtp_peak_force": {"peak_force_n": "N", "body_mass_kg": "kg"},
+    "rfd_0_50_ms": {"force_onset_n": "N", "force_endpoint_n": "N"},
+    "rfd_0_250_ms": {"force_onset_n": "N", "force_endpoint_n": "N"},
+    "cmj_height": {"flight_time_s": "s"},
+    "cmj_relative_peak_power": {"peak_power_w": "W", "body_mass_kg": "kg"},
+    "cmj_absolute_peak_power": {"peak_power_w": "W"},
+    "wingate_peak_power": {"peak_power_w": "W", "body_mass_kg": "kg"},
+    "wingate_mean_power": {"mean_power_w": "W", "body_mass_kg": "kg"},
+    "repeated_explosive_output_decrement": {"outputs_w": "W"},
+    "one_hand_crush_grip": {"grip_kgf": "kgf"},
+    "grip_endurance_60s": {"initial_value": "same declared unit", "final_value": "same declared unit"},
+    "neck_flexion_force": {"force_n": "N"},
+    "neck_extension_force": {"force_n": "N"},
+    "neck_lateral_flexion_force": {"left_force_n": "N", "right_force_n": "N"},
+    "trunk_rotation_antirotation_torque": {"reference_percentile": "percentile"},
+    "isometric_force_retention_30s": {"initial_value": "same declared unit", "final_value": "same declared unit"},
+    "simple_visual_reaction_time": {"reaction_time_ms": "ms"},
+    "choice_reaction_time": {"reaction_time_ms": "ms"},
+    "dynamic_balance_asymmetry": {"left_value": "same declared unit", "right_value": "same declared unit"},
+    "whole_body_force_power_asymmetry": {"left_value": "same declared unit", "right_value": "same declared unit"},
+    "fatigued_dynamic_joint_stability_decrement": {"before_value": "same declared unit", "after_value": "same declared unit"},
+    "post_high_intensity_max_force_decrement": {"before_value": "same declared unit", "after_value": "same declared unit"},
+    "post_high_intensity_explosive_power_decrement": {"before_value": "same declared unit", "after_value": "same declared unit"},
+    "vo2max": {"oxygen_consumption_ml_min": "ml/min", "body_mass_kg": "kg"},
+    "heart_rate_recovery_1min": {"exercise_end_bpm": "bpm", "heart_rate_1min_bpm": "bpm"},
+    "annual_training_adherence": {"completed_sessions": "count", "planned_sessions": "count"},
+    "major_injury_count": {"major_injury_count": "count"},
+}
+
+
 def calculate_target(request: TargetCalculationRequest) -> TargetCalculationResult:
     try:
         spec = TARGET_SPECS[request.target_id]
@@ -288,7 +319,7 @@ def calculate_target(request: TargetCalculationRequest) -> TargetCalculationResu
             **base,
             status=CalculationStatus.INPUT_REQUIRED,
             missing_inputs=missing,
-            details={"required_units": {name: "method-specific; call with all inputs to validate" for name in spec.required}},
+            details={"required_units": TARGET_REQUIRED_UNITS[request.target_id]},
         )
     value, details = spec.compute(request)
     if not math.isfinite(value):

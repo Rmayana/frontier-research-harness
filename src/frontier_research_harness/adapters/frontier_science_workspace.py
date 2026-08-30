@@ -27,6 +27,7 @@ from frontier_research_harness.model_relevance import (
 )
 from frontier_research_harness.target_calculator import (
     CalculationStatus,
+    TARGET_REQUIRED_UNITS,
     TARGET_SPECS,
     TargetCalculationRequest,
     calculate_target as calculate_target_metric,
@@ -1090,6 +1091,7 @@ class FrontierScienceWorkspace:
                 targets.append({
                     "target_id": target_id, "status": "MEASUREMENT_REQUIRED",
                     "target": spec.target, "required_inputs": list(spec.required),
+                    "required_units": TARGET_REQUIRED_UNITS[target_id],
                     "latest_calculation_id": None, "meets_target_floor": None,
                 })
                 continue
@@ -1099,6 +1101,7 @@ class FrontierScienceWorkspace:
                     "TARGET_MET" if output.get("meets_target_floor") is True else "GAP_OBSERVED"
                 ),
                 "target": spec.target, "required_inputs": list(spec.required),
+                "required_units": TARGET_REQUIRED_UNITS[target_id],
                 "latest_calculation_id": row["calculation_id"],
                 "created_at": row["created_at"], "value": output.get("value"),
                 "unit": output.get("unit"),

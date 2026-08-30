@@ -82,7 +82,9 @@ with reference values.
 The highest-priority OpenSim, Pulse, and FEBio paths add engine-specific typed
 study inputs above the generic registered-runtime bridge. They validate
 workspace-local artifacts and calibration labels while leaving question choice
-and result interpretation to Codex.
+and result interpretation to Codex. Deterministic normalizers expose bounded
+engine observables plus the original receipt: they parse neither convergence
+nor simulated peaks as personal efficacy, injury risk, or adaptation.
 
 A Personal Combat Athlete Digital Twin may federate these external models
 through strict exchange contracts. Every exchanged value carries units, time

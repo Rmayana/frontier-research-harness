@@ -1,15 +1,20 @@
 [submodule "vendor/FEBio"]
 	path = vendor/FEBio
 	url = https://github.com/febiosoftware/FEBio.git
+	ignore = untracked
 [submodule "vendor/Human-GEM"]
 	path = vendor/Human-GEM
 	url = https://github.com/SysBioChalmers/Human-GEM.git
+	ignore = untracked
 [submodule "vendor/mitochondria-metabolism"]
 	path = vendor/mitochondria-metabolism
 	url = https://github.com/pfizer-opensource/mitochondria-metabolism.git
+	ignore = untracked
 [submodule "vendor/opensim-core"]
 	path = vendor/opensim-core
 	url = https://github.com/opensim-org/opensim-core.git
+	ignore = untracked
 [submodule "vendor/pulse-engine"]
 	path = vendor/pulse-engine
 	url = https://gitlab.kitware.com/physiology/engine.git
+	ignore = untracked

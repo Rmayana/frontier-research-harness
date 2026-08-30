@@ -67,17 +67,33 @@ measurement-derived results separately from biological forecasts.
 `assess_targets` projects the latest immutable calculations across all 27
 physical targets as `TARGET_MET`, `GAP_OBSERVED`, or `MEASUREMENT_REQUIRED`.
 It is a live readiness view, not a persisted plan or an adaptation forecast.
+`calculate_targets` accepts a portfolio of distinct measurements and preserves
+valid calculations even when a sibling is missing or invalid.
 
 OpenSim, Pulse, and FEBio expose typed study contracts in addition to the
 low-level registered-engine boundary. The contracts validate workspace-local
 input/output artifacts and require an explicit reference or personal-
 observation calibration label. Personal OpenSim studies also require a saved
 state snapshot; a runtime smoke case cannot silently become a personal study.
+Typed runs return normalized observables alongside the original engine receipt:
+OpenSim joint-reaction vectors and magnitudes, Pulse time-series summaries and
+explicit-window heart-rate recovery, and FEBio convergence/termination and
+artifact hashes. These observables retain model-specific limitations and are
+not converted into personal endpoints automatically.
 
 Timestamped boxing fight/training observations can be retained through
 `save_footage_observation`. Each record preserves the inspected interval,
 situation, observed actions, explicit repeated-pattern status, possible drills,
 applicability, limitations, and a content hash as primary-source evidence.
+Saved observations can be listed and compared by their exact retained action
+and context labels without assigning a technique score or inventing semantic
+similarity.
+
+Run live reference-only acceptance checks for the three typed core paths with:
+
+```powershell
+uv run python scripts/validate_typed_core_models.py
+```
 
 The active user-confirmed target is stored in [goal.json](goal.json).
 

@@ -1,188 +1,91 @@
 {
-  "schema_version": 1,
-  "goal_id": "combat_capability_beterbiev_style_v1",
-  "revision": 1,
+  "schema_version": 2,
+  "goal_id": "whole_body_equal_weight_frontier_v5",
+  "revision": 5,
   "status": "USER_CONFIRMED",
-  "north_star": "체중 110–120 kg 상태에서 24개월 안에 아래 전투 피지컬 목표를 동시에 달성하고, 아르투르 베테르비예프의 복싱 스타일을 실제 복싱 수행에서 동일하게 구현한다.",
-  "horizon": {
-    "duration": 24,
-    "unit": "months",
-    "begins": "approved strategy activation date"
-  },
+  "north_star": "체중 110–120 kg에서 골격을 포함한 전신의 구조·생리·운동능력을 함께 연구하고, 단위·크기·좋아지는 방향을 정규화한 지표들의 동일 가중 산술평균이 최대가 되는 동시 달성 가능한 신체 조합을 탐색하고 그 실현 경로를 찾는다. 인간 근거와 검증된 모델로 능력 간 상충·상승 효과를 계산하고 조합을 반복 탐색한다. 기존 최고 기록을 고정 상한으로 간주하지 않으며, 모델과 탐색 범위 안의 최고 결과를 실제 인간의 확정된 한계와 구분한다.",
+  "horizon": null,
   "performance_context": {
     "target_body_mass_kg": "110–120",
-    "physical_target_count": 27,
-    "all_targets_required_simultaneously": true
+    "physical_target_count": null,
+    "all_targets_required_simultaneously": null,
+    "combat_task_count": null,
+    "functional_component_count": null,
+    "quantitative_subtarget_count": null,
+    "all_physical_targets_required_simultaneously": null,
+    "combat_transfer_required": null,
+    "single_metric_cannot_establish_success": true,
+    "whole_person_combat_capability_target": null,
+    "all_capacities_considered_jointly": true
   },
-  "physical_targets": [
-    {
-      "id": "imtp_peak_force",
-      "capability": "최대힘",
-      "metric": "IMTP peak force",
-      "target": "60–70 N/kg"
-    },
-    {
-      "id": "rfd_0_50_ms",
-      "capability": "초기 힘 발휘",
-      "metric": "RFD 0–50 ms",
-      "target": "≥25 kN/s"
-    },
-    {
-      "id": "rfd_0_250_ms",
-      "capability": "초기 힘 발휘",
-      "metric": "RFD 0–250 ms",
-      "target": "≥12–15 kN/s"
-    },
-    {
-      "id": "cmj_height",
-      "capability": "폭발력",
-      "metric": "CMJ",
-      "target": "100 cm+"
-    },
-    {
-      "id": "cmj_relative_peak_power",
-      "capability": "전신 파워",
-      "metric": "CMJ peak power",
-      "target": "≥65 W/kg"
-    },
-    {
-      "id": "cmj_absolute_peak_power",
-      "capability": "전신 파워",
-      "metric": "absolute peak power",
-      "target": "≥7.5–8.5 kW"
-    },
-    {
-      "id": "wingate_peak_power",
-      "capability": "무산소 폭발력",
-      "metric": "Wingate peak",
-      "target": "18–20 W/kg"
-    },
-    {
-      "id": "wingate_mean_power",
-      "capability": "무산소 지속력",
-      "metric": "Wingate mean",
-      "target": "11–12 W/kg"
-    },
-    {
-      "id": "repeated_explosive_output_decrement",
-      "capability": "반복출력",
-      "metric": "반복 최대폭발 출력 감소",
-      "target": "≤5%"
-    },
-    {
-      "id": "one_hand_crush_grip",
-      "capability": "그립 최대힘",
-      "metric": "한손 crush",
-      "target": "110–120+ kgf"
-    },
-    {
-      "id": "grip_endurance_60s",
-      "capability": "그립 지속력",
-      "metric": "60초 반복/등척성",
-      "target": "초기 최대힘의 ≥70% 유지"
-    },
-    {
-      "id": "neck_flexion_force",
-      "capability": "목 최대힘",
-      "metric": "굴곡",
-      "target": "700–800 N"
-    },
-    {
-      "id": "neck_extension_force",
-      "capability": "목 최대힘",
-      "metric": "신전",
-      "target": "950–1100 N"
-    },
-    {
-      "id": "neck_lateral_flexion_force",
-      "capability": "목 최대힘",
-      "metric": "좌·우 측굴",
-      "target": "800–950 N급"
-    },
-    {
-      "id": "trunk_rotation_antirotation_torque",
-      "capability": "몸통 힘",
-      "metric": "최대 항회전/회전 torque",
-      "target": "동체급 최상위 1% 이상"
-    },
-    {
-      "id": "isometric_force_retention_30s",
-      "capability": "등척성 지속력",
-      "metric": "최대 등척성 힘 유지",
-      "target": "30초 후 ≥70%"
-    },
-    {
-      "id": "simple_visual_reaction_time",
-      "capability": "반응속도",
-      "metric": "단순 시각 반응",
-      "target": "≤130–140 ms"
-    },
-    {
-      "id": "choice_reaction_time",
-      "capability": "선택 반응",
-      "metric": "choice RT",
-      "target": "≤180–200 ms"
-    },
-    {
-      "id": "dynamic_balance_asymmetry",
-      "capability": "동적 균형",
-      "metric": "좌우 차이",
-      "target": "≤3%"
-    },
-    {
-      "id": "whole_body_force_power_asymmetry",
-      "capability": "전신 비대칭",
-      "metric": "주요 힘·파워 차이",
-      "target": "≤3%"
-    },
-    {
-      "id": "fatigued_dynamic_joint_stability_decrement",
-      "capability": "관절 안정성",
-      "metric": "피로 전후 동적 안정성 감소",
-      "target": "≤5%"
-    },
-    {
-      "id": "post_high_intensity_max_force_decrement",
-      "capability": "피로 저항성",
-      "metric": "고강도 후 최대힘 감소",
-      "target": "≤5%"
-    },
-    {
-      "id": "post_high_intensity_explosive_power_decrement",
-      "capability": "피로 저항성",
-      "metric": "고강도 후 폭발력 감소",
-      "target": "≤8%"
-    },
-    {
-      "id": "vo2max",
-      "capability": "유산소 능력",
-      "metric": "VO₂max",
-      "target": "60–70 ml/kg/min"
-    },
-    {
-      "id": "heart_rate_recovery_1min",
-      "capability": "회복 능력",
-      "metric": "HR recovery 1 min",
-      "target": "≥40–50 bpm 감소"
-    },
-    {
-      "id": "annual_training_adherence",
-      "capability": "훈련 내구성",
-      "metric": "계획 훈련 수행률",
-      "target": "≥95%/년"
-    },
-    {
-      "id": "major_injury_count",
-      "capability": "부상 내구성",
-      "metric": "장기 훈련 중 중대 부상",
-      "target": "0회"
-    }
+  "physical_targets": [],
+  "technical_goal": null,
+  "research_structure": null,
+  "optimization_objective": {
+    "aggregation": "equal_weight_arithmetic_mean",
+    "weighting_unit": "each distinct included metric",
+    "normalization": "단위와 수치 크기 및 개선 방향을 맞춘 무차원 점수를 사용한다. 비교하는 후보에는 동일한 지표 집합과 기준 및 변환을 적용한다.",
+    "search": "원하는 종합 성능에서 신체 구조·생리·기전과 실현 방법을 역설계하고, 근거 있는 변수 조합을 모델로 순방향 계산하여 종합점수를 반복 최대화한다. 전체와 세부를 오가는 연구로 상충·상승 효과 및 모델 연결을 계속 재검토한다.",
+    "tradeoffs": "유효한 제약 안에서는 일부 지표의 감소를 다른 지표의 증가로 상쇄할 수 있다. 최약점 우선이나 파레토 후보 제시로 사용자의 종합점수 목적을 대체하지 않는다.",
+    "not_yet_fixed": "최종 지표 집합, 기준값, 범위형 및 0 목표 지표의 변환, 생물학적 제약과 모델 연결은 연구로 명시해야 한다. 첨부 표는 검토할 후보 기준이며 확정된 인간 한계가 아니다.",
+    "claim_boundary": "미예측 지표를 임의의 값으로 채우거나 생략한 부분 점수를 전신 종합점수로 제시하지 않는다. 탐색 중 최고값과 전역 최대값의 증명을 구분한다."
+  },
+  "change_authorization": {
+    "authorized_by": "user",
+    "scope": "사용자 승인에 따라 정규화한 지표별 동일 가중 종합점수를 최대화하는 전신 조합 탐색으로 목표 구체화",
+    "preserved_intent": [
+      "110–120 kg",
+      "골격 포함 전신 발전",
+      "동시 달성",
+      "실제 적용 전 승인"
+    ],
+    "date": "2026-09-09",
+    "source": "종합점수를 같은 비율로해서 종합점수를 가장 높이는 조합을 시뮬로 찾고싶다니까; 단위 차이의 공평한 보정 및 상충관계를 반영한 반복 최대화 논의 후: 평그전에 목표 바꾸고 내가 시스템에 원하는게 뭔지 알아? 뭐 어떻게 연구하고 이런거",
+    "supersedes": "whole_body_human_frontier_v4"
+  },
+  "physical_goal": null,
+  "measurement_benchmarks": [],
+  "success_conditions": [
+    "목표 체중 110–120 kg에서 전신 지표의 정규화된 동일 가중 종합점수를 높이는 동시 달성 조합을 찾고, 실제 실현 가능성을 검증한다. 모든 지표가 개별 최고값을 동시에 달성해야 한다는 뜻은 아니다.",
+    "골격의 길이·굵기·형태·미세구조를 포함한 신체 구성과 생리는 연구 및 역설계 대상이다. 내부 수치 증가는 기능적 이득과 함께 평가한다.",
+    "단기 훈련량 자체보다 일별 성장과 장기 누적 발전을 함께 추구한다."
   ],
-  "technical_goal": {
-    "discipline": "boxing",
-    "reference_athlete": "Artur Beterbiev",
-    "target": "아르투르 베테르비예프의 복싱 스타일을 실제 수행에서 동일하게 구현",
-    "meaning": "외형적 모방이 아니라 스탠스·가드·압박·거리 절단·타격 선택·콤비네이션·공수 전환·리듬·타이밍·인파이팅과 상대 반응에 대한 의사결정까지 실제 스파링 및 시합 상황에서 동일하게 구현한다.",
-    "horizon": "24 months"
-  }
+  "technical_context": {
+    "current": "boxing",
+    "future": "MMA",
+    "role": "전투 기술은 병행 관심사이자 신체 능력의 적용 영역; 특정 선수의 동일 구현은 새 목표의 필수 성공조건이 아니다."
+  },
+  "prior_numerical_anchors": {
+    "status": "HISTORICAL_REFERENCE_NOT_BINDING",
+    "policy": "이전 7개 목표와 27개 수치는 새 목표의 범위나 입증된 인간 한계를 대신하지 않는다."
+  },
+  "research_scope": [
+    "skeletal structure",
+    "muscle architecture and function",
+    "tendons ligaments cartilage joints",
+    "neural and sensorimotor systems",
+    "cardiorespiratory and blood",
+    "cellular energy and metabolism",
+    "endocrine regulation",
+    "nutrition digestion and organ support",
+    "sleep repair immunity thermoregulation"
+  ],
+  "action_boundary": "연구 및 시뮬레이션만 승인됨. 실제 훈련·식단·의료·약물·보충제 적용은 별도 사용자 승인 필요.",
+  "research_artifacts": {
+    "target_table": "docs/TARGETS.md",
+    "score_table": "docs/SCORECARD.md",
+    "supplied_source": "docs/references/frontier-v2-user-source.md",
+    "source_sha256": "68c6d679d5460bfa33a58647da0a1253cc94a2eebdb7896ae6194bfdec62857d",
+    "target_status": "USER_SUPPLIED_RESEARCH_TARGETS_NOT_VERIFIED_LIMITS",
+    "score_status": "NOT_COMPUTED",
+    "active_target_table": "docs/ACTIVE_TARGETS.md",
+    "active_target_data": "docs/ACTIVE_TARGETS.json",
+    "active_target_status": "USER_APPROVED_RESEARCH_TARGET_CANDIDATE",
+    "active_target_approval": {
+      "date": "2026-09-10",
+      "source": "아니 일단 수치 빠진거 없으면 목표로 저장하자",
+      "scope": "Save discussed provisional candidate, retain all original rows and mark unresolved numeric targets; do not change NorthStar or scoring normalization."
+    }
+  },
+  "research_intent": "가장 중요한 연구 원칙은 Codex가 자연스럽게 생각하며 전체 목표와 세부 기전 사이, 그리고 서로 영향을 주는 분야 사이를 자유롭게 넘나들면서 질문하고 연구하는 것이다. 원하는 종합 성능에서 필요한 신체 구조·생리·기전·실현 방법을 역설계하고, 그 변화의 전신 결과를 순방향으로 검증한다. 결과·모순·미해결 연결에서 다음 질문을 스스로 만들어 설명·가정·모델·조합·실현 경로를 수정한다. 역설계는 고정된 단계나 질문 목록이 아니며 수치 최적화는 이 연구의 한 도구다."
 }

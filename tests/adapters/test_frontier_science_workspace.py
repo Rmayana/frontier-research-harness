@@ -6,12 +6,15 @@ import json
 import subprocess
 import sys
 from pathlib import Path
+from adapters.legacy_records import seed_experiment, seed_calculation
 from unittest.mock import patch
 
 from frontier_research_harness.adapters.frontier_science_workspace import FrontierScienceWorkspace
 
 
-def scholarly_evidence(identifier: str = "123") -> dict:
+def scholarly_evidence(
+    identifier: str = "123", target_ids: list[str] | None = None
+) -> dict:
     fetched = {
         "source": "pubmed",
         "identifier": identifier,
@@ -29,20 +32,67 @@ def scholarly_evidence(identifier: str = "123") -> dict:
         "retained_claims": ["The source supports one bounded test claim."],
         "applicability": "Used only for the selected target in this test.",
         "limitations": ["Synthetic fixture, not a scientific conclusion."],
+        "target_ids": target_ids or ["vo2max"],
+        "evidence_passages": [{
+            "excerpt": fetched["abstract"],
+            "locator": "abstract",
+            "supports_claim": "The source supports one bounded test claim.",
+        }],
+        "quality_appraisal": {
+            "source_type": "synthetic test record",
+            "population": "synthetic fixture",
+            "methods": "fixture construction",
+            "results": "one bounded fixture claim",
+            "directness": "indirect",
+            "bias_or_quality_limits": ["Synthetic fixture, not scientific evidence."],
+        },
         "fetched_record": fetched,
     }
 
 
+def research_item(statement: str, target_id: str = "vo2max", **receipts: object) -> dict:
+    return {
+        "statement": statement,
+        "support_status": receipts.pop("support_status", "UNKNOWN"),
+        "target_ids": [target_id],
+        **receipts,
+    }
+
+
 class FrontierScienceWorkspaceTests(unittest.TestCase):
+    def setUp(self):
+        # Legacy contract tests must not force the user's live goal back to v3.
+        from frontier_research_harness.adapters import _workspace_common as module
+        goal = json.loads((Path(__file__).parents[1] / 'fixtures/legacy-detailed-goal.json').read_text(encoding='utf-8'))
+        bootstrap = FrontierScienceWorkspace._bootstrap_document
+        read_record = module._read_json_record
+        def seed(workspace):
+            document = bootstrap(workspace)
+            document['fixed_goal'] = goal
+            return document
+        bootstrap_patch = patch.object(FrontierScienceWorkspace, '_bootstrap_document', seed)
+        read_patch = patch.object(module, '_read_json_record', side_effect=lambda path: goal if path == module.PROJECT_ROOT / 'goal.json' else read_record(path))
+        for patcher in (bootstrap_patch, read_patch):
+            patcher.start()
+            self.addCleanup(patcher.stop)
+
     def test_workspace_merges_without_revision_or_phase(self):
         with tempfile.TemporaryDirectory() as root, FrontierScienceWorkspace(Path(root) / "research.sqlite3") as workspace:
             first = workspace.load_research()
             self.assertIn("workspace", first)
-            saved = workspace.save_research({"research_notes": ["test note"]})
-            workspace.save_research({"research_notes": ["second note"], "current_state": {"sleep": {"hours": 8}}})
-            workspace.save_research({"research_notes": ["test note"], "current_state": {"sleep": {"quality": "good"}}})
+            self.assertTrue(first["context_status"]["stored_content_may_be_stale"])
+            self.assertTrue(first["context_status"]["verify_time_sensitive_claims"])
+            self.assertEqual(
+                first["context_status"]["workspace_updated_at"], first["updated_at"]
+            )
+            saved = workspace.save_research({"research_notes": [research_item("test note")]})
+            workspace.save_research({"research_notes": [research_item("second note")], "current_state": {"sleep": {"hours": 8}}})
+            workspace.save_research({"research_notes": [research_item("test note")], "current_state": {"sleep": {"quality": "good"}}})
             loaded = workspace.load_research(sections=["research_notes", "current_state"])
-            self.assertEqual(loaded["workspace"]["research_notes"], ["test note", "second note"])
+            self.assertEqual(
+                [item["statement"] for item in loaded["workspace"]["research_notes"]],
+                ["test note", "second note"],
+            )
             self.assertEqual(loaded["workspace"]["current_state"]["sleep"], {"hours": 8, "quality": "good"})
             self.assertEqual(saved["updated_sections"], ["research_notes"])
             self.assertNotIn("revision", saved)
@@ -56,11 +106,22 @@ class FrontierScienceWorkspaceTests(unittest.TestCase):
             self.assertNotIn("measurements", loaded["workspace"])
             self.assertNotIn("research_protocols", loaded["workspace"])
             self.assertEqual(
-                len(loaded["workspace"]["fixed_goal"]["physical_targets"]), 27
+                len(loaded["workspace"]["fixed_goal"]["physical_targets"]), 7
+            )
+            self.assertEqual(
+                len(loaded["workspace"]["fixed_goal"]["measurement_benchmarks"]), 27
             )
             self.assertEqual(
                 loaded["workspace"]["fixed_goal"]["technical_goal"]["reference_athlete"],
                 "Artur Beterbiev",
+            )
+            self.assertEqual(
+                loaded["workspace"]["fixed_goal"]["research_structure"]["kind"],
+                "linked_maps",
+            )
+            self.assertEqual(
+                len(loaded["workspace"]["fixed_goal"]["research_structure_summary"]["capacity_nodes"]),
+                7,
             )
             self.assertNotIn("whole_body_coverage", loaded["workspace"]["fixed_goal"])
             alias = workspace.load_research(sections=["goal", "state"])
@@ -71,6 +132,29 @@ class FrontierScienceWorkspaceTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "unknown research sections"):
                 workspace.load_research(sections=["research_protocols"])
 
+    def test_goal_map_expands_a_target_through_separate_linked_views(self):
+        with tempfile.TemporaryDirectory() as root, FrontierScienceWorkspace(Path(root) / "research.sqlite3") as workspace:
+            overview = workspace.load_goal_map()
+            self.assertEqual(overview["mode"], "summary")
+            self.assertTrue(overview["validation"]["validated"])
+            self.assertEqual(overview["validation"]["physical_target_count"], 7)
+            self.assertEqual(overview["validation"]["quantitative_subtarget_count"], 27)
+
+            expanded = workspace.load_goal_map(benchmark_ids=["cmj_height"])
+            self.assertEqual(expanded["mode"], "connected_subgraph")
+            self.assertEqual(expanded["requested"]["benchmark_ids"], ["cmj_height"])
+            self.assertEqual(
+                {item["id"] for item in expanded["capacity_nodes"]},
+                {"impulse_power"},
+            )
+            self.assertIn("cmj_height", expanded["benchmark_observations"])
+            self.assertTrue(expanded["diagnostic_nodes"])
+            self.assertTrue(expanded["intervention_nodes"])
+            self.assertIn("do not prove personal causality", expanded["interpretation_boundary"])
+
+            with self.assertRaisesRegex(ValueError, "unknown target IDs"):
+                workspace.load_goal_map(target_ids=["not_a_goal_target"])
+
     def test_existing_workspace_imports_missing_personal_context(self):
         with tempfile.TemporaryDirectory() as root:
             profile = Path(root) / "profile.json"
@@ -78,7 +162,7 @@ class FrontierScienceWorkspaceTests(unittest.TestCase):
             profile.write_text(json.dumps({"height_cm": 191, "uncertainty": ["test"]}), encoding="utf-8")
             body.write_text(json.dumps({"body_mass_kg": 79.4, "measurement_uncertainty": ["test"]}), encoding="utf-8")
             database = Path(root) / "research.sqlite3"
-            with patch("frontier_research_harness.adapters.frontier_science_workspace.PERSONAL_PROFILE", profile), patch("frontier_research_harness.adapters.frontier_science_workspace.BODY_COMPOSITION_BASELINE", body):
+            with patch("frontier_research_harness.adapters._workspace_common.PERSONAL_PROFILE", profile), patch("frontier_research_harness.adapters._workspace_common.BODY_COMPOSITION_BASELINE", body):
                 with FrontierScienceWorkspace(database) as workspace:
                     workspace.save_research({"current_state": {"sleep": {"hours": 8}}})
                 profile.write_text(json.dumps({"height_cm": 192, "uncertainty": ["updated test"]}), encoding="utf-8")
@@ -94,66 +178,49 @@ class FrontierScienceWorkspaceTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "unknown research sections"):
                 workspace.save_research({"planner": {"next": "invented workflow"}})
 
+    def test_plain_hypotheses_are_allowed_but_strong_labels_require_receipts(self):
+        with tempfile.TemporaryDirectory() as root, FrontierScienceWorkspace(Path(root) / "research.sqlite3") as workspace:
+            workspace.save_research({
+                "hypotheses": [
+                    "A tentative mechanism can stay plain while it is being explored.",
+                    {
+                        "statement": "A typed hypothesis does not need a target or receipt.",
+                        "support_status": "HYPOTHESIS",
+                    },
+                ]
+            })
+            loaded = workspace.load_research(sections=["hypotheses"])
+            self.assertEqual(len(loaded["workspace"]["hypotheses"]), 2)
+            with self.assertRaisesRegex(ValueError, "SUPPORTED requires"):
+                workspace.save_research({
+                    "research_notes": [research_item(
+                        "unsupported claim", support_status="SUPPORTED"
+                    )]
+                })
+
     def test_multiple_chat_research_topics_can_share_one_workspace(self):
         with tempfile.TemporaryDirectory() as root, FrontierScienceWorkspace(Path(root) / "research.sqlite3") as workspace:
             workspace.save_research({
                 "hypotheses": [
-                    {"topic": "neck strength", "question": "best training route"},
-                    {"topic": "choice reaction", "question": "best training route"},
+                    research_item("best training route for neck strength", "neck_flexion_force", support_status="HYPOTHESIS"),
+                    research_item("best training route for choice reaction", "choice_reaction_time", support_status="HYPOTHESIS"),
                 ],
                 "research_notes": [
-                    {"topic": "portfolio", "finding": "synthesize interactions after separate research"}
+                    research_item("synthesize interactions after separate research")
                 ],
             })
             loaded = workspace.load_research(sections=["hypotheses", "research_notes"])
             self.assertEqual(len(loaded["workspace"]["hypotheses"]), 2)
-            self.assertEqual(loaded["workspace"]["research_notes"][0]["topic"], "portfolio")
-
-    def test_catalog_exposes_direct_external_models_and_their_contracts(self):
-        with tempfile.TemporaryDirectory() as root, FrontierScienceWorkspace(Path(root) / "research.sqlite3") as workspace:
-            names = {item["name"] for item in workspace.list_models()["models"]}
-            self.assertTrue({"human_gem", "mitocore", "mitochondria_qsp", "registered_external_engine"} <= names)
-            self.assertNotIn("fick_oxygen_transport", names)
-            self.assertNotIn("scientific_range_inference", names)
-            self.assertNotIn("resistance_training_candidate", names)
-            self.assertTrue({"febio", "pulse", "circadapt", "pk_sim"} <= names)
-            self.assertNotIn("frontier_network", names)
-            self.assertNotIn("reduced_whole_body", names)
-            description = workspace.describe_model("human_gem")
-            self.assertTrue(description["execution_available"])
-            self.assertIn("input_schema", description)
-            self.assertIn("outputs", description)
-            self.assertIn("limitations", description)
-            self.assertIn("validation", description)
-            self.assertEqual(description["research_readiness"], "RESEARCH_CALLABLE")
-            self.assertFalse(description["personalized"])
-
-    def test_catalog_routes_targets_to_every_relevant_model_layer(self):
-        with tempfile.TemporaryDirectory() as root, FrontierScienceWorkspace(Path(root) / "research.sqlite3") as workspace:
-            result = workspace.list_models([
-                "vo2max", "cmj_height", "major_injury_count", "wingate_peak_power"
-            ])
             self.assertEqual(
-                set(result["required_model_layers"]),
-                {
-                    "whole_person_physiology", "organ_circulation",
-                    "musculoskeletal_mechanics", "tissue_durability",
-                    "cellular_metabolism",
-                },
+                loaded["workspace"]["research_notes"][0]["statement"],
+                "synthesize interactions after separate research",
             )
-            by_name = {item["name"]: item for item in result["models"]}
-            self.assertTrue(by_name["pulse"]["target_relevant_for_current_question"])
-            self.assertTrue(by_name["circadapt"]["target_relevant_for_current_question"])
-            self.assertTrue(by_name["opensim"]["target_relevant_for_current_question"])
-            self.assertTrue(by_name["febio"]["target_relevant_for_current_question"])
-            self.assertTrue(by_name["mitocore"]["target_relevant_for_current_question"])
-            self.assertFalse(by_name["pk_sim"]["target_relevant_for_current_question"])
-            self.assertIn("reference_experiment", workspace.describe_model("pulse"))
+
 
     def test_literature_portfolio_preserves_queries_and_deduplicates(self):
         with tempfile.TemporaryDirectory() as root, FrontierScienceWorkspace(Path(root) / "research.sqlite3") as workspace:
             with patch(
-                "frontier_research_harness.adapters.frontier_science_workspace.ScientificKnowledgeClient"
+                "frontier_research_harness.adapters._workspace_evidence.ScientificKnowledgeClient"
             ) as client_type:
                 client_type.return_value.search.side_effect = (
                     {"source": "pubmed", "query": "mechanism", "results": [{"id": "1", "doi": "10.1/shared", "title": "Shared"}]},
@@ -170,7 +237,7 @@ class FrontierScienceWorkspaceTests(unittest.TestCase):
     def test_literature_queries_isolate_failures_and_return_next_queries(self):
         with tempfile.TemporaryDirectory() as root, FrontierScienceWorkspace(Path(root) / "research.sqlite3") as workspace:
             with patch(
-                "frontier_research_harness.adapters.frontier_science_workspace.ScientificKnowledgeClient"
+                "frontier_research_harness.adapters._workspace_evidence.ScientificKnowledgeClient"
             ) as client_type:
                 client_type.return_value.search.side_effect = (
                     RuntimeError("temporary source failure"),
@@ -219,23 +286,23 @@ class FrontierScienceWorkspaceTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "retained_claims"):
                 workspace.save_evidence({**record, "retained_claims": []})
 
-    def test_selected_goal_coverage_maps_real_evidence_and_rejects_omissions(self):
+    def test_selected_goal_coverage_maps_real_evidence_and_reports_omissions(self):
         with tempfile.TemporaryDirectory() as root, FrontierScienceWorkspace(Path(root) / "research.sqlite3") as workspace:
             evidence_id = workspace.save_evidence(scholarly_evidence())["evidence_id"]
-            with patch.object(workspace, "_execute", return_value=("test-v1", {"value": 1})):
-                pulse_id = workspace.run_model(
+            with patch.object(workspace, "_execute", create=True, return_value=("test-v1", {"value": 1})):
+                pulse_id = seed_experiment(workspace,
                     "pulse",
                     {"value": 1},
                     question="What bounded result informs the selected target?",
                     provenance=[{"kind": "TEST"}],
                 )["experiment_id"]
-                circadapt_id = workspace.run_model(
+                circadapt_id = seed_experiment(workspace,
                     "circadapt", {"value": 2},
                     question="What organ boundary informs the selected target?",
                     provenance=[{"kind": "TEST"}],
                 )["experiment_id"]
             selected = workspace.save_research(
-                {"research_notes": ["selected target researched"]},
+                {"research_notes": [research_item("selected target researched")]},
                 coverage={
                     "scope": "selected_targets",
                     "requested_target_ids": ["vo2max"],
@@ -251,20 +318,24 @@ class FrontierScienceWorkspaceTests(unittest.TestCase):
             self.assertTrue(selected["research_coverage"]["validated"])
             self.assertEqual(selected["research_coverage"]["target_count"], 1)
             self.assertEqual(selected["research_coverage"]["experiment_model_count"], 2)
-            with self.assertRaisesRegex(ValueError, "omitted goal targets"):
-                workspace.save_research(
-                    {"research_notes": ["incomplete whole goal"]},
-                    coverage={
-                        "scope": "whole_goal",
-                        "target_statuses": [{
-                            "target_id": "vo2max",
-                            "status": "researched",
-                            "finding": "Only one target was covered.",
-                            "evidence_ids": [evidence_id],
-                            "experiment_ids": [pulse_id, circadapt_id],
-                        }],
-                    },
-                )
+            incomplete = workspace.save_research(
+                {"research_notes": [research_item("incomplete whole goal")]},
+                coverage={
+                    "scope": "whole_goal",
+                    "target_statuses": [{
+                        "target_id": "fatigue_resistance_recovery",
+                        "status": "researched",
+                        "finding": "Only one target was covered.",
+                        "evidence_ids": [evidence_id],
+                        "experiment_ids": [pulse_id, circadapt_id],
+                    }],
+                },
+            )
+            self.assertFalse(incomplete["research_coverage"]["complete"])
+            self.assertIn(
+                "technical_goal",
+                incomplete["research_coverage"]["unreported_target_ids"],
+            )
 
     def test_coverage_rejects_legacy_identifier_only_evidence(self):
         with tempfile.TemporaryDirectory() as root, FrontierScienceWorkspace(Path(root) / "research.sqlite3") as workspace:
@@ -285,8 +356,8 @@ class FrontierScienceWorkspaceTests(unittest.TestCase):
                     }),
                 ),
             )
-            with patch.object(workspace, "_execute", return_value=("test-v1", {"value": 1})):
-                experiment_id = workspace.run_model(
+            with patch.object(workspace, "_execute", create=True, return_value=("test-v1", {"value": 1})):
+                experiment_id = seed_experiment(workspace,
                     "test_model",
                     {"value": 1},
                     question="What bounded result informs the target?",
@@ -294,7 +365,7 @@ class FrontierScienceWorkspaceTests(unittest.TestCase):
                 )["experiment_id"]
             with self.assertRaisesRegex(ValueError, "legacy or incomplete evidence"):
                 workspace.save_research(
-                    {"research_notes": ["legacy evidence must not pass"]},
+                    {"research_notes": [research_item("legacy evidence must not pass")]},
                     coverage={
                         "scope": "selected_targets",
                         "requested_target_ids": ["vo2max"],
@@ -308,44 +379,27 @@ class FrontierScienceWorkspaceTests(unittest.TestCase):
                     },
                 )
 
-    def test_external_inventory_exposes_typed_execution_without_claiming_personalization(self):
+    def test_unresolved_coverage_can_report_missing_evidence_and_models(self):
         with tempfile.TemporaryDirectory() as root, FrontierScienceWorkspace(Path(root) / "research.sqlite3") as workspace:
-            description = workspace.describe_model("pulse")
-            self.assertEqual(description["connection_status"], "READY")
-            self.assertTrue(description["execution_available"])
-            self.assertEqual(description["execution_via"].split("(")[0], "run_model")
-            self.assertIn("input_schema", description)
-            self.assertIn("outputs", description)
-            self.assertEqual(description["research_readiness"], "TYPED_STUDY_CALLABLE")
-            self.assertIn("research_input_schema", description)
-            self.assertFalse(description["personalized"])
-            self.assertNotIn("execution_note", description)
-            self.assertNotIn("blockers", description)
+            saved = workspace.save_research(
+                {"research_notes": [research_item("The target remains unresolved.", "cmj_height")]},
+                coverage={
+                    "scope": "selected_targets",
+                    "requested_target_ids": ["cmj_height"],
+                    "target_statuses": [{
+                        "target_id": "cmj_height",
+                        "status": "unresolved",
+                        "finding": "No decision-relevant personal observation is available.",
+                        "evidence_ids": [],
+                    }],
+                },
+            )
+            assessment = saved["research_coverage"]
+            self.assertTrue(assessment["validated"])
+            self.assertFalse(assessment["complete"])
+            self.assertEqual(assessment["evidence_count"], 0)
+            self.assertTrue(assessment["uncovered_model_layers"])
 
-    def test_unavailable_model_returns_only_one_short_reason(self):
-        with tempfile.TemporaryDirectory() as root, FrontierScienceWorkspace(Path(root) / "research.sqlite3") as workspace:
-            description = workspace.describe_model("anybody")
-            self.assertFalse(description["execution_available"])
-            self.assertIn("reason", description)
-            self.assertNotIn("blockers", description)
-            self.assertNotIn("limitations", description)
-            self.assertEqual(description["validation_status"], "unqualified for personal prediction")
-            self.assertEqual(description["research_readiness"], "NOT_EXECUTABLE")
-
-    def test_model_run_is_validated_and_automatically_recorded(self):
-        with tempfile.TemporaryDirectory() as root, FrontierScienceWorkspace(Path(root) / "research.sqlite3") as workspace:
-            with patch.object(workspace, "_execute", return_value=("test-v1", {"trajectory": [1, 2]})):
-                result = workspace.run_model(
-                    "test_model",
-                    {"input": 1},
-                    question="Does persistence preserve this output?",
-                    provenance=[{"kind": "TEST"}],
-                )
-            loaded = workspace.load_experiment(result["experiment_id"])
-            self.assertEqual(loaded["input_hash"], result["input_hash"])
-            self.assertEqual(loaded["model_version"], "test-v1")
-            self.assertEqual(loaded["raw_output"]["trajectory"], [1, 2])
-            self.assertEqual(workspace.list_experiments()["count"], 1)
 
     def test_active_import_keeps_removed_modules_absent(self):
         code = """
@@ -369,73 +423,6 @@ print(json.dumps(blocked))
         )
         self.assertEqual(json.loads(result.stdout), [])
 
-    def test_external_engine_accepts_json_arrays_from_mcp(self):
-        with tempfile.TemporaryDirectory() as root, FrontierScienceWorkspace(Path(root) / "research.sqlite3") as workspace:
-            with patch(
-                "frontier_research_harness.adapters.frontier_science_workspace.ExternalEngineRunner.run",
-                return_value={"component_id": "circadapt", "exit_code": 0},
-            ) as run:
-                version, result = workspace._execute(
-                    "registered_external_engine",
-                    {
-                        "component_id": "circadapt",
-                        "arguments": ["driver.py"],
-                        "input_artifacts": ["driver.py"],
-                        "expected_output_artifacts": [],
-                    },
-                )
-            self.assertEqual(version, "registered-engine-bridge-v1")
-            self.assertEqual(result["exit_code"], 0)
-            self.assertEqual(run.call_args.args[0].arguments, ("driver.py",))
-
-    def test_ready_engine_runs_by_its_own_name(self):
-        with tempfile.TemporaryDirectory() as root, FrontierScienceWorkspace(Path(root) / "research.sqlite3") as workspace:
-            with patch(
-                "frontier_research_harness.adapters.frontier_science_workspace.ExternalEngineRunner.run",
-                return_value={"component_id": "circadapt", "exit_code": 0},
-            ) as run:
-                _, result = workspace._execute(
-                    "circadapt",
-                    {"arguments": ["driver.py"], "input_artifacts": [], "expected_output_artifacts": []},
-                )
-            self.assertEqual(result["component_id"], "circadapt")
-            self.assertEqual(run.call_args.args[0].component_id, "circadapt")
-
-    def test_compare_runs_returns_raw_records_without_winner(self):
-        with tempfile.TemporaryDirectory() as root, FrontierScienceWorkspace(Path(root) / "research.sqlite3") as workspace:
-            with patch.object(workspace, "_execute", side_effect=(("v1", {"value": 1}), ("v1", {"value": 2}))):
-                ids = [
-                    workspace.run_model(
-                        "test_model",
-                        {"value": value},
-                        question="How does the test value change?",
-                        provenance=[{"kind": "TEST", "value": value}],
-                    )["experiment_id"]
-                    for value in (1, 2)
-                ]
-            comparison = workspace.compare_runs(ids)
-            self.assertEqual(len(comparison["runs"]), 2)
-            self.assertNotIn("winner", comparison)
-            self.assertEqual(comparison["runs"][0]["output_mode"], "STRUCTURAL_SUMMARY")
-            self.assertNotIn("raw_output", comparison["runs"][0])
-            exact = workspace.compare_runs(ids, output_paths=["value"])
-            self.assertEqual(exact["runs"][1]["output"]["value"], 2)
-
-    def test_target_calculation_is_unit_checked_persisted_and_loadable(self):
-        with tempfile.TemporaryDirectory() as root, FrontierScienceWorkspace(Path(root) / "research.sqlite3") as workspace:
-            result = workspace.calculate_target(
-                "imtp_peak_force",
-                {"peak_force_n": 7200.0, "body_mass_kg": 120.0},
-                units={"peak_force_n": "N", "body_mass_kg": "kg"},
-            )
-            loaded = workspace.load_calculation(result["calculation_id"])
-            self.assertTrue(result["persisted"])
-            self.assertEqual(result["value"], 60.0)
-            self.assertEqual(loaded["output"]["evidence_class"], "DATA_DERIVED")
-            self.assertEqual(workspace.load_research()["calculation_count"], 1)
-            missing = workspace.calculate_target("vo2max")
-            self.assertFalse(missing["persisted"])
-            self.assertEqual(missing["status"], "INPUT_REQUIRED")
 
     def test_technical_only_coverage_uses_primary_footage_without_a_model(self):
         footage = {
@@ -448,12 +435,13 @@ print(json.dumps(blocked))
             "retained_claims": ["00:10 pressure step preceded the body attack."],
             "applicability": "One bounded observation of the named athlete.",
             "limitations": ["Single camera angle."],
+            "target_ids": ["technical_goal"],
             "source_record": {"timestamp": "00:10", "observation": "pressure step"},
         }
         with tempfile.TemporaryDirectory() as root, FrontierScienceWorkspace(Path(root) / "research.sqlite3") as workspace:
             evidence_id = workspace.save_evidence(footage)["evidence_id"]
             saved = workspace.save_research(
-                {"research_notes": ["Technique footage retained without irrelevant simulation."]},
+                {"research_notes": [research_item("Technique footage retained without irrelevant simulation.", "technical_goal")]},
                 coverage={
                     "scope": "selected_targets",
                     "requested_target_ids": ["technical_goal"],
@@ -470,19 +458,21 @@ print(json.dumps(blocked))
 
     def test_coverage_accepts_only_calculations_for_the_matching_target(self):
         with tempfile.TemporaryDirectory() as root, FrontierScienceWorkspace(Path(root) / "research.sqlite3") as workspace:
-            evidence_id = workspace.save_evidence(scholarly_evidence())["evidence_id"]
-            calculation_id = workspace.calculate_target(
+            evidence_id = workspace.save_evidence(
+                scholarly_evidence(target_ids=["imtp_peak_force", "vo2max"])
+            )["evidence_id"]
+            calculation_id = seed_calculation(workspace,
                 "imtp_peak_force",
                 {"peak_force_n": 7200.0, "body_mass_kg": 120.0},
                 units={"peak_force_n": "N", "body_mass_kg": "kg"},
             )["calculation_id"]
-            with patch.object(workspace, "_execute", return_value=("test-v1", {"value": 1})):
-                experiment_id = workspace.run_model(
+            with patch.object(workspace, "_execute", create=True, return_value=("test-v1", {"value": 1})):
+                experiment_id = seed_experiment(workspace,
                     "opensim", {"value": 1}, question="What bounded result informs strength?",
                     provenance=[{"kind": "TEST"}],
                 )["experiment_id"]
             saved = workspace.save_research(
-                {"research_notes": ["Calculation attached to its target."]},
+                {"research_notes": [research_item("Calculation attached to its target.", "simple_visual_reaction_time")]},
                 coverage={
                     "scope": "selected_targets",
                     "requested_target_ids": ["imtp_peak_force"],
@@ -496,18 +486,18 @@ print(json.dumps(blocked))
                 },
             )
             self.assertEqual(saved["research_coverage"]["calculation_count"], 1)
-            with patch.object(workspace, "_execute", return_value=("test-v1", {"value": 1})):
-                pulse_id = workspace.run_model(
+            with patch.object(workspace, "_execute", create=True, return_value=("test-v1", {"value": 1})):
+                pulse_id = seed_experiment(workspace,
                     "pulse", {"value": 2}, question="What systemic boundary informs VO2max?",
                     provenance=[{"kind": "TEST"}],
                 )["experiment_id"]
-                circadapt_id = workspace.run_model(
+                circadapt_id = seed_experiment(workspace,
                     "circadapt", {"value": 3}, question="What organ boundary informs VO2max?",
                     provenance=[{"kind": "TEST"}],
                 )["experiment_id"]
-            with self.assertRaisesRegex(ValueError, "their own physical target"):
+            with self.assertRaisesRegex(ValueError, "compatible physical target"):
                 workspace.save_research(
-                    {"research_notes": ["Mismatched calculation."]},
+                    {"research_notes": [research_item("Mismatched calculation.", "cmj_height")]},
                     coverage={
                         "scope": "selected_targets", "requested_target_ids": ["vo2max"],
                         "target_statuses": [{
@@ -518,12 +508,14 @@ print(json.dumps(blocked))
                     },
                 )
 
-    def test_selected_portfolio_requires_all_relevant_model_layers(self):
+    def test_selected_portfolio_reports_uncovered_model_layers(self):
         with tempfile.TemporaryDirectory() as root, FrontierScienceWorkspace(Path(root) / "research.sqlite3") as workspace:
-            evidence_id = workspace.save_evidence(scholarly_evidence())["evidence_id"]
-            with patch.object(workspace, "_execute", return_value=("test-v1", {"value": 1})):
+            evidence_id = workspace.save_evidence(scholarly_evidence(target_ids=[
+                "vo2max", "cmj_height", "major_injury_count", "wingate_peak_power"
+            ]))["evidence_id"]
+            with patch.object(workspace, "_execute", create=True, return_value=("test-v1", {"value": 1})):
                 experiments = {
-                    name: workspace.run_model(
+                    name: seed_experiment(workspace,
                         name, {"name": name}, question=f"What boundary does {name} establish?",
                         provenance=[{"kind": "TEST"}],
                     )["experiment_id"]
@@ -540,43 +532,82 @@ print(json.dumps(blocked))
                 "requested_target_ids": ["vo2max", "cmj_height", "major_injury_count", "wingate_peak_power"],
                 "target_statuses": target_statuses,
             }
-            with self.assertRaisesRegex(ValueError, "missing decision-relevant external-model layers"):
-                incomplete = {**coverage, "target_statuses": [
-                    {**item, "experiment_ids": (
-                        item["experiment_ids"] if item["target_id"] == "wingate_peak_power" else []
-                    )}
-                    for item in target_statuses
-                ]}
-                workspace.save_research({"research_notes": ["single-layer attempt"]}, coverage=incomplete)
-            saved = workspace.save_research(
-                {"research_notes": ["all relevant layers covered"]}, coverage=coverage
+            incomplete = {**coverage, "target_statuses": [
+                {**item, "experiment_ids": (
+                    item["experiment_ids"] if item["target_id"] == "wingate_peak_power" else []
+                )}
+                for item in target_statuses
+            ]}
+            assessed = workspace.save_research(
+                {"research_notes": [research_item("single-layer attempt")]}, coverage=incomplete
             )
+            self.assertFalse(assessed["research_coverage"]["complete"])
+            self.assertIn(
+                "whole_person_physiology",
+                assessed["research_coverage"]["uncovered_model_layers"],
+            )
+            saved = workspace.save_research(
+                {"research_notes": [research_item("all relevant layers covered")]}, coverage=coverage
+            )
+            self.assertTrue(saved["research_coverage"]["complete"])
             self.assertEqual(len(saved["research_coverage"]["covered_model_layers"]), 5)
 
-    def test_assess_targets_projects_latest_measurements_without_forecasting(self):
-        with tempfile.TemporaryDirectory() as root, FrontierScienceWorkspace(Path(root) / "research.sqlite3") as workspace:
-            initial = workspace.assess_targets(["cmj_height", "major_injury_count"])
-            self.assertEqual(initial["counts"]["MEASUREMENT_REQUIRED"], 2)
-            calculated = workspace.calculate_target(
-                "major_injury_count", {"major_injury_count": 0}, units={"major_injury_count": "count"}
-            )
-            projected = workspace.assess_targets(["cmj_height", "major_injury_count"])
-            by_id = {item["target_id"]: item for item in projected["targets"]}
-            self.assertEqual(by_id["major_injury_count"]["status"], "TARGET_MET")
-            self.assertEqual(by_id["major_injury_count"]["latest_calculation_id"], calculated["calculation_id"])
-            self.assertEqual(by_id["cmj_height"]["required_inputs"], ["flight_time_s"])
-            self.assertIn("no feasibility", projected["interpretation_boundary"])
 
-    def test_measurement_portfolio_is_fault_isolated(self):
+
+    def test_personal_observations_are_protocol_comparable_and_audited(self):
+        base = {
+            "target_ids": ["vo2max"],
+            "metric": "VO2max",
+            "unit": "ml/kg/min",
+            "protocol": "same lab ramp protocol",
+            "source_type": "LAB",
+            "instrument": "metabolic cart A",
+            "provenance": [{"kind": "TEST_FIXTURE", "record": "lab report"}],
+        }
         with tempfile.TemporaryDirectory() as root, FrontierScienceWorkspace(Path(root) / "research.sqlite3") as workspace:
-            result = workspace.calculate_targets([
-                {"target_id": "major_injury_count", "inputs": {"major_injury_count": 0}, "units": {"major_injury_count": "count"}},
-                {"target_id": "cmj_height"},
-                {"target_id": "unknown_target"},
+            saved = workspace.save_personal_observations([
+                {**base, "observed_at": "2026-01-01T09:00:00+09:00", "value": 45.0},
+                {**base, "observed_at": "2026-02-01T09:00:00+09:00", "value": 47.5},
+                {**base, "observed_at": "2026-03-01T09:00:00+09:00", "value": 48.0, "target_ids": ["not-a-target"]},
             ])
-            self.assertEqual(result["counts"], {"CALCULATED": 1, "INPUT_REQUIRED": 1, "INVALID": 1})
-            self.assertTrue(result["results"][0]["persisted"])
-            self.assertFalse(result["results"][1]["persisted"])
+            self.assertEqual(
+                saved["counts"], {"SAVED": 2, "DEDUPLICATED": 0, "INVALID": 1}
+            )
+            listed = workspace.list_personal_observations(target_ids=["vo2max"])
+            self.assertEqual(listed["matched_count"], 2)
+            self.assertEqual(listed["repeated_comparable_series_count"], 1)
+            self.assertEqual(listed["series"][0]["descriptive_delta"], 2.5)
+
+            evidence_id = workspace.save_evidence(scholarly_evidence())["evidence_id"]
+            observation_id = saved["results"][0]["observation_id"]
+            workspace.save_research({
+                "research_notes": [research_item(
+                    "One source supports a bounded VO2max claim.",
+                    support_status="SUPPORTED",
+                    evidence_ids=[evidence_id],
+                )],
+                "promising_methods": [research_item(
+                    "Retain this candidate only for further research.",
+                    support_status="SUPPORTED",
+                    evidence_ids=[evidence_id],
+                )],
+                "hypotheses": [research_item(
+                    "The repeated personal series may alter method selection.",
+                    support_status="USER_OBSERVATION",
+                    observation_ids=[observation_id],
+                )],
+            })
+            audit = workspace.audit_research(["vo2max"])
+            self.assertEqual(
+                audit["literature_quality"]["current_traceability_contract_count"], 1
+            )
+            self.assertEqual(
+                audit["personalization"]["repeated_comparable_protocol_count"], 1
+            )
+            support = audit["goal_support"]["targets"][0]
+            self.assertEqual(support["personal_observation_count"], 2)
+            self.assertEqual(support["promising_method_count"], 1)
+            self.assertEqual(support["gaps"], [])
 
     def test_footage_observation_is_saved_as_exact_primary_evidence(self):
         with tempfile.TemporaryDirectory() as root, FrontierScienceWorkspace(Path(root) / "research.sqlite3") as workspace:
@@ -613,13 +644,6 @@ print(json.dumps(blocked))
             self.assertEqual(compared["shared_actions_exact"], ["lead foot blocks the lateral exit"])
             self.assertTrue(compared["all_marked_repeated_pattern"])
             self.assertIn("Codex must judge", compared["comparison_boundary"])
-
-    def test_ready_core_models_expose_typed_study_contracts(self):
-        with tempfile.TemporaryDirectory() as root, FrontierScienceWorkspace(Path(root) / "research.sqlite3") as workspace:
-            for model_name in ("opensim", "pulse", "febio"):
-                description = workspace.describe_model(model_name)
-                self.assertEqual(description["research_readiness"], "TYPED_STUDY_CALLABLE")
-                self.assertIn("research_input_schema", description)
 
 
 if __name__ == "__main__":

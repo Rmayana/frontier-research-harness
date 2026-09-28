@@ -1,0 +1,2847 @@
+{
+  "schema_version": "nhanes-population-prior-v1",
+  "generated_at": "2026-09-01T03:39:51.111522+00:00",
+  "generator": "scripts/reference_data/derive_nhanes_population.py",
+  "priors": [
+    {
+      "prior_id": "nhanes-us-male-20-39-v1",
+      "observed_at": "2020-02-01T00:00:00Z",
+      "population": "U.S. male adults aged 20-39 years",
+      "parameters": [
+        {
+          "signal_id": "stature",
+          "unit": "cm",
+          "resolution": "DAY",
+          "distribution": "EMPIRICAL_QUANTILES",
+          "mean": 175.94668619,
+          "standard_deviation": 7.24194266,
+          "quantile_probabilities": [
+            0.0,
+            0.005,
+            0.01,
+            0.025,
+            0.05,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.8,
+            0.9,
+            0.95,
+            0.975,
+            0.99,
+            0.995,
+            1.0
+          ],
+          "quantile_values": [
+            152.1,
+            155.4951181,
+            157.7,
+            161.9,
+            164.6,
+            167.1396353,
+            169.8,
+            171.9,
+            174.0,
+            175.9,
+            177.5,
+            179.5,
+            181.84099865,
+            185.5,
+            188.36101295,
+            189.95599589,
+            194.27667829,
+            195.19765321,
+            195.8
+          ],
+          "unweighted_sample_size": 731,
+          "effective_sample_size": 389.83390936,
+          "lower_bound": 152.1,
+          "upper_bound": 195.8,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only."
+        },
+        {
+          "signal_id": "body_mass",
+          "unit": "kg",
+          "resolution": "DAY",
+          "distribution": "EMPIRICAL_QUANTILES",
+          "mean": 90.28111692,
+          "standard_deviation": 23.57200203,
+          "quantile_probabilities": [
+            0.0,
+            0.005,
+            0.01,
+            0.025,
+            0.05,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.8,
+            0.9,
+            0.95,
+            0.975,
+            0.99,
+            0.995,
+            1.0
+          ],
+          "quantile_values": [
+            43.7,
+            49.04579459,
+            53.76326333,
+            56.86973922,
+            59.67474862,
+            64.4,
+            70.81179292,
+            75.39533676,
+            81.0,
+            85.9,
+            91.95422576,
+            99.2,
+            107.5,
+            120.93317944,
+            133.47259616,
+            144.86539834,
+            159.76920381,
+            185.01548812,
+            242.6
+          ],
+          "unweighted_sample_size": 729,
+          "effective_sample_size": 388.39170856,
+          "lower_bound": 43.7,
+          "upper_bound": 242.6,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only."
+        },
+        {
+          "signal_id": "body_mass_index",
+          "unit": "kg/m2",
+          "resolution": "DAY",
+          "distribution": "EMPIRICAL_QUANTILES",
+          "mean": 29.10892763,
+          "standard_deviation": 7.12414826,
+          "quantile_probabilities": [
+            0.0,
+            0.005,
+            0.01,
+            0.025,
+            0.05,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.8,
+            0.9,
+            0.95,
+            0.975,
+            0.99,
+            0.995,
+            1.0
+          ],
+          "quantile_values": [
+            15.5,
+            16.39842703,
+            17.16899564,
+            18.61702904,
+            19.31873874,
+            21.2,
+            23.12953719,
+            24.7,
+            26.5,
+            27.9,
+            30.0,
+            32.1,
+            34.43538005,
+            37.9,
+            41.17874889,
+            44.35131825,
+            52.74647867,
+            56.71899705,
+            86.2
+          ],
+          "unweighted_sample_size": 729,
+          "effective_sample_size": 388.39170856,
+          "lower_bound": 15.5,
+          "upper_bound": 86.2,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only."
+        },
+        {
+          "signal_id": "waist_circumference",
+          "unit": "cm",
+          "resolution": "DAY",
+          "distribution": "EMPIRICAL_QUANTILES",
+          "mean": 98.18358685,
+          "standard_deviation": 17.23689312,
+          "quantile_probabilities": [
+            0.0,
+            0.005,
+            0.01,
+            0.025,
+            0.05,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.8,
+            0.9,
+            0.95,
+            0.975,
+            0.99,
+            0.995,
+            1.0
+          ],
+          "quantile_values": [
+            62.3,
+            67.21397315,
+            68.64160703,
+            70.67006605,
+            74.33019716,
+            77.1989338,
+            83.40999452,
+            87.2,
+            92.0,
+            95.4,
+            100.6,
+            106.14719208,
+            111.3,
+            123.08909388,
+            130.14006873,
+            133.12895545,
+            144.30594063,
+            152.42668398,
+            161.6
+          ],
+          "unweighted_sample_size": 709,
+          "effective_sample_size": 382.3394922,
+          "lower_bound": 62.3,
+          "upper_bound": 161.6,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only."
+        },
+        {
+          "signal_id": "hip_circumference",
+          "unit": "cm",
+          "resolution": "DAY",
+          "distribution": "EMPIRICAL_QUANTILES",
+          "mean": 105.01863876,
+          "standard_deviation": 12.72913824,
+          "quantile_probabilities": [
+            0.0,
+            0.005,
+            0.01,
+            0.025,
+            0.05,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.8,
+            0.9,
+            0.95,
+            0.975,
+            0.99,
+            0.995,
+            1.0
+          ],
+          "quantile_values": [
+            77.7,
+            82.58094387,
+            83.80455327,
+            85.28430912,
+            86.75635012,
+            90.79310107,
+            94.5,
+            97.8,
+            100.6,
+            103.3,
+            106.2,
+            109.4,
+            114.18872916,
+            122.02204701,
+            127.57673622,
+            133.33390167,
+            144.84384759,
+            156.13610192,
+            176.6
+          ],
+          "unweighted_sample_size": 710,
+          "effective_sample_size": 382.95282025,
+          "lower_bound": 77.7,
+          "upper_bound": 176.6,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only."
+        },
+        {
+          "signal_id": "upper_arm_circumference",
+          "unit": "cm",
+          "resolution": "DAY",
+          "distribution": "EMPIRICAL_QUANTILES",
+          "mean": 35.07417424,
+          "standard_deviation": 4.98738539,
+          "quantile_probabilities": [
+            0.0,
+            0.005,
+            0.01,
+            0.025,
+            0.05,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.8,
+            0.9,
+            0.95,
+            0.975,
+            0.99,
+            0.995,
+            1.0
+          ],
+          "quantile_values": [
+            22.8,
+            24.33098793,
+            24.98146028,
+            26.0724814,
+            27.2,
+            28.8,
+            30.7,
+            32.5,
+            34.0,
+            34.94336844,
+            36.16662226,
+            37.1,
+            38.9,
+            41.67060159,
+            43.7,
+            45.43498636,
+            48.43000294,
+            51.40752217,
+            53.6
+          ],
+          "unweighted_sample_size": 711,
+          "effective_sample_size": 383.85226927,
+          "lower_bound": 22.8,
+          "upper_bound": 53.6,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only."
+        },
+        {
+          "signal_id": "total_body_bmd",
+          "unit": "g/cm2",
+          "resolution": "DAY",
+          "distribution": "EMPIRICAL_QUANTILES",
+          "mean": 1.16219765,
+          "standard_deviation": 0.10127545,
+          "quantile_probabilities": [
+            0.0,
+            0.005,
+            0.01,
+            0.025,
+            0.05,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.8,
+            0.9,
+            0.95,
+            0.975,
+            0.99,
+            0.995,
+            1.0
+          ],
+          "quantile_values": [
+            0.893,
+            0.94099233,
+            0.9537865,
+            0.97167347,
+            1.00932064,
+            1.03861966,
+            1.076,
+            1.10568053,
+            1.13690831,
+            1.156,
+            1.179,
+            1.20880543,
+            1.2395304,
+            1.29062278,
+            1.33142287,
+            1.36225027,
+            1.439,
+            1.48151411,
+            1.728
+          ],
+          "unweighted_sample_size": 528,
+          "effective_sample_size": 280.8420819,
+          "lower_bound": 0.893,
+          "upper_bound": 1.728,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only."
+        },
+        {
+          "signal_id": "fat_mass",
+          "unit": "kg",
+          "resolution": "DAY",
+          "distribution": "EMPIRICAL_QUANTILES",
+          "mean": 23.43799706,
+          "standard_deviation": 10.02968227,
+          "quantile_probabilities": [
+            0.0,
+            0.005,
+            0.01,
+            0.025,
+            0.05,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.8,
+            0.9,
+            0.95,
+            0.975,
+            0.99,
+            0.995,
+            1.0
+          ],
+          "quantile_values": [
+            6.6652,
+            7.97141029,
+            8.07034075,
+            8.81559537,
+            9.74935094,
+            11.28033937,
+            14.44023135,
+            17.32624026,
+            19.72384865,
+            21.90713132,
+            24.52493251,
+            27.16218936,
+            30.55732671,
+            37.00328769,
+            43.77715249,
+            46.82807865,
+            50.93621096,
+            53.03817482,
+            72.4784
+          ],
+          "unweighted_sample_size": 526,
+          "effective_sample_size": 279.53720747,
+          "lower_bound": 6.6652,
+          "upper_bound": 72.4784,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only."
+        },
+        {
+          "signal_id": "lean_mass_excluding_bmc",
+          "unit": "kg",
+          "resolution": "DAY",
+          "distribution": "EMPIRICAL_QUANTILES",
+          "mean": 59.95026124,
+          "standard_deviation": 9.96526675,
+          "quantile_probabilities": [
+            0.0,
+            0.005,
+            0.01,
+            0.025,
+            0.05,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.8,
+            0.9,
+            0.95,
+            0.975,
+            0.99,
+            0.995,
+            1.0
+          ],
+          "quantile_values": [
+            32.9017,
+            38.08349792,
+            40.38589983,
+            44.18823647,
+            44.83708903,
+            47.92760646,
+            51.16990338,
+            53.65245178,
+            56.54224741,
+            59.21311337,
+            62.07276072,
+            63.9657425,
+            68.67299557,
+            73.48058305,
+            76.88939422,
+            80.18307387,
+            85.04121607,
+            88.27616823,
+            105.5784
+          ],
+          "unweighted_sample_size": 535,
+          "effective_sample_size": 284.64354584,
+          "lower_bound": 32.9017,
+          "upper_bound": 105.5784,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only."
+        },
+        {
+          "signal_id": "bone_mineral_content",
+          "unit": "kg",
+          "resolution": "DAY",
+          "distribution": "EMPIRICAL_QUANTILES",
+          "mean": 2.63483353,
+          "standard_deviation": 0.37822473,
+          "quantile_probabilities": [
+            0.0,
+            0.005,
+            0.01,
+            0.025,
+            0.05,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.8,
+            0.9,
+            0.95,
+            0.975,
+            0.99,
+            0.995,
+            1.0
+          ],
+          "quantile_values": [
+            1.5368,
+            1.84115028,
+            1.90884795,
+            1.93487549,
+            2.06401722,
+            2.19281207,
+            2.30800993,
+            2.40402639,
+            2.5162523,
+            2.61066237,
+            2.70954905,
+            2.80599412,
+            2.94159947,
+            3.11681451,
+            3.28318337,
+            3.47942467,
+            3.5626738,
+            3.77889412,
+            4.58587
+          ],
+          "unweighted_sample_size": 528,
+          "effective_sample_size": 280.8420819,
+          "lower_bound": 1.5368,
+          "upper_bound": 4.58587,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only."
+        },
+        {
+          "signal_id": "body_fat_percentage",
+          "unit": "%",
+          "resolution": "DAY",
+          "distribution": "EMPIRICAL_QUANTILES",
+          "mean": 26.27067227,
+          "standard_deviation": 6.40893755,
+          "quantile_probabilities": [
+            0.0,
+            0.005,
+            0.01,
+            0.025,
+            0.05,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.8,
+            0.9,
+            0.95,
+            0.975,
+            0.99,
+            0.995,
+            1.0
+          ],
+          "quantile_values": [
+            12.1,
+            12.15216289,
+            12.70700207,
+            14.1,
+            15.5,
+            17.4,
+            20.4,
+            22.8,
+            24.66667768,
+            26.71314619,
+            28.0,
+            30.3,
+            31.7,
+            34.69032952,
+            36.8,
+            38.26615805,
+            40.58679653,
+            40.9,
+            42.4
+          ],
+          "unweighted_sample_size": 526,
+          "effective_sample_size": 279.53720747,
+          "lower_bound": 12.1,
+          "upper_bound": 42.4,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only."
+        },
+        {
+          "signal_id": "combined_grip_strength",
+          "unit": "kg",
+          "resolution": "DAY",
+          "distribution": "EMPIRICAL_QUANTILES",
+          "mean": 96.21329184,
+          "standard_deviation": 17.67112227,
+          "quantile_probabilities": [
+            0.0,
+            0.005,
+            0.01,
+            0.025,
+            0.05,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.8,
+            0.9,
+            0.95,
+            0.975,
+            0.99,
+            0.995,
+            1.0
+          ],
+          "quantile_values": [
+            36.1,
+            51.5547447,
+            54.08944932,
+            62.58202536,
+            67.1,
+            73.43788514,
+            81.9,
+            87.5,
+            91.45229117,
+            95.58308724,
+            100.25640593,
+            104.9,
+            110.52792591,
+            117.6,
+            123.9,
+            131.53739231,
+            145.57207874,
+            149.19772806,
+            161.7
+          ],
+          "unweighted_sample_size": 879,
+          "effective_sample_size": 647.68677665,
+          "lower_bound": 36.1,
+          "upper_bound": 161.7,
+          "source_reference_ids": [
+            "nhanes-2013-2014-demographics",
+            "nhanes-2013-2014-grip"
+          ],
+          "applicability": "Grip-strength marginal for U.S. male adults aged 20-39 years; sourced from 2013-2014 and intentionally left independent of 2017-2018 variables."
+        }
+      ],
+      "correlations": [
+        {
+          "left_signal_id": "stature",
+          "right_signal_id": "body_mass",
+          "coefficient": 0.24571433,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "stature",
+          "right_signal_id": "body_mass_index",
+          "coefficient": -0.08926141,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "stature",
+          "right_signal_id": "waist_circumference",
+          "coefficient": 0.03731944,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "stature",
+          "right_signal_id": "hip_circumference",
+          "coefficient": 0.13206186,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "stature",
+          "right_signal_id": "upper_arm_circumference",
+          "coefficient": 0.05556958,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "stature",
+          "right_signal_id": "total_body_bmd",
+          "coefficient": 0.2402032,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "stature",
+          "right_signal_id": "fat_mass",
+          "coefficient": 0.07503485,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "stature",
+          "right_signal_id": "lean_mass_excluding_bmc",
+          "coefficient": 0.36483145,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "stature",
+          "right_signal_id": "bone_mineral_content",
+          "coefficient": 0.51852305,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "stature",
+          "right_signal_id": "body_fat_percentage",
+          "coefficient": -0.10363819,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "body_mass",
+          "right_signal_id": "body_mass_index",
+          "coefficient": 0.94138761,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "body_mass",
+          "right_signal_id": "waist_circumference",
+          "coefficient": 0.92675123,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "body_mass",
+          "right_signal_id": "hip_circumference",
+          "coefficient": 0.95158638,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "body_mass",
+          "right_signal_id": "upper_arm_circumference",
+          "coefficient": 0.88151072,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "body_mass",
+          "right_signal_id": "total_body_bmd",
+          "coefficient": 0.24234029,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "body_mass",
+          "right_signal_id": "fat_mass",
+          "coefficient": 0.92061953,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "body_mass",
+          "right_signal_id": "lean_mass_excluding_bmc",
+          "coefficient": 0.92626562,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "body_mass",
+          "right_signal_id": "bone_mineral_content",
+          "coefficient": 0.47595803,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "body_mass",
+          "right_signal_id": "body_fat_percentage",
+          "coefficient": 0.70768196,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "body_mass_index",
+          "right_signal_id": "waist_circumference",
+          "coefficient": 0.93963535,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "body_mass_index",
+          "right_signal_id": "hip_circumference",
+          "coefficient": 0.93320739,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "body_mass_index",
+          "right_signal_id": "upper_arm_circumference",
+          "coefficient": 0.88499826,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "body_mass_index",
+          "right_signal_id": "total_body_bmd",
+          "coefficient": 0.16370304,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "body_mass_index",
+          "right_signal_id": "fat_mass",
+          "coefficient": 0.91822724,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "body_mass_index",
+          "right_signal_id": "lean_mass_excluding_bmc",
+          "coefficient": 0.82511277,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "body_mass_index",
+          "right_signal_id": "bone_mineral_content",
+          "coefficient": 0.30979454,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "body_mass_index",
+          "right_signal_id": "body_fat_percentage",
+          "coefficient": 0.76238794,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "waist_circumference",
+          "right_signal_id": "hip_circumference",
+          "coefficient": 0.91883037,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "waist_circumference",
+          "right_signal_id": "upper_arm_circumference",
+          "coefficient": 0.79711362,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "waist_circumference",
+          "right_signal_id": "total_body_bmd",
+          "coefficient": 0.09131927,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "waist_circumference",
+          "right_signal_id": "fat_mass",
+          "coefficient": 0.95210679,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "waist_circumference",
+          "right_signal_id": "lean_mass_excluding_bmc",
+          "coefficient": 0.76437252,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "waist_circumference",
+          "right_signal_id": "bone_mineral_content",
+          "coefficient": 0.26929079,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "waist_circumference",
+          "right_signal_id": "body_fat_percentage",
+          "coefficient": 0.84512032,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "hip_circumference",
+          "right_signal_id": "upper_arm_circumference",
+          "coefficient": 0.83871359,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "hip_circumference",
+          "right_signal_id": "total_body_bmd",
+          "coefficient": 0.1918374,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "hip_circumference",
+          "right_signal_id": "fat_mass",
+          "coefficient": 0.93001696,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "hip_circumference",
+          "right_signal_id": "lean_mass_excluding_bmc",
+          "coefficient": 0.82899732,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "hip_circumference",
+          "right_signal_id": "bone_mineral_content",
+          "coefficient": 0.38701759,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "hip_circumference",
+          "right_signal_id": "body_fat_percentage",
+          "coefficient": 0.77446023,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "upper_arm_circumference",
+          "right_signal_id": "total_body_bmd",
+          "coefficient": 0.26580048,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "upper_arm_circumference",
+          "right_signal_id": "fat_mass",
+          "coefficient": 0.77938938,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "upper_arm_circumference",
+          "right_signal_id": "lean_mass_excluding_bmc",
+          "coefficient": 0.84780063,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "upper_arm_circumference",
+          "right_signal_id": "bone_mineral_content",
+          "coefficient": 0.42418263,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "upper_arm_circumference",
+          "right_signal_id": "body_fat_percentage",
+          "coefficient": 0.59665035,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "total_body_bmd",
+          "right_signal_id": "fat_mass",
+          "coefficient": 0.04724885,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "total_body_bmd",
+          "right_signal_id": "lean_mass_excluding_bmc",
+          "coefficient": 0.37747906,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "total_body_bmd",
+          "right_signal_id": "bone_mineral_content",
+          "coefficient": 0.89591494,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "total_body_bmd",
+          "right_signal_id": "body_fat_percentage",
+          "coefficient": -0.11996952,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "fat_mass",
+          "right_signal_id": "lean_mass_excluding_bmc",
+          "coefficient": 0.7069319,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "fat_mass",
+          "right_signal_id": "bone_mineral_content",
+          "coefficient": 0.23145741,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "fat_mass",
+          "right_signal_id": "body_fat_percentage",
+          "coefficient": 0.91135482,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "lean_mass_excluding_bmc",
+          "right_signal_id": "bone_mineral_content",
+          "coefficient": 0.62511527,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "lean_mass_excluding_bmc",
+          "right_signal_id": "body_fat_percentage",
+          "coefficient": 0.40650041,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "bone_mineral_content",
+          "right_signal_id": "body_fat_percentage",
+          "coefficient": -0.00669758,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=519. Used as a Gaussian-copula approximation."
+        }
+      ],
+      "plausibility_constraints": [
+        {
+          "constraint_id": "measured-mass-minus-dxa-components",
+          "unit": "kg",
+          "terms": [
+            {
+              "signal_id": "body_mass",
+              "coefficient": 1.0
+            },
+            {
+              "signal_id": "fat_mass",
+              "coefficient": -1.0
+            },
+            {
+              "signal_id": "lean_mass_excluding_bmc",
+              "coefficient": -1.0
+            },
+            {
+              "signal_id": "bone_mineral_content",
+              "coefficient": -1.0
+            }
+          ],
+          "lower_bound": -4.39,
+          "upper_bound": 1.43,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "basis": "Observed full range of measured scale mass minus whole-body DXA fat, lean-excluding-BMC, and BMC in the filtered sample; n=520."
+        }
+      ],
+      "sources": [
+        {
+          "reference_id": "nhanes-2017-2018-demographics",
+          "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/DEMO_J.XPT",
+          "content_hash": "c0b46e0345ea19404928656277c8b0d10b0cca348a9b2fe4fc3c67e8b7ee73ec",
+          "population": "U.S. male adults aged 20-39 years",
+          "statistic_basis": "NHANES 2017-2018 examined participants; demographic filter and MEC weights.",
+          "limitations": [
+            "Public cross-sectional U.S. survey data; not an athlete reference and not longitudinal.",
+            "MEC weights estimate population distributions; stored standard deviations are population dispersion, not survey-design standard errors."
+          ]
+        },
+        {
+          "reference_id": "nhanes-2017-2018-body-measures",
+          "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/BMX_J.XPT",
+          "content_hash": "8d675e42d8826ac98714b2c3dd4c5138a5e353fb4424f7eff5e6db4a01ce838a",
+          "population": "U.S. male adults aged 20-39 years",
+          "statistic_basis": "NHANES 2017-2018 examined participants; measured anthropometry.",
+          "limitations": [
+            "Public cross-sectional U.S. survey data; not an athlete reference and not longitudinal.",
+            "MEC weights estimate population distributions; stored standard deviations are population dispersion, not survey-design standard errors."
+          ]
+        },
+        {
+          "reference_id": "nhanes-2017-2018-dxa",
+          "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/DXX_J.XPT",
+          "content_hash": "de16420ff3f978f72dbcc6a83c64de041440f29ad1f516f5e1cc5476af994ff1",
+          "population": "U.S. male adults aged 20-39 years",
+          "statistic_basis": "NHANES 2017-2018 eligible participants with valid whole-body DXA outputs.",
+          "limitations": [
+            "Public cross-sectional U.S. survey data; not an athlete reference and not longitudinal.",
+            "MEC weights estimate population distributions; stored standard deviations are population dispersion, not survey-design standard errors."
+          ]
+        },
+        {
+          "reference_id": "nhanes-2013-2014-demographics",
+          "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2013/DataFiles/DEMO_H.XPT",
+          "content_hash": "f8f0cbb3085a323d4cde22349b164878fea1e64dbc404e65b5815c7816b547d7",
+          "population": "U.S. male adults aged 20-39 years",
+          "statistic_basis": "NHANES 2013-2014 examined participants; demographic filter and MEC weights.",
+          "limitations": [
+            "Public cross-sectional U.S. survey data; not an athlete reference and not longitudinal.",
+            "MEC weights estimate population distributions; stored standard deviations are population dispersion, not survey-design standard errors."
+          ]
+        },
+        {
+          "reference_id": "nhanes-2013-2014-grip",
+          "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2013/DataFiles/MGX_H.XPT",
+          "content_hash": "49f0440f0bacf180bd9a674f5411c0bae0230a8c2e5a90a41e8e6754bcb8607b",
+          "population": "U.S. male adults aged 20-39 years",
+          "statistic_basis": "NHANES 2013-2014 combined handgrip-strength examination.",
+          "limitations": [
+            "Public cross-sectional U.S. survey data; not an athlete reference and not longitudinal.",
+            "MEC weights estimate population distributions; stored standard deviations are population dispersion, not survey-design standard errors."
+          ]
+        }
+      ],
+      "applicability": "Population initialization for U.S. male adults aged 20-39 years; general-population reference only.",
+      "limitations": [
+        "This is a cross-sectional U.S. general-population prior, not an elite-athlete or combat-performance prior.",
+        "Grip strength is from 2013-2014; it has no asserted cross-cycle correlation with the 2017-2018 body-composition variables.",
+        "Empirical marginals and a Gaussian-copula approximation do not reconstruct the confidential joint population distribution exactly.",
+        "No personal endpoint or longitudinal response is identified by this prior."
+      ]
+    },
+    {
+      "prior_id": "nhanes-us-female-20-39-v1",
+      "observed_at": "2020-02-01T00:00:00Z",
+      "population": "U.S. female adults aged 20-39 years",
+      "parameters": [
+        {
+          "signal_id": "stature",
+          "unit": "cm",
+          "resolution": "DAY",
+          "distribution": "EMPIRICAL_QUANTILES",
+          "mean": 162.61381303,
+          "standard_deviation": 6.73376374,
+          "quantile_probabilities": [
+            0.0,
+            0.005,
+            0.01,
+            0.025,
+            0.05,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.8,
+            0.9,
+            0.95,
+            0.975,
+            0.99,
+            0.995,
+            1.0
+          ],
+          "quantile_values": [
+            141.5,
+            145.73485244,
+            146.85416585,
+            149.59248053,
+            151.1,
+            153.89785995,
+            156.82544017,
+            159.0,
+            161.05113971,
+            162.39338304,
+            164.1,
+            166.0,
+            168.24952677,
+            171.3070477,
+            173.5,
+            175.9,
+            177.7,
+            180.49135359,
+            182.4
+          ],
+          "unweighted_sample_size": 845,
+          "effective_sample_size": 516.90460816,
+          "lower_bound": 141.5,
+          "upper_bound": 182.4,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only."
+        },
+        {
+          "signal_id": "body_mass",
+          "unit": "kg",
+          "resolution": "DAY",
+          "distribution": "EMPIRICAL_QUANTILES",
+          "mean": 78.40367582,
+          "standard_deviation": 24.38257151,
+          "quantile_probabilities": [
+            0.0,
+            0.005,
+            0.01,
+            0.025,
+            0.05,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.8,
+            0.9,
+            0.95,
+            0.975,
+            0.99,
+            0.995,
+            1.0
+          ],
+          "quantile_values": [
+            37.5,
+            39.58524384,
+            43.16800456,
+            47.52816318,
+            49.78930498,
+            52.6,
+            58.42925464,
+            64.0,
+            68.38469361,
+            72.9,
+            78.1,
+            85.66377169,
+            95.2,
+            110.56268305,
+            124.63455891,
+            145.29650616,
+            159.80615635,
+            168.58625395,
+            180.9
+          ],
+          "unweighted_sample_size": 846,
+          "effective_sample_size": 517.5424409,
+          "lower_bound": 37.5,
+          "upper_bound": 180.9,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only."
+        },
+        {
+          "signal_id": "body_mass_index",
+          "unit": "kg/m2",
+          "resolution": "DAY",
+          "distribution": "EMPIRICAL_QUANTILES",
+          "mean": 29.56384455,
+          "standard_deviation": 8.6448789,
+          "quantile_probabilities": [
+            0.0,
+            0.005,
+            0.01,
+            0.025,
+            0.05,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.8,
+            0.9,
+            0.95,
+            0.975,
+            0.99,
+            0.995,
+            1.0
+          ],
+          "quantile_values": [
+            14.8,
+            16.68371552,
+            17.57575979,
+            18.40577823,
+            19.06919956,
+            20.3,
+            22.25899895,
+            23.83930169,
+            25.65252159,
+            27.7,
+            30.1,
+            32.6,
+            36.0,
+            41.0,
+            45.5,
+            51.87978295,
+            59.36758896,
+            63.41450491,
+            66.2
+          ],
+          "unweighted_sample_size": 845,
+          "effective_sample_size": 516.90460816,
+          "lower_bound": 14.8,
+          "upper_bound": 66.2,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only."
+        },
+        {
+          "signal_id": "waist_circumference",
+          "unit": "cm",
+          "resolution": "DAY",
+          "distribution": "EMPIRICAL_QUANTILES",
+          "mean": 95.63511114,
+          "standard_deviation": 19.4678421,
+          "quantile_probabilities": [
+            0.0,
+            0.005,
+            0.01,
+            0.025,
+            0.05,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.8,
+            0.9,
+            0.95,
+            0.975,
+            0.99,
+            0.995,
+            1.0
+          ],
+          "quantile_values": [
+            63.2,
+            66.39775842,
+            67.45869215,
+            69.28204075,
+            70.8597026,
+            73.3,
+            77.7,
+            82.5,
+            87.32168304,
+            91.8,
+            97.5,
+            103.9691582,
+            111.1,
+            122.0,
+            130.9856739,
+            142.49251172,
+            152.99771978,
+            159.71792053,
+            169.5
+          ],
+          "unweighted_sample_size": 798,
+          "effective_sample_size": 489.52029103,
+          "lower_bound": 63.2,
+          "upper_bound": 169.5,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only."
+        },
+        {
+          "signal_id": "hip_circumference",
+          "unit": "cm",
+          "resolution": "DAY",
+          "distribution": "EMPIRICAL_QUANTILES",
+          "mean": 108.76076186,
+          "standard_deviation": 16.41916184,
+          "quantile_probabilities": [
+            0.0,
+            0.005,
+            0.01,
+            0.025,
+            0.05,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.8,
+            0.9,
+            0.95,
+            0.975,
+            0.99,
+            0.995,
+            1.0
+          ],
+          "quantile_values": [
+            79.2,
+            82.15839003,
+            83.0,
+            85.71072626,
+            88.02946842,
+            90.8,
+            94.92226881,
+            99.0,
+            102.47271075,
+            106.0,
+            109.47941144,
+            114.51439005,
+            119.99294492,
+            130.8,
+            138.34440057,
+            147.11059557,
+            159.72535239,
+            172.13436517,
+            179.0
+          ],
+          "unweighted_sample_size": 802,
+          "effective_sample_size": 491.12612176,
+          "lower_bound": 79.2,
+          "upper_bound": 179.0,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only."
+        },
+        {
+          "signal_id": "upper_arm_circumference",
+          "unit": "cm",
+          "resolution": "DAY",
+          "distribution": "EMPIRICAL_QUANTILES",
+          "mean": 32.45372374,
+          "standard_deviation": 5.95820687,
+          "quantile_probabilities": [
+            0.0,
+            0.005,
+            0.01,
+            0.025,
+            0.05,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.8,
+            0.9,
+            0.95,
+            0.975,
+            0.99,
+            0.995,
+            1.0
+          ],
+          "quantile_values": [
+            20.0,
+            21.14278231,
+            22.09843401,
+            23.2,
+            24.25924073,
+            25.6,
+            27.04554408,
+            28.7,
+            30.2,
+            31.7,
+            33.1,
+            35.1,
+            37.5,
+            40.5,
+            43.04056189,
+            45.36711628,
+            48.95376615,
+            52.63522566,
+            56.3
+          ],
+          "unweighted_sample_size": 809,
+          "effective_sample_size": 495.79449825,
+          "lower_bound": 20.0,
+          "upper_bound": 56.3,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only."
+        },
+        {
+          "signal_id": "total_body_bmd",
+          "unit": "g/cm2",
+          "resolution": "DAY",
+          "distribution": "EMPIRICAL_QUANTILES",
+          "mean": 1.09973286,
+          "standard_deviation": 0.08237585,
+          "quantile_probabilities": [
+            0.0,
+            0.005,
+            0.01,
+            0.025,
+            0.05,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.8,
+            0.9,
+            0.95,
+            0.975,
+            0.99,
+            0.995,
+            1.0
+          ],
+          "quantile_values": [
+            0.908,
+            0.919,
+            0.9249791,
+            0.95350561,
+            0.973,
+            0.99951579,
+            1.027,
+            1.054,
+            1.07559078,
+            1.092,
+            1.113,
+            1.13670768,
+            1.16323145,
+            1.21680703,
+            1.254,
+            1.26932719,
+            1.28955125,
+            1.34038506,
+            1.374
+          ],
+          "unweighted_sample_size": 564,
+          "effective_sample_size": 351.67304412,
+          "lower_bound": 0.908,
+          "upper_bound": 1.374,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only."
+        },
+        {
+          "signal_id": "fat_mass",
+          "unit": "kg",
+          "resolution": "DAY",
+          "distribution": "EMPIRICAL_QUANTILES",
+          "mean": 29.79372751,
+          "standard_deviation": 13.18696611,
+          "quantile_probabilities": [
+            0.0,
+            0.005,
+            0.01,
+            0.025,
+            0.05,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.8,
+            0.9,
+            0.95,
+            0.975,
+            0.99,
+            0.995,
+            1.0
+          ],
+          "quantile_values": [
+            8.8268,
+            10.44656917,
+            10.83131869,
+            11.95606395,
+            13.45449196,
+            15.09500305,
+            18.03627671,
+            20.76225153,
+            24.29745645,
+            27.77459048,
+            30.58541768,
+            34.87197414,
+            40.12454566,
+            47.00713196,
+            56.23454772,
+            58.69743255,
+            70.22896284,
+            79.99456307,
+            86.8902
+          ],
+          "unweighted_sample_size": 564,
+          "effective_sample_size": 352.14937527,
+          "lower_bound": 8.8268,
+          "upper_bound": 86.8902,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only."
+        },
+        {
+          "signal_id": "lean_mass_excluding_bmc",
+          "unit": "kg",
+          "resolution": "DAY",
+          "distribution": "EMPIRICAL_QUANTILES",
+          "mean": 44.4628476,
+          "standard_deviation": 8.67146702,
+          "quantile_probabilities": [
+            0.0,
+            0.005,
+            0.01,
+            0.025,
+            0.05,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.8,
+            0.9,
+            0.95,
+            0.975,
+            0.99,
+            0.995,
+            1.0
+          ],
+          "quantile_values": [
+            24.7554,
+            26.36293212,
+            29.14029515,
+            31.15460927,
+            33.06768489,
+            34.52552338,
+            37.00427734,
+            39.28805694,
+            41.14305509,
+            43.23549036,
+            45.10879194,
+            47.51998482,
+            51.50989056,
+            57.02117916,
+            60.30932386,
+            64.64247111,
+            69.09168941,
+            72.67371393,
+            81.0676
+          ],
+          "unweighted_sample_size": 606,
+          "effective_sample_size": 377.79936842,
+          "lower_bound": 24.7554,
+          "upper_bound": 81.0676,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only."
+        },
+        {
+          "signal_id": "bone_mineral_content",
+          "unit": "kg",
+          "resolution": "DAY",
+          "distribution": "EMPIRICAL_QUANTILES",
+          "mean": 2.16887277,
+          "standard_deviation": 0.30043271,
+          "quantile_probabilities": [
+            0.0,
+            0.005,
+            0.01,
+            0.025,
+            0.05,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.8,
+            0.9,
+            0.95,
+            0.975,
+            0.99,
+            0.995,
+            1.0
+          ],
+          "quantile_values": [
+            1.41268,
+            1.46862725,
+            1.53290948,
+            1.66403444,
+            1.71076405,
+            1.81052216,
+            1.90626697,
+            2.00175321,
+            2.06399791,
+            2.12294938,
+            2.21415739,
+            2.29709668,
+            2.43829143,
+            2.58918862,
+            2.70357255,
+            2.78828641,
+            2.9274986,
+            2.98165611,
+            3.01302
+          ],
+          "unweighted_sample_size": 564,
+          "effective_sample_size": 351.67304412,
+          "lower_bound": 1.41268,
+          "upper_bound": 3.01302,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only."
+        },
+        {
+          "signal_id": "body_fat_percentage",
+          "unit": "%",
+          "resolution": "DAY",
+          "distribution": "EMPIRICAL_QUANTILES",
+          "mean": 37.57743816,
+          "standard_deviation": 7.08439082,
+          "quantile_probabilities": [
+            0.0,
+            0.005,
+            0.01,
+            0.025,
+            0.05,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.8,
+            0.9,
+            0.95,
+            0.975,
+            0.99,
+            0.995,
+            1.0
+          ],
+          "quantile_values": [
+            17.7,
+            20.06447165,
+            21.49917968,
+            23.42840623,
+            25.57833199,
+            27.6,
+            30.79975077,
+            33.7,
+            36.3,
+            38.3,
+            40.13144783,
+            41.76250946,
+            43.61933413,
+            46.6,
+            48.27556386,
+            49.39968476,
+            51.77900176,
+            53.48641982,
+            56.1
+          ],
+          "unweighted_sample_size": 564,
+          "effective_sample_size": 352.14937527,
+          "lower_bound": 17.7,
+          "upper_bound": 56.1,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only."
+        },
+        {
+          "signal_id": "combined_grip_strength",
+          "unit": "kg",
+          "resolution": "DAY",
+          "distribution": "EMPIRICAL_QUANTILES",
+          "mean": 61.26128766,
+          "standard_deviation": 10.19730426,
+          "quantile_probabilities": [
+            0.0,
+            0.005,
+            0.01,
+            0.025,
+            0.05,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.8,
+            0.9,
+            0.95,
+            0.975,
+            0.99,
+            0.995,
+            1.0
+          ],
+          "quantile_values": [
+            31.1,
+            39.0,
+            40.10863978,
+            42.60671838,
+            45.2,
+            48.9,
+            52.6478802,
+            55.8,
+            58.4,
+            60.5,
+            62.9,
+            65.6,
+            68.9015984,
+            75.59749863,
+            80.3529551,
+            82.82836538,
+            85.40223597,
+            90.97379068,
+            99.7
+          ],
+          "unweighted_sample_size": 921,
+          "effective_sample_size": 696.57887044,
+          "lower_bound": 31.1,
+          "upper_bound": 99.7,
+          "source_reference_ids": [
+            "nhanes-2013-2014-demographics",
+            "nhanes-2013-2014-grip"
+          ],
+          "applicability": "Grip-strength marginal for U.S. female adults aged 20-39 years; sourced from 2013-2014 and intentionally left independent of 2017-2018 variables."
+        }
+      ],
+      "correlations": [
+        {
+          "left_signal_id": "stature",
+          "right_signal_id": "body_mass",
+          "coefficient": 0.21566521,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "stature",
+          "right_signal_id": "body_mass_index",
+          "coefficient": -0.07035926,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "stature",
+          "right_signal_id": "waist_circumference",
+          "coefficient": 0.04675781,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "stature",
+          "right_signal_id": "hip_circumference",
+          "coefficient": 0.13698852,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "stature",
+          "right_signal_id": "upper_arm_circumference",
+          "coefficient": 0.04331877,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "stature",
+          "right_signal_id": "total_body_bmd",
+          "coefficient": 0.27853002,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "stature",
+          "right_signal_id": "fat_mass",
+          "coefficient": 0.08849494,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "stature",
+          "right_signal_id": "lean_mass_excluding_bmc",
+          "coefficient": 0.37677175,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "stature",
+          "right_signal_id": "bone_mineral_content",
+          "coefficient": 0.62303646,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "stature",
+          "right_signal_id": "body_fat_percentage",
+          "coefficient": -0.12628479,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "body_mass",
+          "right_signal_id": "body_mass_index",
+          "coefficient": 0.95633965,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "body_mass",
+          "right_signal_id": "waist_circumference",
+          "coefficient": 0.93669208,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "body_mass",
+          "right_signal_id": "hip_circumference",
+          "coefficient": 0.95961654,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "body_mass",
+          "right_signal_id": "upper_arm_circumference",
+          "coefficient": 0.92919366,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "body_mass",
+          "right_signal_id": "total_body_bmd",
+          "coefficient": 0.19971045,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "body_mass",
+          "right_signal_id": "fat_mass",
+          "coefficient": 0.96941885,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "body_mass",
+          "right_signal_id": "lean_mass_excluding_bmc",
+          "coefficient": 0.93377953,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "body_mass",
+          "right_signal_id": "bone_mineral_content",
+          "coefficient": 0.4811989,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "body_mass",
+          "right_signal_id": "body_fat_percentage",
+          "coefficient": 0.75595887,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "body_mass_index",
+          "right_signal_id": "waist_circumference",
+          "coefficient": 0.94220115,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "body_mass_index",
+          "right_signal_id": "hip_circumference",
+          "coefficient": 0.94343554,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "body_mass_index",
+          "right_signal_id": "upper_arm_circumference",
+          "coefficient": 0.93752926,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "body_mass_index",
+          "right_signal_id": "total_body_bmd",
+          "coefficient": 0.12913183,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "body_mass_index",
+          "right_signal_id": "fat_mass",
+          "coefficient": 0.96153941,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "body_mass_index",
+          "right_signal_id": "lean_mass_excluding_bmc",
+          "coefficient": 0.84253392,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "body_mass_index",
+          "right_signal_id": "bone_mineral_content",
+          "coefficient": 0.31266171,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "body_mass_index",
+          "right_signal_id": "body_fat_percentage",
+          "coefficient": 0.80719783,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "waist_circumference",
+          "right_signal_id": "hip_circumference",
+          "coefficient": 0.91199895,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "waist_circumference",
+          "right_signal_id": "upper_arm_circumference",
+          "coefficient": 0.89592441,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "waist_circumference",
+          "right_signal_id": "total_body_bmd",
+          "coefficient": 0.09688111,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "waist_circumference",
+          "right_signal_id": "fat_mass",
+          "coefficient": 0.94139705,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "waist_circumference",
+          "right_signal_id": "lean_mass_excluding_bmc",
+          "coefficient": 0.82737501,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "waist_circumference",
+          "right_signal_id": "bone_mineral_content",
+          "coefficient": 0.31421859,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "waist_circumference",
+          "right_signal_id": "body_fat_percentage",
+          "coefficient": 0.81009377,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "hip_circumference",
+          "right_signal_id": "upper_arm_circumference",
+          "coefficient": 0.90296643,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "hip_circumference",
+          "right_signal_id": "total_body_bmd",
+          "coefficient": 0.1500971,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "hip_circumference",
+          "right_signal_id": "fat_mass",
+          "coefficient": 0.95998117,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "hip_circumference",
+          "right_signal_id": "lean_mass_excluding_bmc",
+          "coefficient": 0.85263651,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "hip_circumference",
+          "right_signal_id": "bone_mineral_content",
+          "coefficient": 0.4032293,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "hip_circumference",
+          "right_signal_id": "body_fat_percentage",
+          "coefficient": 0.80032766,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "upper_arm_circumference",
+          "right_signal_id": "total_body_bmd",
+          "coefficient": 0.18900411,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "upper_arm_circumference",
+          "right_signal_id": "fat_mass",
+          "coefficient": 0.91908529,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "upper_arm_circumference",
+          "right_signal_id": "lean_mass_excluding_bmc",
+          "coefficient": 0.84391249,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "upper_arm_circumference",
+          "right_signal_id": "bone_mineral_content",
+          "coefficient": 0.40411708,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "upper_arm_circumference",
+          "right_signal_id": "body_fat_percentage",
+          "coefficient": 0.78085997,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "total_body_bmd",
+          "right_signal_id": "fat_mass",
+          "coefficient": 0.08603974,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "total_body_bmd",
+          "right_signal_id": "lean_mass_excluding_bmc",
+          "coefficient": 0.33443674,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "total_body_bmd",
+          "right_signal_id": "bone_mineral_content",
+          "coefficient": 0.83610815,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "total_body_bmd",
+          "right_signal_id": "body_fat_percentage",
+          "coefficient": -0.09770135,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "fat_mass",
+          "right_signal_id": "lean_mass_excluding_bmc",
+          "coefficient": 0.81891505,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "fat_mass",
+          "right_signal_id": "bone_mineral_content",
+          "coefficient": 0.34168509,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "fat_mass",
+          "right_signal_id": "body_fat_percentage",
+          "coefficient": 0.87831885,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "lean_mass_excluding_bmc",
+          "right_signal_id": "bone_mineral_content",
+          "coefficient": 0.62797172,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "lean_mass_excluding_bmc",
+          "right_signal_id": "body_fat_percentage",
+          "coefficient": 0.4987711,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        },
+        {
+          "left_signal_id": "bone_mineral_content",
+          "right_signal_id": "body_fat_percentage",
+          "coefficient": 0.07821271,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only. Weighted complete-case Pearson dependency; n=557. Used as a Gaussian-copula approximation."
+        }
+      ],
+      "plausibility_constraints": [
+        {
+          "constraint_id": "measured-mass-minus-dxa-components",
+          "unit": "kg",
+          "terms": [
+            {
+              "signal_id": "body_mass",
+              "coefficient": 1.0
+            },
+            {
+              "signal_id": "fat_mass",
+              "coefficient": -1.0
+            },
+            {
+              "signal_id": "lean_mass_excluding_bmc",
+              "coefficient": -1.0
+            },
+            {
+              "signal_id": "bone_mineral_content",
+              "coefficient": -1.0
+            }
+          ],
+          "lower_bound": -2.65,
+          "upper_bound": 5.29,
+          "source_reference_ids": [
+            "nhanes-2017-2018-demographics",
+            "nhanes-2017-2018-body-measures",
+            "nhanes-2017-2018-dxa"
+          ],
+          "basis": "Observed full range of measured scale mass minus whole-body DXA fat, lean-excluding-BMC, and BMC in the filtered sample; n=563."
+        }
+      ],
+      "sources": [
+        {
+          "reference_id": "nhanes-2017-2018-demographics",
+          "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/DEMO_J.XPT",
+          "content_hash": "c0b46e0345ea19404928656277c8b0d10b0cca348a9b2fe4fc3c67e8b7ee73ec",
+          "population": "U.S. female adults aged 20-39 years",
+          "statistic_basis": "NHANES 2017-2018 examined participants; demographic filter and MEC weights.",
+          "limitations": [
+            "Public cross-sectional U.S. survey data; not an athlete reference and not longitudinal.",
+            "MEC weights estimate population distributions; stored standard deviations are population dispersion, not survey-design standard errors."
+          ]
+        },
+        {
+          "reference_id": "nhanes-2017-2018-body-measures",
+          "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/BMX_J.XPT",
+          "content_hash": "8d675e42d8826ac98714b2c3dd4c5138a5e353fb4424f7eff5e6db4a01ce838a",
+          "population": "U.S. female adults aged 20-39 years",
+          "statistic_basis": "NHANES 2017-2018 examined participants; measured anthropometry.",
+          "limitations": [
+            "Public cross-sectional U.S. survey data; not an athlete reference and not longitudinal.",
+            "MEC weights estimate population distributions; stored standard deviations are population dispersion, not survey-design standard errors."
+          ]
+        },
+        {
+          "reference_id": "nhanes-2017-2018-dxa",
+          "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/DXX_J.XPT",
+          "content_hash": "de16420ff3f978f72dbcc6a83c64de041440f29ad1f516f5e1cc5476af994ff1",
+          "population": "U.S. female adults aged 20-39 years",
+          "statistic_basis": "NHANES 2017-2018 eligible participants with valid whole-body DXA outputs.",
+          "limitations": [
+            "Public cross-sectional U.S. survey data; not an athlete reference and not longitudinal.",
+            "MEC weights estimate population distributions; stored standard deviations are population dispersion, not survey-design standard errors."
+          ]
+        },
+        {
+          "reference_id": "nhanes-2013-2014-demographics",
+          "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2013/DataFiles/DEMO_H.XPT",
+          "content_hash": "f8f0cbb3085a323d4cde22349b164878fea1e64dbc404e65b5815c7816b547d7",
+          "population": "U.S. female adults aged 20-39 years",
+          "statistic_basis": "NHANES 2013-2014 examined participants; demographic filter and MEC weights.",
+          "limitations": [
+            "Public cross-sectional U.S. survey data; not an athlete reference and not longitudinal.",
+            "MEC weights estimate population distributions; stored standard deviations are population dispersion, not survey-design standard errors."
+          ]
+        },
+        {
+          "reference_id": "nhanes-2013-2014-grip",
+          "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2013/DataFiles/MGX_H.XPT",
+          "content_hash": "49f0440f0bacf180bd9a674f5411c0bae0230a8c2e5a90a41e8e6754bcb8607b",
+          "population": "U.S. female adults aged 20-39 years",
+          "statistic_basis": "NHANES 2013-2014 combined handgrip-strength examination.",
+          "limitations": [
+            "Public cross-sectional U.S. survey data; not an athlete reference and not longitudinal.",
+            "MEC weights estimate population distributions; stored standard deviations are population dispersion, not survey-design standard errors."
+          ]
+        }
+      ],
+      "applicability": "Population initialization for U.S. female adults aged 20-39 years; general-population reference only.",
+      "limitations": [
+        "This is a cross-sectional U.S. general-population prior, not an elite-athlete or combat-performance prior.",
+        "Grip strength is from 2013-2014; it has no asserted cross-cycle correlation with the 2017-2018 body-composition variables.",
+        "Empirical marginals and a Gaussian-copula approximation do not reconstruct the confidential joint population distribution exactly.",
+        "No personal endpoint or longitudinal response is identified by this prior."
+      ]
+    }
+  ],
+  "prior_hashes": {
+    "nhanes-us-male-20-39-v1": "34cb13c0773fb845efc568c2933c3d1f48e6bc6b025985f3c709d681020810ea",
+    "nhanes-us-female-20-39-v1": "881260fd79f5f89a7b88c20a8f652c2301bf9176e401d6b4d15c48c338a3b80f"
+  }
+}

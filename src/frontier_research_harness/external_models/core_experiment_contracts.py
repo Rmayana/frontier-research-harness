@@ -63,6 +63,32 @@ class OpenSimJointReactionStudy(ScientificModel):
         )
 
 
+class OpenSimReactionSeriesStudy(ScientificModel):
+    """Repeated state evaluation, explicitly distinct from motion prediction."""
+    study_type: str = "joint_reaction_series"
+    model_path: NonEmptyStr
+    states_path: NonEmptyStr
+    joint: NonEmptyStr
+    side: str
+    calibration: CalibrationBoundary
+    timeout_seconds: int = Field(default=300, ge=1, le=3600)
+
+    @model_validator(mode="after")
+    def validate_study(self) -> "OpenSimReactionSeriesStudy":
+        if self.study_type != "joint_reaction_series" or self.side not in {"child", "parent"}:
+            raise ValueError("joint_reaction_series and child/parent side required")
+        _workspace_path(self.model_path, "model_path")
+        _workspace_path(self.states_path, "states_path")
+        return self
+
+    def to_job(self) -> ExternalEngineJob:
+        driver = "scripts/external_engines/opensim_reaction_series.py"
+        return ExternalEngineJob(component_id="opensim",
+            arguments=(driver, "--model", self.model_path, "--states", self.states_path,
+                       "--joint", self.joint, "--side", self.side),
+            input_artifacts=(driver, self.model_path, self.states_path), timeout_seconds=self.timeout_seconds)
+
+
 class PulseScenarioStudy(ScientificModel):
     study_type: str = "scenario"
     scenario_path: NonEmptyStr
@@ -97,6 +123,7 @@ class FebioStudy(ScientificModel):
     model_path: NonEmptyStr
     expected_log_path: NonEmptyStr
     expected_plot_path: str | None = None
+    expected_data_paths: tuple[NonEmptyStr, ...] = ()
     calibration: CalibrationBoundary
     timeout_seconds: int = Field(default=1800, ge=1, le=14_400)
 
@@ -108,6 +135,10 @@ class FebioStudy(ScientificModel):
         _workspace_path(self.expected_log_path, "expected_log_path")
         if self.expected_plot_path:
             _workspace_path(self.expected_plot_path, "expected_plot_path")
+        for path in self.expected_data_paths:
+            _workspace_path(path, "expected_data_paths")
+        if len(set(self.expected_data_paths)) != len(self.expected_data_paths):
+            raise ValueError("FEBio expected data paths must be unique")
         return self
 
     def to_job(self) -> ExternalEngineJob:
@@ -115,6 +146,7 @@ class FebioStudy(ScientificModel):
         outputs = [self.expected_log_path]
         if self.expected_plot_path:
             outputs.append(self.expected_plot_path)
+        outputs.extend(self.expected_data_paths)
         return ExternalEngineJob(
             component_id="febio", arguments=(model.name,),
             input_artifacts=(self.model_path,), expected_output_artifacts=tuple(outputs),

@@ -65,6 +65,25 @@ class CoreOutputNormalizerTests(unittest.TestCase):
         self.assertEqual(normalized["completed_time_steps"], 10)
         self.assertIn("not anatomical validation", normalized["limitations"][0])
 
+    def test_recovery_requires_the_actual_later_sample(self):
+        for times, reason in (("0,120\n60,100\n", "OUTSIDE_RECORDED_HORIZON"),
+                              ("0,120\n60,100\n180,70\n", "REQUESTED_SAMPLE_NOT_PRESENT")):
+            with self.subTest(reason=reason), tempfile.TemporaryDirectory() as root:
+                path = Path(root) / "results.csv"
+                path.write_text("Time(s),HeartRate(1/min)\n" + times, encoding="utf-8")
+                result = normalize_pulse(receipt(outputs=(artifact(path),)), exercise_end_seconds=60)
+                self.assertIsNone(result["heart_rate_recovery"])
+                self.assertEqual(result["heart_rate_recovery_status"], reason)
+
+    def test_recovery_rejects_invalid_interval_and_unordered_samples(self):
+        with self.assertRaisesRegex(ValueError, "positive"):
+            normalize_pulse(receipt(), recovery_interval_seconds=0)
+        with tempfile.TemporaryDirectory() as root:
+            path = Path(root) / "results.csv"
+            path.write_text("Time(s),HeartRate(1/min)\n60,100\n0,70\n", encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "increasing"):
+                normalize_pulse(receipt(outputs=(artifact(path),)), exercise_end_seconds=0)
+
 
 if __name__ == "__main__":
     unittest.main()

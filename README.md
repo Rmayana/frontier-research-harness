@@ -1,114 +1,265 @@
 # Frontier Research Harness
 
 A lightweight research environment for Codex. The user gives a goal in natural
-language; Codex decides how to investigate it using current evidence, relevant
-external scientific models, and reproducible experiment records.
+language; Codex investigates like a human researcher, combining knowledge,
+evidence, chained estimates, calculations and tools to revise its explanation.
+The repository supplies access, execution and recoverable records.
 
-## Active environment
+Use the environment on real questions and improve observed friction in small
+increments. Specialist plugins, including separate gene-manipulation and
+drug-discovery tool groups, are described in the research skill's
+[optional tool guide](plugins/frontier-science-model/skills/goal-research/references/tools-and-development.md).
+They are peer tools selected for the question, not a required workflow.
 
-```text
-User <-> Codex
-          |-- small goal/current-state/research workspace
-          |-- scholarly search and retained evidence
-          |-- established external scientific models
-          |-- unit-checked calculations for 27 physical targets
-          `-- immutable inputs, versions, provenance, and raw outputs
-```
+## Start here for human and AI reviewers
 
-The active path has no mandatory measurement contract, special frontier-
-hypothesis phase, predeclared research protocol, Planner/Reviewer, gate, state
-machine, or fixed 24-month strategy search. Hypotheses and possible methods are
-created and revised naturally as Codex researches the goal. Effectiveness and
-efficiency remain continuing optimization objectives rather than separate
-features.
+This repository publishes the research environment, not personal research data.
+Read [AGENTS.md](AGENTS.md), [CONTEXT.md](CONTEXT.md), the current
+[blueprint](docs/BLUEPRINT.md), and the [research skill](plugins/frontier-science-model/skills/goal-research/SKILL.md)
+for the intended behavior. [ADR 0007](docs/adr/0007-direct-external-models.md)
+describes direct model use; older decisions and archived examples may be superseded.
 
-Research starts from the whole-person question and moves into organ, tissue,
-cellular, or molecular detail when doing so can change the conclusion. The
-active model toolbox exposes established external engines and preserves their
-exact runs. A model is used only within its documented context; a successful
-run is not automatically a personalized prediction.
+The working goal and target tables describe research objectives, not demonstrated
+human outcomes. Personal observations, research databases, credentials and installed
+scientific runtimes are excluded. The plugin's `.mcp.json` contains local deployment
+paths: configure `cwd` and the Python executable for your own checkout before use.
+Optional vendor source dependencies can be obtained with `git submodule update --init`.
 
-The model catalog distinguishes a verified reference run from a research-
-callable, target-relevant, or personalized model. These states are never
-treated as synonyms. The boxing technical goal remains part of the North Star,
-but footage-only technique research uses broad timestamped fight and training
-observations instead of an unrelated physiological simulation.
+Current baseline (2026-09-28): 136 local unit tests passed; skill/plugin format
+validation passed. This is not evidence of improved scientific intelligence or
+cross-machine runtime readiness. See [evaluation criteria](docs/RESEARCH_ENVIRONMENT_EVAL.md)
+and the [external model guide](docs/EXTERNAL_MODELS.md) for limits and optional tools.
 
-For physical questions, `list_models` can receive the goal targets in scope and
-returns compatible models by whole-person, organ, musculoskeletal, tissue, and
-cellular Model Layer. A broad synthesis must include a current-turn experiment
-from every relevant executable layer, and an experiment cannot be attached to
-an incompatible target. The routing is derived during the call and is not a
-stored plan or agent state machine.
+Improve from actual use: describe the observed problem or missing capability,
+inspect relevant existing implementations and plugins, make one useful bounded
+change, and verify it. Report evidence, changed behavior and remaining uncertainty.
+Keep the environment light and preserve the approved goal and useful records.
 
-The default workspace loads only the exact fixed goal, accepted personal
-baseline, current state, constraints, hypotheses, research notes, and promising
-methods. Evidence and model experiments use separate records and can be loaded
-again in later chats.
+## Core architecture
 
-Literature search supports independent multi-source queries, pagination,
-transient-error retries, per-query failure isolation, and DOI/PMID/work-level
-deduplication. Search metadata is never treated as read evidence: retained
-evidence must include inspected content, the claims actually used,
-applicability, limitations, and a content hash. A small plugin hook asks Codex
-to continue once when a research tool failed or it tries to stop without
-current-turn target-compatible runs across the relevant Model Layers and a
-validated mapping from every goal target in scope to retained evidence.
-Technical-footage-only
-research is exempt from the model call. This one-turn receipt is not stored as
-a plan or workflow object, and the hook does not score claims or choose the
-research path.
+The public Module Interface is transport independent. `research_tool_contracts`
+defines the shared tool schemas and `research_tool_dispatch` invokes the stable
+`FrontierScienceWorkspace` facade. The MCP server and JSON CLI only translate
+their respective transport inputs and outputs.
 
-`calculate_target` covers every physical target with bounded formulas, strict
-units, formula versions, input hashes, and immutable results. It returns
-`INPUT_REQUIRED` rather than inventing missing data and labels arithmetic or
-measurement-derived results separately from biological forecasts.
+The workspace facade is implemented by responsibility-specific internal modules:
 
-`assess_targets` projects the latest immutable calculations across all 27
-physical targets as `TARGET_MET`, `GAP_OBSERVED`, or `MEASUREMENT_REQUIRED`.
-It is a live readiness view, not a persisted plan or an adaptation forecast.
-`calculate_targets` accepts a portfolio of distinct measurements and preserves
-valid calculations even when a sibling is missing or invalid.
+| Module | Responsibility |
+| --- | --- |
+| `_workspace_core` | SQLite lifecycle, goal workspace, resumption, and retained-record reads |
+| `_workspace_evidence` | literature discovery, evidence retention, and footage records |
+| `_workspace_observations` | personal observations |
+| `_workspace_audit` | coverage and integrity audits plus goal/model identifier validation |
+| `_workspace_operations` | research log, environment information and historical record reads |
 
-OpenSim, Pulse, and FEBio expose typed study contracts in addition to the
-low-level registered-engine boundary. The contracts validate workspace-local
-input/output artifacts and require an explicit reference or personal-
-observation calibration label. Personal OpenSim studies also require a saved
-state snapshot; a runtime smoke case cannot silently become a personal study.
-Typed runs return normalized observables alongside the original engine receipt:
-OpenSim joint-reaction vectors and magnitudes, Pulse time-series summaries and
-explicit-window heart-rate recovery, and FEBio convergence/termination and
-artifact hashes. These observables retain model-specific limitations and are
-not converted into personal endpoints automatically.
+Callers continue to import `FrontierScienceWorkspace` from
+`adapters.frontier_science_workspace`; persistence, evidence, observations, and
+historical record reads remain separate implementation modules. External models
+are run directly as described below.
 
-Timestamped boxing fight/training observations can be retained through
-`save_footage_observation`. Each record preserves the inspected interval,
-situation, observed actions, explicit repeated-pattern status, possible drills,
-applicability, limitations, and a content hash as primary-source evidence.
-Saved observations can be listed and compared by their exact retained action
-and context labels without assigning a technique score or inventing semantic
-similarity.
+### Research tools and local fallback
 
-Run live reference-only acceptance checks for the three typed core paths with:
+`inspect_environment` shows configured evidence sources, the model guide
+and the local entrypoint. It deliberately reports network access as
+untested and cannot certify which tools a host has exposed. The local JSON CLI
+uses the same dispatcher as MCP; it is available if a conversation has not loaded
+the plugin's tools.
+
+On this Windows workspace, the plugin uses `.venv-research/Scripts/python.exe`
+and an absolute workspace `cwd`, so a cached plugin cannot resolve its database
+or Python environment relative to the plugin cache. A relocated checkout needs
+its MCP command and cwd updated. For a fresh environment:
 
 ```powershell
-uv run python scripts/validate_typed_core_models.py
+$env:UV_CACHE_DIR = Join-Path (Get-Location) '.uv-cache'
+$env:UV_PROJECT_ENVIRONMENT = Join-Path (Get-Location) '.venv-research'
+uv sync --locked
+uv run python -m unittest discover -s tests -v
 ```
 
-The active user-confirmed target is stored in [goal.json](goal.json).
+Optional scientific runtimes are discovered separately. The existing OpenSim
+4.6 installation was preserved in the new environment and smoke-tested; it is
+not a dependency supplied by `uv sync`. Recreating this environment requires
+installing the appropriate OpenSim package separately when that engine is needed.
+
+```powershell
+# Inspect schemas without touching the personal database.
+& .venv-research/Scripts/python.exe -X utf8 -m frontier_research_harness.adapters.research_cli tools
+# Read JSON arguments from a file; no quoting or embedded Python needed.
+& .venv-research/Scripts/python.exe -X utf8 -m frontier_research_harness.adapters.research_cli search_literature --input queries.json
+```
+
+`queries.json` uses `{"queries":[{"source":"pubmed","query":"your research query"}],"page_size":10}`.
+The same route supports every advertised tool, including `load_research`,
+`fetch_literature` and `research_log`. `--database` selects an isolated
+database for engineering tests. Tool failures return a nonzero CLI exit code.
+
+Resume research with `load_research`: its default response includes the approved
+objective, reverse-design intent, target/score table paths, current understanding,
+and `recent_activity`. Activity previews link to exact saved results; they are
+chronological records, not recommendations or new findings. Explicit `sections`
+and `recent_items` keep context bounded. Codex interprets the results, chooses the
+next useful question/tool, and saves a revised understanding when appropriate.
+The existing host agent loop executes those choices; no second scheduler or
+fixed scientific workflow is installed by this project.
+An already-running MCP process can retain old Python code. If default
+`load_research` lacks `recent_activity` or the current objective, use the local CLI
+against the same database until the host reconnects the server. Editing source
+does not hot-reload an existing MCP connection.
+
+The installed research skill is also a separate cached copy. After changing the
+plugin, use Plugin Creator's cachebuster/update flow and
+`codex plugin add frontier-science-model@frontier-research-local`; use a new chat
+to pick up the updated skill and tools. Verify source/cache contents rather than
+assuming a source edit updated the installed copy.
+
+### External models
+
+Use the [short external-model guide](docs/EXTERNAL_MODELS.md). Codex writes input
+files and analysis code when the question requires them, then calls the installed
+engine's Python API or executable. Keep useful code, inputs and raw results as files.
+There is no simulator tool, mandatory experiment template, shared calculator,
+dataset registry or new experiment database. Existing research data is preserved.
+
+Literature search, personal observations, research notes and goal continuity remain
+available through the Module Interface. Its bounded original-record reader can
+also read old experiment records; the old execution APIs have been removed.
+
+`research_log` optionally appends user/Codex contributions and plan drafts with
+free labels and reply links; list pagination uses `after_sequence`. It does not
+prescribe questions, assign evidential support or authorize a routine. The current
+causal explanation remains in `current_understanding`, with its existing history.
+Fetched literature now includes navigation to cited records and linked materials;
+those links have not themselves been fetched or verified.
+
+Live engineering acceptance (writes only test records under `.scratch`):
+
+```powershell
+& .venv-research/Scripts/python.exe -X utf8 scripts/validate_research_lab.py --engine --mcp
+# Also check public scholarly endpoints when network access is available:
+& .venv-research/Scripts/python.exe -X utf8 scripts/validate_research_lab.py --online --mcp
+```
+
+These checks demonstrate research-tool transport, not autonomous research
+quality or a validated personal combat-body simulation. The actual explanation
+of combat capability remains open to evidence and discussion with the user.
+
+```text
+approved North Star
+       |
+       v
+     Codex  <------ evidence and personal observations
+       |
+       +---------- qualified external models
+       |                 |
+       |                 v
+       +-------- question-specific code and experiment files
+       |
+       v
+questions -> hypotheses -> experiments -> interpretation -> revised strategy
+```
+
+The governing goal in [goal.json](goal.json) is the whole-body configuration at
+110–120 kg that maximizes the equal-weight mean of normalized metrics, including
+skeletal development. [Numerical research targets](docs/TARGETS.md) preserve the
+user-supplied table; [the score table](docs/SCORECARD.md) records comparison rules
+and uncomputed results. The former seven combat targets and 27 anchors are
+historical, not current requirements.
+
+For broad research Codex starts from the strongest current evidence and
+best-documented elite practice, maintains a revisable whole-goal strategy, and
+uses every result as a new observation that changes its causal understanding.
+It derives newly available quantities, follows unexplained implications and
+promising method combinations, and lets those findings naturally produce the
+next question, hypothesis, and discriminating investigation. No question score,
+fixed hypothesis count, Planner, Reviewer, phase, gate, or completion state is
+encoded in the repository.
+
+Codex reverse-designs the desired outcome into structures, physiology, mechanisms,
+and feasible methods and tests their consequences forward. It moves naturally
+between broad synthesis and fine detail, and across interacting systems as results
+raise questions, without a prescribed order. Numerical optimization is one tool
+within this research. Combat remains an application of the whole-body goal.
+Codex can replace `current_understanding` with concise free text
+as its explanation changes; `load_research(history_limit=...)` retrieves earlier
+versions. Notes remain available as historical observations, not a list of
+currently accepted conclusions.
+
+## What each part does
+
+| Part | Accepts | Returns | Does not do |
+| --- | --- | --- | --- |
+| Goal workspace | selected goal/map branches and concise retained state | fixed North Star, current context, hypotheses, durable notes | choose the research path |
+| Evidence tools | literature queries, source IDs, inspected records | candidate records, fetched content, claim-linked evidence receipts | treat search metadata as read evidence |
+| Personal observations | value, unit, time, protocol, instrument, uncertainty, provenance | immutable observations and same-protocol descriptive series | infer causality or future response |
+| Installed external models | engine-native inputs created for the question | native output files and logs | choose the research path |
+
+The approved target is in [goal.json](goal.json): the whole-body human capability
+frontier at 110–120 kg, including skeletal development. The previous combat map
+in [goal-structure.json](goal-structure.json) is historical reference, not the
+current goal or an active set of success conditions. Map edges do not prove
+causality or authorize an intervention.
+
+## Evidence and model discipline
+
+`fetch_literature` preserves the exact response and returns a `fetch_id`.
+`save_evidence` can use that ID instead of resending the payload and source
+metadata; add a title when the source response has none. Scholarly appraisals
+may be concise free text or structured fields. Claims still require located
+passages and source-bounded interpretation.
+
+External engines now run directly. Keep useful stdout/stderr, inputs and outputs
+with the experiment files, including failures. Historical failed DB records remain
+available for diagnosis and cannot support a successful model-result claim.
+
+Search is paginated and fault-isolated. Retained scholarly evidence contains
+the inspected payload, claims actually used, short located passages,
+applicability, limitations, and a content hash. A PubMed record may resolve to
+available PMC full text through Europe PMC; failure falls back to the exact
+record with the limitation preserved.
+
+External models are used only when their documented scale and inputs can change
+the decision. When a result raises a quantitative question, Codex chooses the
+relevant established relation or creates the smallest question-specific
+provisional model, then calculates directly or with temporary code. Equations,
+inputs, units, coefficient sources, assumptions, outputs, sensitivity,
+uncertainty, and unresolved links remain visible. A calculation is promoted to a
+permanent tool only after repeated use demonstrates a need. Local code may not
+invent biological coefficients or a personal longitudinal simulator. Reference
+and population runs support conditional conclusions; personalization requires
+adequate comparable personal data and an explicitly justified calibration
+method.
+
+Every executed experiment preserves the exact question, all actual inputs,
+units, timing, seeds, versions, provenance, raw outputs, uncertainty, failures,
+and unresolved variables. When the user asks to see everything, these records
+are shown directly or through a linked artifact.
 
 ## Chat use
 
-Ask naturally. One message may contain one topic or several, for example:
+Ask naturally, including several topics in one message. Codex treats them as a
+temporary portfolio, investigates each far enough that an easy topic cannot
+substitute for another, then synthesizes mechanisms, conflicts, trade-offs, and
+whole-goal implications. Personal observations improve calibration but are not
+required to begin evidence review, physics-based analysis, reference modeling,
+or sensitivity experiments.
 
-> 목 힘, 선택반응, 고강도 후 폭발력 저하를 각각 연구하고 서로 충돌하지
-> 않는 최적 훈련 방향으로 합쳐줘.
+During a substantial run Codex shows material intermediate results, quantities
+derived from them, questions they genuinely raised, and changes to the leading
+strategy. The user can challenge assumptions, add observations, or redirect the
+emphasis while research is running. Codex continues safe research without
+making the user supply the next scientific question.
 
-Codex separates the topics internally, researches each with current evidence
-and relevant external models, then synthesizes interactions and implications
-for the fixed goal. No form, research ID, manual phase, or separate task is
-required. The old Kernel, custom simulators, measurement-contract machinery,
-frontier workflow, and fixed strategy scripts have been removed.
+Research does not activate training, medical action, drugs or supplements,
+purchases, bookings, external mutations, or a changed goal. Those require
+explicit user approval.
+
+## Optional long-running operation
+
+The [joint-research runner guide](docs/RUNNER.md) covers explicit launch, live
+human steering, native parallel research, event inspection, pause/recovery and
+resource limits. Normal chat does not require the runner. Nothing starts or
+activates a real-world strategy merely by installing these changes.
 
 ## Validation
 
@@ -116,6 +267,6 @@ frontier workflow, and fixed strategy scripts have been removed.
 uv run python -m unittest discover -s tests -v
 ```
 
-See [AGENTS.md](AGENTS.md) for invariants, [CONTEXT.md](CONTEXT.md) for active
-terms, [docs/BLUEPRINT.md](docs/BLUEPRINT.md) for the architecture, and
-[docs/ARTIFACT_POLICY.md](docs/ARTIFACT_POLICY.md) for version-control boundaries.
+Architecture and language are defined in [docs/BLUEPRINT.md](docs/BLUEPRINT.md),
+[CONTEXT.md](CONTEXT.md), and [AGENTS.md](AGENTS.md). Version-control boundaries
+are in [docs/ARTIFACT_POLICY.md](docs/ARTIFACT_POLICY.md).

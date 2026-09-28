@@ -10,11 +10,45 @@ from frontier_research_harness.external_models.external_engine_federation import
     ConnectionStatus, ExternalComponent, FederationInventory, FederationRole,
 )
 from frontier_research_harness.external_models.external_engine_runner import (
-    ExternalEngineJob, ExternalEngineRunner,
+    ExternalEngineError, ExternalEngineJob, ExternalEngineRunner,
 )
 
 
 class ExternalEngineRunnerTests(unittest.TestCase):
+    def test_timeout_and_missing_output_preserve_available_process_diagnostics(self):
+        import subprocess
+
+        component = ExternalComponent(
+            component_id="pulse", name="Pulse", layer="physiology",
+            role=FederationRole.EXECUTION_ENGINE, status=ConnectionStatus.READY,
+            runtime_path="registered.exe",
+        )
+        inventory = FederationInventory(components=(component,), executable_component_ids=("pulse",), ready_for_execution=True, blocking_component_ids=())
+        for outcome in (
+            subprocess.TimeoutExpired("registered.exe", 1, output=b"partial output", stderr=b"partial error"),
+            subprocess.CompletedProcess([], 0, b"completed but missing artifact", b""),
+        ):
+            with self.subTest(outcome=type(outcome).__name__), tempfile.TemporaryDirectory() as directory, patch(
+                "frontier_research_harness.external_models.external_engine_runner.external_federation_inventory", return_value=inventory
+            ), patch("frontier_research_harness.external_models.external_engine_runner.subprocess.run") as run:
+                if isinstance(outcome, Exception):
+                    run.side_effect = outcome
+                else:
+                    run.return_value = outcome
+                with self.assertRaises(ExternalEngineError) as caught:
+                    ExternalEngineRunner().run(ExternalEngineJob(
+                        component_id="pulse", timeout_seconds=1, expected_output_artifacts=("missing.dat",),
+                    ), workspace_root=directory)
+                receipt = caught.exception.receipt
+                self.assertEqual(receipt.runtime_path, "registered.exe")
+                if isinstance(outcome, Exception):
+                    self.assertEqual(receipt.timeout_seconds, 1)
+                    self.assertEqual(receipt.stdout, "partial output")
+                    self.assertEqual(receipt.stderr, "partial error")
+                else:
+                    self.assertEqual(receipt.exit_code, 0)
+                    self.assertEqual(receipt.stdout, "completed but missing artifact")
+
     def test_missing_runtime_never_falls_back_to_python_equations(self):
         component = ExternalComponent(component_id="pulse", name="Pulse", layer="physiology", role=FederationRole.EXECUTION_ENGINE, status=ConnectionStatus.RUNTIME_MISSING)
         inventory = FederationInventory(components=(component,), executable_component_ids=("pulse",), ready_for_execution=False, blocking_component_ids=("pulse",))

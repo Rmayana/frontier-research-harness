@@ -1,123 +1,104 @@
 ---
 name: goal-research
-description: Use Frontier Science Model for open-ended scientific research toward a user-defined personal goal, using current evidence and external models while Codex chooses the research path.
+description: Use when researching a personal scientific goal, revising a causal explanation, or resuming an investigation with evidence, estimates and tools.
 ---
 
 # Goal Research
 
-Codex is the researcher and natural-language interface. Understand the user's
-goal, current state, corrections, and preferences in ordinary language. Keep
-database fields, internal identifiers, model plumbing, and legacy terminology
-out of the conversation unless the user asks for them.
+Keep the environment light so Codex can use its knowledge, reasoning, coding and
+tools as a human researcher would. Codex owns questions, explanations and strategy;
+the environment supplies access, execution and recoverable records.
 
-Load only the smallest useful workspace context. Treat effectiveness and
-efficiency as continuing optimization objectives: seek a better route whenever
-current evidence or model results justify one. Hypotheses should arise, change,
-combine, or disappear naturally during research. Do not impose a separate
-frontier-discovery phase, a fixed hypothesis count, a mandatory measurement
-contract, a predeclared protocol, a gate, or a prebuilt 24-month plan.
+The central problem is: **How can this goal be achieved?** Follow `goal.json` and
+keep a revisable causal explanation and realization strategy. Begin with strong
+human evidence and documented elite practice. Work backward from desired outcomes,
+forward through consequences, and across systems as findings raise questions.
+Develop alternatives and discriminating predictions; distinguish execution bugs,
+model limits and contrary evidence. Pursue questions that could change the strategy
+without fixed stages, question scores, roles, counts or a prescribed order.
 
-When the user asks for several research topics in one chat message, treat them
-as one research portfolio. Identify the topics yourself, investigate each far
-enough that one topic does not substitute for another, then synthesize shared
-mechanisms, conflicts, trade-offs, and the best combined implications for the
-goal. Do not ask the user to create projects, fill forms, name internal fields,
-or open separate threads. Use a separate task or recurring automation only when
-the user explicitly requests it.
+Combine literature, observations, mechanisms, chained estimates, calculations and
+simulations. A complete calculation model is not a prerequisite for inquiry.
+Identify evidence and assumptions at consequential links, consider alternatives
+and uncertainty, and say what would revise the estimate. Do not invent biological
+coefficients or promote a conditional inference into a personal fact.
 
-For substantial physical or physiological research, use current primary
-evidence and relevant connected external scientific models rather than ending
-with literature alone. Footage-only research on the boxing technical goal does
-not require or benefit from an unrelated physiological simulation.
-Use `search_literature` with the canonical shape
-`{"queries":[{"source":"pubmed","query":"..."}],"page_size":25}`. For broad
-questions, search independent query families across complementary sources and
-follow returned `next_queries`; do not mistake the first page for a literature
-review. Continue while additional pages or query reformulations are still
-adding decision-relevant records, and stop when marginal useful coverage has
-clearly plateaued rather than at an arbitrary paper count.
+Read the goal-linked target and score tables when
+comparing numerical combinations. Execute the user's equal-weight normalized
+objective without inventing weights or biological tradeoffs. A modeled optimum
+does not establish actual attainability. Combat remains an application when the
+approved goal is whole-body capability.
 
-Search results are candidate metadata, not read evidence. Fetch and inspect the
-decision-relevant primary records. `save_evidence` rejects metadata-only
-scholarly records: retain the exact fetched/source payload, title, content
-level, specific claims used, applicability, and limitations. Do not fetch the
-same source identifier twice in one turn. For the boxing technical goal,
-inspect primary fight footage and retain timestamped observations as
-`EXTERNAL_PRIMARY_SOURCE` through `save_footage_observation`; literature about
-generic boxing cannot substitute for the named athlete's actual decision
-system. Use `list_footage_observations` and `compare_footage_observations` to
-reload exact clips and labels, but let Codex judge semantic similarity and
-opponent-specific variation.
+The user is a research partner. Incorporate their observations and objections,
+distinguishing their words from your interpretation. Share consequential findings,
+uncertainty and strategy changes while continuing safe in-scope investigation.
+Generate the next useful question yourself; examples are not a questionnaire and
+intermediate reports are not mandatory approval gates.
 
-For substantial research that includes physical targets, call `list_models`
-with the exact physical target IDs in scope. Use its required model layers and
-relevant models as routing evidence, not as a substitute for scientific
-judgment. Successfully run and interpret a target-compatible experiment in
-every returned layer during the current research turn. Listing, describing, or
-reusing a prior run does not count. Within a layer, choose the model and
-question that can most change the goal-level decision. If personal inputs are
-unavailable, use a documented reference, boundary, or sensitivity input and
-keep the resulting limitation explicit; never fabricate personal input.
+Use native subagents for useful independent approaches in substantial research.
+Share bounded questions, assumptions and exact sources; exchange intermediate
+findings and reconcile contradictions while continuing your own investigation.
+Keep attributed contributions in research_log and one current synthesis. Pass
+load_research.updated_at as save_research.expected_updated_at; reconcile conflicts.
 
-Do not let the easiest executable model define the research agenda. For a broad
-goal, move top-down through whole-person physiology, organ circulation,
-musculoskeletal mechanics, tissue durability, and cellular metabolism wherever
-the catalog marks that layer relevant. Before deepening an already-run layer,
-resolve the other relevant layers. A model result may revise hypotheses inside
-its context, but it cannot by itself replace explanations or unknowns at other
-layers. Current `list_models` and `describe_model` status overrides an older
-operational note about a runtime failure; retain a correction when the old
-failure affected prior research.
+Select tools from their live capabilities and read the matching skills. Consult
+[tools-and-development.md](references/tools-and-development.md) when choosing
+specialist plugins or changing this environment. Gene manipulation and drug
+discovery are distinct peer tool groups; neither imposes a research sequence.
+Use inspect_environment for local paths and the README's JSON CLI when workspace
+MCP tools are unavailable. Discovery, authentication and successful use differ.
 
-For a request limited to Beterbiev technique, inspect extensive fight and
-training footage, retain timestamped observations, and do not run a model
-merely to satisfy the receipt.
+When a route lacks evidence or a tool, investigate how to make progress: inspect
+adjacent evidence, theoretical bounds, original data/equations and maintained
+implementations; adapt an existing solver or build a question-specific analysis.
+Validate units, limiting cases, a documented baseline and independent results
+where available. Preserve code, inputs, versions and raw outputs. Unknown
+biological coefficients remain unknown: a conditional calculation can narrow the
+question without pretending to predict the user. Follow alternative routes when
+one branch needs new authority or measurements.
 
-Use `calculate_target`, or fault-isolated `calculate_targets` for a portfolio,
-for unit-checked arithmetic and measurement-derived values for the 27 physical
-targets. Use `assess_targets` to distinguish observed gaps from missing
-measurements. Treat `EXACT` and `DATA_DERIVED` literally: neither is a forecast
-of 24-month biological adaptation. Reuse the returned immutable calculation ID
-when the number informs retained research.
+Use external models directly through their Python APIs or executables; the project
+README links the short model guide. Create input files and experiment code when
+needed. Connect results, repeat calculations and analyze them using question-specific
+code. Keep useful code, inputs and raw results as files; no experiment registration,
+shared calculator or predefined template is required.
 
-At synthesis, pass a non-persistent `coverage` receipt to `save_research`.
-Use `scope: whole_goal` when the user asks for the overall goal, strategy, or
-feasibility; map every physical target ID plus `technical_goal` to retained
-evidence and a concise `researched` or `unresolved` finding. Use
-`selected_targets` only when the user explicitly asks about a narrower subset,
-and list that exact subset in `requested_target_ids`. Do not compress a broad
-goal into a few themes. The validator checks real evidence and experiment IDs;
-attach each current-turn experiment only to a compatible target and cover every
-required model layer. It does not store a plan, phase, gate, or coverage
-inventory.
+Minor conversation need not be logged; retained notes are not automatically
+evidence or approval. Research can develop into executable
+proposals fitted to the user's circumstances; approved practice and observed
+responses inform subsequent research. No fixed questions or routines are imposed.
 
-Include a short execution receipt in the answer: candidate records reviewed,
-primary records fetched, evidence retained, external models actually run, goal
-targets covered or unresolved, and persistence status. Do not describe research
-as complete when a required tool call or completion check failed.
+Use the smallest useful context and tools. Read
+[iterative-strategy-research.md](references/iterative-strategy-research.md) when
+whole-goal synthesis or experiment design needs it, and
+[evidence-and-personalization.md](references/evidence-and-personalization.md)
+when retaining evidence or using personal observations and model predictions.
+Read [research-examples.md](references/research-examples.md) only when requested
+or a demonstrated research behavior needs clarification; its fictional examples
+are optional illustrations, not a required research sequence or evidence.
 
-Start with the whole-person question, then move toward organ, tissue, cellular,
-or molecular detail only where it can change the answer. Prefer established
-external models used in their documented context over repository-built
-whole-body simulators. Preserve exact inputs, versions, provenance, and raw
-outputs. A successful model run is evidence inside that model's context, not
-proof of a personal outcome.
+Keep a concise `current_understanding` in free text when continuity helps.
+Replace it as thinking changes; earlier versions remain retrievable through
+`load_research(history_limit=...)`. Historical notes are not current conclusions.
+When resuming, `load_research` includes the goal's objective and artifact paths,
+current understanding, and recent activity with exact-record reload calls.
+Use the relevant receipts to recover the observation that prompted the work;
+timestamps and previews do not establish importance or scientific support.
+Use search_retained to rediscover originals and research contributions, and
+read_original_record for byte-bounded reading or literal passage search. Continue
+with the returned offset and hash when necessary; a preview is not a full reading.
+Preserve why unfinished investigations matter, their exact inputs/receipts and
+the unresolved competing explanations so another session can resume the inquiry.
+Interpret new results against the whole-goal explanation, follow questions they
+raise across scales, and preserve material revisions before context is lost.
+The host Codex loop supplies continued model/tool execution; the workspace does
+not start background work or choose the next scientific action.
 
-Preserve the stored North Star and success conditions exactly. Do not soften
-"same implementation" into loose inspiration, adaptation, or principle-level
-similarity unless the user explicitly changes the goal.
+Separate evidence, observations, model-bounded results, calculations, inference,
+hypotheses, and unknowns. Model scope and missing data limit claims. Preserve
+exact inputs, sources, raw results, and failures; evidence links do not prove
+that an interpretation is correct. Save only useful durable understanding.
 
-Compare meaningful alternatives when comparison helps answer the question,
-but do not create formal artifacts merely to satisfy a workflow. Save only
-useful current state, retained evidence, experiment records, concise findings,
-live hypotheses, promising methods, failures worth avoiding, and important
-unknowns. Let Codex decide the next research action from the goal and evidence.
-
-The plugin is a passive workspace, literature connection, and external-model
-toolbox. It has no Planner, Reviewer, research state machine, strategy engine,
-or authority to activate a real-world intervention.
-
-Require explicit user approval before activating a strategy, changing the
-fixed goal, taking medical action, using drugs or supplements, spending money,
-booking an external action, or mutating external data. Do not schedule recurring
-work unless the user explicitly asks for it.
+Require user approval before changing the goal, activating a real-world
+strategy, medical action, drugs or supplements, spending, booking, or external
+mutation. Existing authorization remains applicable.

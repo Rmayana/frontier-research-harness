@@ -11,6 +11,9 @@ import locale
 import os
 import subprocess
 import sys
+import tempfile
+import struct
+from importlib import metadata
 from importlib.util import find_spec
 from pathlib import Path
 
@@ -40,6 +43,7 @@ class ArtifactReceipt(ScientificModel):
     path: NonEmptyStr
     sha256: NonEmptyStr
     size_bytes: int = Field(ge=0)
+    preserved_path: str | None = None
 
 
 class ExternalEngineReceipt(ScientificModel):
@@ -51,16 +55,86 @@ class ExternalEngineReceipt(ScientificModel):
     stderr: str
     inputs: tuple[ArtifactReceipt, ...]
     outputs: tuple[ArtifactReceipt, ...]
+    execution_manifest: dict[str, object] = Field(default_factory=dict)
 
 
-def _receipt(path: Path) -> ArtifactReceipt:
+class ExternalEngineFailure(ScientificModel):
+    component_id: NonEmptyStr
+    runtime_path: NonEmptyStr
+    arguments: tuple[str, ...]
+    inputs: tuple[ArtifactReceipt, ...]
+    exit_code: int | None = None
+    timeout_seconds: int | None = None
+    stdout: str = ""
+    stderr: str = ""
+
+
+class ExternalEngineError(RuntimeError):
+    def __init__(self, message: str, receipt: ExternalEngineFailure) -> None:
+        super().__init__(message)
+        self.receipt = receipt
+
+
+def _receipt(path: Path, *, preserve_under: Path | None = None) -> ArtifactReceipt:
     if not path.is_file():
         raise FileNotFoundError(f"required external-engine artifact is absent: {path}")
     digest = hashlib.sha256()
     with path.open("rb") as stream:
         for chunk in iter(lambda: stream.read(1024 * 1024), b""):
             digest.update(chunk)
-    return ArtifactReceipt(path=str(path.resolve()), sha256=digest.hexdigest(), size_bytes=path.stat().st_size)
+    sha256 = digest.hexdigest()
+    preserved = None
+    if preserve_under is not None:
+        destination = preserve_under / sha256 / path.name
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        if not destination.exists():
+            temporary: str | None = None
+            try:
+                with tempfile.NamedTemporaryFile(dir=destination.parent, delete=False) as target:
+                    temporary = target.name
+                    copied = hashlib.sha256()
+                    with path.open("rb") as source:
+                        for chunk in iter(lambda: source.read(1024 * 1024), b""):
+                            copied.update(chunk)
+                            target.write(chunk)
+                if copied.hexdigest() != sha256:
+                    raise ValueError("artifact changed while being preserved")
+                os.replace(temporary, destination)
+                temporary = None
+            finally:
+                if temporary is not None:
+                    Path(temporary).unlink(missing_ok=True)
+        if _receipt(destination).sha256 != sha256:
+            raise ValueError("preserved artifact content hash mismatch")
+        preserved = str(destination.resolve())
+    return ArtifactReceipt(path=str(path.resolve()), sha256=sha256,
+                           size_bytes=path.stat().st_size, preserved_path=preserved)
+
+
+def verified_artifact_path(artifact: ArtifactReceipt) -> Path:
+    """Read the preserved bytes when available, and detect stale legacy paths."""
+    path = Path(artifact.preserved_path or artifact.path)
+    actual = _receipt(path)
+    if actual.sha256 != artifact.sha256 or actual.size_bytes != artifact.size_bytes:
+        raise ValueError("external-engine artifact no longer matches its receipt")
+    return path
+
+
+def _execution_manifest(root: Path, runtime_path: str) -> dict[str, object]:
+    packages = {}
+    for name in ("pydantic", "numpy", "cobra", "opensim"):
+        try:
+            packages[name] = metadata.version(name)
+        except metadata.PackageNotFoundError:
+            pass
+    runtime = Path(runtime_path)
+    lock = root / "uv.lock"
+    return {"host_python": sys.version, "host_platform": sys.platform,
+            "host_pointer_bits": 8 * struct.calcsize("P"),
+            "host_packages": packages,
+            "workspace_lock_sha256": _receipt(lock).sha256 if lock.is_file() else None,
+            "runtime_sha256": _receipt(runtime).sha256 if runtime.is_file() else None,
+            "boundary": "Host packages do not describe a separately registered engine's internal environment."}
 
 
 def _decode_process_output(payload: bytes | str | None) -> str:
@@ -123,7 +197,15 @@ class ExternalEngineRunner:
             raise ValueError(f"unknown federation component: {job.component_id}")
         if component.status is not ConnectionStatus.READY or not component.runtime_path:
             raise RuntimeError(f"external runtime is not ready: {job.component_id} ({component.status})")
-        inputs = tuple(_receipt(root.joinpath(path)) for path in job.input_artifacts)
+        def workspace_path(path: str) -> Path:
+            resolved = root.joinpath(path).resolve()
+            if resolved != root and root not in resolved.parents:
+                raise ValueError("external-engine artifacts must stay inside workspace")
+            return resolved
+        input_paths = tuple(workspace_path(path) for path in job.input_artifacts)
+        output_paths = tuple(workspace_path(path) for path in job.expected_output_artifacts)
+        artifact_root = root / ".research-artifacts" / "sha256"
+        inputs = tuple(_receipt(path, preserve_under=artifact_root) for path in input_paths)
         working_directory = root.joinpath(job.working_directory or ".").resolve()
         if working_directory != root and root not in working_directory.parents:
             raise ValueError("external-engine working directory must stay inside workspace")
@@ -136,27 +218,48 @@ class ExternalEngineRunner:
             declared_inputs.get(argument, argument) for argument in job.arguments
         )
         command, environment = self._command_and_environment(component, runtime_arguments)
-        completed = subprocess.run(
-            command, cwd=working_directory, shell=False, env=environment,
-            capture_output=True, text=False, timeout=job.timeout_seconds, check=False,
-        )
+        failure_context = {
+            "component_id": job.component_id, "runtime_path": component.runtime_path,
+            "arguments": runtime_arguments, "inputs": inputs,
+        }
+        try:
+            completed = subprocess.run(
+                command, cwd=working_directory, shell=False, env=environment,
+                capture_output=True, text=False, timeout=job.timeout_seconds, check=False,
+            )
+        except subprocess.TimeoutExpired as exc:
+            raise ExternalEngineError(
+                f"{job.component_id} timed out after {job.timeout_seconds}s",
+                ExternalEngineFailure(**failure_context, timeout_seconds=job.timeout_seconds,
+                    stdout=_decode_process_output(exc.stdout), stderr=_decode_process_output(exc.stderr)),
+            ) from exc
+        except OSError as exc:
+            raise ExternalEngineError(str(exc), ExternalEngineFailure(**failure_context)) from exc
         stdout = _decode_process_output(completed.stdout)
         stderr = _decode_process_output(completed.stderr)
         if completed.returncode != 0:
             diagnostic = "\n".join(
                 part for part in (stdout.strip(), stderr.strip()) if part
             )
-            raise RuntimeError(
+            raise ExternalEngineError(
                 f"{job.component_id} failed with exit code {completed.returncode}: "
-                f"{diagnostic[-4000:] or 'engine returned no diagnostic output'}"
+                f"{diagnostic[-4000:] or 'engine returned no diagnostic output'}",
+                ExternalEngineFailure(**failure_context, exit_code=completed.returncode,
+                    stdout=stdout, stderr=stderr),
             )
-        outputs = tuple(_receipt(root.joinpath(path)) for path in job.expected_output_artifacts)
+        try:
+            outputs = tuple(_receipt(path, preserve_under=artifact_root) for path in output_paths)
+        except (OSError, ValueError) as exc:
+            raise ExternalEngineError(str(exc), ExternalEngineFailure(
+                **failure_context, exit_code=completed.returncode, stdout=stdout, stderr=stderr,
+            )) from exc
         return ExternalEngineReceipt(
             component_id=job.component_id, runtime_path=component.runtime_path,
             arguments=runtime_arguments, exit_code=completed.returncode,
-            stdout=stdout[-20_000:], stderr=stderr[-20_000:],
+            stdout=stdout, stderr=stderr,
             inputs=inputs, outputs=outputs,
+            execution_manifest=_execution_manifest(root, str(component.runtime_path)),
         )
 
 
-__all__ = ["ArtifactReceipt", "ExternalEngineJob", "ExternalEngineReceipt", "ExternalEngineRunner"]
+__all__ = ["ArtifactReceipt", "ExternalEngineJob", "ExternalEngineReceipt", "ExternalEngineRunner", "verified_artifact_path"]

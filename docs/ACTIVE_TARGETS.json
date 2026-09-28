@@ -1,0 +1,2430 @@
+{
+  "id": "whole_body_candidate_115kg_2026_09_10",
+  "date": "2026-09-10",
+  "approval": "아니 일단 수치 빠진거 없으면 목표로 저장하자",
+  "status": "USER_APPROVED_RESEARCH_TARGET_CANDIDATE",
+  "north_star_goal_id": "whole_body_equal_weight_frontier_v5",
+  "claim_boundary": "Research targets only; not proven human limits, joint attainability, optimality, predictions or activated intervention. Unknown values remain unknown. Inherited targets may conflict and must be tested.",
+  "normalization_policy": "Preserve original comparison anchors; revised targets do not change scoring denominators.",
+  "source": "docs/TARGETS.md",
+  "source_sha256": "1a02ed871733882a068e9dc644d0bdc86d856560e688978be87c5e87d48f0868",
+  "metrics": [
+    {
+      "id": "A01",
+      "metric": "IMTP peak force",
+      "original": "**60 N/kg**",
+      "target": "50–55 N/kg",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "↑ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "A02",
+      "metric": "IMTP force @100 ms",
+      "original": "**25 N/kg**",
+      "target": "**25 N/kg**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↑ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "A03",
+      "metric": "IMTP force @200 ms",
+      "original": "**40 N/kg**",
+      "target": "**40 N/kg**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↑ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "A04",
+      "metric": "RFD 0–200 ms",
+      "original": "**≥180 N/kg/s**",
+      "target": "**≥180 N/kg/s**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↑ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "A05",
+      "metric": "Back squat",
+      "original": "**3.0×BW**",
+      "target": "2.4–2.6×BW (115 kg에서 276–299 kg)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "↑ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "A06",
+      "metric": "Deadlift",
+      "original": "**3.5×BW**",
+      "target": "2.8–3.0×BW (322–345 kg)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "↑ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "A07",
+      "metric": "Bench press",
+      "original": "**2.3×BW**",
+      "target": "1.7–1.9×BW (195.5–218.5 kg)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "↑ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "A08",
+      "metric": "Weighted pull-up 총질량",
+      "original": "**2.2×BW**",
+      "target": "총질량 1.8–2.0×BW",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "↑ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "A09",
+      "metric": "한손 grip",
+      "original": "**1.0×BW kgf**",
+      "target": "**1.0×BW kgf**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↑ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "A10",
+      "metric": "좌우 최대힘 차이",
+      "original": "**≤2%**",
+      "target": "**≤2%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "A11",
+      "metric": "목 굴곡",
+      "original": "**450 N**",
+      "target": "**450 N**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↑ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "A12",
+      "metric": "목 신전",
+      "original": "**750 N**",
+      "target": "**750 N**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↑ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "A13",
+      "metric": "목 측굴",
+      "original": "**700 N/side**",
+      "target": "**700 N/side**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↑ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "B01",
+      "metric": "엄격 CMJ, 팔 고정",
+      "original": "**85 cm**",
+      "target": "70–80 cm",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "↑ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "B02",
+      "metric": "제자리 vertical + arm swing",
+      "original": "**125 cm**",
+      "target": "90–105 cm",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "↑ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "B03",
+      "metric": "Approach max vertical",
+      "original": "**140 cm**",
+      "target": "105–120 cm",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "↑ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "B04",
+      "metric": "Standing broad jump",
+      "original": "**4.0 m**",
+      "target": "3.3–3.6 m",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "↑ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "B05",
+      "metric": "RSI",
+      "original": "**4.0–4.5 m/s**",
+      "target": "**4.0–4.5 m/s**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↑ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "B06",
+      "metric": "Drop-jump contact",
+      "original": "**≤120 ms**",
+      "target": "**≤120 ms**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "B07",
+      "metric": "Cycling instantaneous power",
+      "original": "**28 W/kg**",
+      "target": "23–26 W/kg",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "↑ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "B08",
+      "metric": "30-s Wingate mean",
+      "original": "**14 W/kg**",
+      "target": "11–12 W/kg",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "↑ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "B09",
+      "metric": "Peak force 도달",
+      "original": "**≤150 ms**",
+      "target": "**≤150 ms**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "C01",
+      "metric": "최고속도",
+      "original": "**13.0 m/s**",
+      "target": "11.0–11.7 m/s",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "↑ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "C02",
+      "metric": "최고속도",
+      "original": "**46.8 km/h**",
+      "target": "39.6–42.12 km/h (C01 환산; 비가산)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "동일 지표 표기",
+        "C01 참조; 중복 가산하지 않음"
+      ]
+    },
+    {
+      "id": "C03",
+      "metric": "100 m",
+      "original": "**9.40 s**",
+      "target": "10.5–11.2 s",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "C04",
+      "metric": "200 m",
+      "original": "**18.8 s**",
+      "target": "**18.8 s**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "C05",
+      "metric": "400 m",
+      "original": "**41.5–42.0 s**",
+      "target": "**41.5–42.0 s**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "C06",
+      "metric": "max-speed ground contact",
+      "original": "**≤80 ms**",
+      "target": "**≤80 ms**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "C07",
+      "metric": "step frequency",
+      "original": "**≈5.0 Hz**",
+      "target": "**≈5.0 Hz**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "C08",
+      "metric": "반복 sprint 감소율",
+      "original": "**≤2%**",
+      "target": "**≤2%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "D01",
+      "metric": "VO₂max",
+      "original": "**100–105**",
+      "target": "65–70 mL/kg/min; 내부 가정 기준점 67.1",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "↑ 후보",
+        "단위는 원문 Y 표의 mL/kg/min. D02와 체중을 함께 검증해야 함."
+      ]
+    },
+    {
+      "id": "D02",
+      "metric": "Absolute VO₂max",
+      "original": "**8.0 L/min**",
+      "target": "7.475–8.05 L/min; 내부 가정 기준점 7.720812",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "↑ 후보",
+        "상대 VO₂max × 체중 ÷ 1000 = L/min. D01과 110–120 kg을 적용하면 11.0–12.6 L/min. 원문 8.0은 유지하고 고정값/최소값 해석을 구분해야 함."
+      ]
+    },
+    {
+      "id": "D03",
+      "metric": "Max cardiac output",
+      "original": "**45 L/min**",
+      "target": "44 L/min",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "D04",
+      "metric": "Max stroke volume",
+      "original": "**230–250 mL**",
+      "target": "231.58 mL (심박수 190/min 가정)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "D05",
+      "metric": "Blood volume",
+      "original": "**115 mL/kg**",
+      "target": "110 mL/kg (12.65 L)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "D06",
+      "metric": "total Hb mass",
+      "original": "**17–18 g/kg**",
+      "target": "16.5 g/kg 체중 (1897.5 g)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "D07",
+      "metric": "tHb / lean mass",
+      "original": "**17–18 g/kg LBM**",
+      "target": "18.75 g/kg LBM (LBM 101.2 kg 가정)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "D06과 달리 분모가 제지방량. 체중 기준과 혼용하지 않음."
+      ]
+    },
+    {
+      "id": "D08",
+      "metric": "근육 O₂ extraction",
+      "original": "**≥95%**",
+      "target": "**≥95%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "D09",
+      "metric": "SaO₂ @ VO₂max",
+      "original": "**≥95% 유지**",
+      "target": "97%",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "E01",
+      "metric": "VEmax",
+      "original": "**230–250 L/min**",
+      "target": "238 L/min (E02 × E03)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "Y 요약은 250으로 표기. 원문 범위와 요약을 함께 보존."
+      ]
+    },
+    {
+      "id": "E02",
+      "metric": "maximal tidal volume",
+      "original": "**4.0–4.5 L**",
+      "target": "3.5 L (E03과 같은 시점)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "E03",
+      "metric": "maximal respiratory frequency",
+      "original": "**65–70 /min**",
+      "target": "68/min (E02와 같은 시점)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "E04",
+      "metric": "DLCO resting",
+      "original": "**≥45–50 mL/min/mmHg급**",
+      "target": "**≥45–50 mL/min/mmHg급**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "E05",
+      "metric": "exercise SaO₂",
+      "original": "**≥95%**",
+      "target": "**≥95%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "E06",
+      "metric": "PaO₂ @ maximal effort",
+      "original": "**≥90 mmHg**",
+      "target": "**≥90 mmHg**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "E07",
+      "metric": "maximal exercise desaturation",
+      "original": "**≤3 percentage points**",
+      "target": "**≤3 percentage points**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "E08",
+      "metric": "respiratory-muscle fatigue after maximal test",
+      "original": "**≤5% pressure loss**",
+      "target": "**≤5% pressure loss**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "F01",
+      "metric": "Specific tension",
+      "original": "**30–35 N/cm² 검증 목표**",
+      "target": "30 N/cm² (계산용 가정)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "↑ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "F02",
+      "metric": "voluntary activation",
+      "original": "**≥99%**",
+      "target": "97–99%",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "K01의 99–100%와 동일 측정인지 확인 후 중복 처리."
+      ]
+    },
+    {
+      "id": "F03",
+      "metric": "motor-unit recruitment",
+      "original": "**≈100%**",
+      "target": "**≈100%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "F04",
+      "metric": "좌우 근육 volume 차이",
+      "original": "**≤2%**",
+      "target": "**≤2%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "F05",
+      "metric": "근육 내 지방",
+      "original": "**≤3%급**",
+      "target": "**≤3%급**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "F06",
+      "metric": "peak muscle glycogen",
+      "original": "**850–900 mmol/kg dry mass**",
+      "target": "**850–900 mmol/kg dry mass**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "F07",
+      "metric": "정상 고충전 상태",
+      "original": "**700–800 mmol/kg DM**",
+      "target": "**700–800 mmol/kg DM**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "F08",
+      "metric": "근글리코겐 재합성 초기속도",
+      "original": "**≥50 mmol/kg DM/h**",
+      "target": "**≥50 mmol/kg DM/h**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↑ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "G01",
+      "metric": "Mitochondrial volume density",
+      "original": "**12–13%**",
+      "target": "외측광근 6–8% (잠정 가정)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "G02",
+      "metric": "capillary density",
+      "original": "**850/mm²**",
+      "target": "외측광근 500–700/mm² (잠정 가정)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "G03",
+      "metric": "capillaries/fiber",
+      "original": "**8–9**",
+      "target": "미정: 근섬유 크기와 함께 산출; 원래 8–9는 참고값",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "G04",
+      "metric": "PCr recovery \\(t_{1/2}\\)",
+      "original": "**≤15 s**",
+      "target": "15–25 s (잠정 가정)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "G05",
+      "metric": "muscle oxidative recovery τ",
+      "original": "**≤15 s**",
+      "target": "**≤15 s**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "G06",
+      "metric": "local StO₂ recovery \\(t_{1/2}\\)",
+      "original": "**≤7 s**",
+      "target": "**≤7 s**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "H01",
+      "metric": "Peak fat oxidation",
+      "original": "**≥2.0 g/min**",
+      "target": "**≥2.0 g/min**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "H02",
+      "metric": "exogenous CHO oxidation",
+      "original": "**≥1.8 g/min**",
+      "target": "**≥1.8 g/min**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "O03과 시험 조건이 같다면 한 번만 계산."
+      ]
+    },
+    {
+      "id": "H03",
+      "metric": "whole-body CHO oxidation",
+      "original": "**≥3.5–4.0 g/min**",
+      "target": "**≥3.5–4.0 g/min**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "H04",
+      "metric": "운동 중 CHO tolerance",
+      "original": "**120–150 g/h**",
+      "target": "**120–150 g/h**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "O01/O02는 기본·확장 섭취 조건. 동일 능력 중복 가산 검토."
+      ]
+    },
+    {
+      "id": "H05",
+      "metric": "120 g/h 섭취 GI severe symptoms",
+      "original": "**0**",
+      "target": "**0**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "0 목표·별도 변환",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "H06",
+      "metric": "반복 최대출력 decrement",
+      "original": "**≤2%**",
+      "target": "**≤2%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "H07",
+      "metric": "PCr recovery \\(t_{1/2}\\)",
+      "original": "**≤15 s**",
+      "target": "15–25 s (G04 동일 지표·비가산)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "동일 지표 표기",
+        "G04 참조; 중복 가산하지 않음"
+      ]
+    },
+    {
+      "id": "I01",
+      "metric": "Patellar stiffness",
+      "original": "**3.5–4.0 kN/mm**",
+      "target": "3.5 kN/mm (E=1.4 GPa, CSA=125 mm², 길이=50 mm)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "I02",
+      "metric": "Patellar Young modulus",
+      "original": "**1.4–1.5 GPa**",
+      "target": "1.4 GPa",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "I03",
+      "metric": "Patellar CSA",
+      "original": "**체중/하중 정규화**",
+      "target": "125 mm² (길이 50 mm 가정)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "I04",
+      "metric": "Achilles SWE",
+      "original": "**15–16 m/s**",
+      "target": "**15–16 m/s**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "I05",
+      "metric": "좌우 tendon stiffness 차이",
+      "original": "**≤3%**",
+      "target": "**≤3%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "I06",
+      "metric": "tendon strain @ competition load",
+      "original": "**≈4–6% functional target**",
+      "target": "**≈4–6% functional target**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "범위 유지 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "J01",
+      "metric": "DXA BMD Z-score",
+      "original": "**+2.0 ~ +3.0**",
+      "target": "**+2.0 ~ +3.0**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "Z-score는 비율척도가 아니므로 결과/목표를 직접 적용하지 않음."
+      ]
+    },
+    {
+      "id": "J02",
+      "metric": "femoral cortical thickness",
+      "original": "비운동군 대비 **+25%**",
+      "target": "비운동군 대비 **+25%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "J03",
+      "metric": "bone CSA",
+      "original": "**+20–25%**",
+      "target": "대조군 대비 +22.5% (원형 고리 단면 가정)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "J04",
+      "metric": "CSMI",
+      "original": "**+20–25%**",
+      "target": "대조군 대비 약 +22.0% (기하 계산)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "J05",
+      "metric": "section modulus",
+      "original": "**+20–25%**",
+      "target": "대조군 대비 약 +18.0% (기하 계산)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "J06",
+      "metric": "buckling ratio",
+      "original": "대조군 대비 **−30%**",
+      "target": "대조군 대비 약 −17.3% (기하 계산)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "대조군 기준 변화량. 음수 목표로 직접 나누지 않고 척도를 정의해야 함."
+      ]
+    },
+    {
+      "id": "J07",
+      "metric": "좌우 structural difference",
+      "original": "**≤3%**",
+      "target": "**≤3%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "K01",
+      "metric": "Voluntary activation",
+      "original": "**99–100%**",
+      "target": "97–99% (F02 동일 측정일 때 중복 비가산)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "F02와 동일 측정인지 확인. 원문 목표 표기 차이를 보존."
+      ]
+    },
+    {
+      "id": "K02",
+      "metric": "motor-unit recruitment",
+      "original": "**≈100%**",
+      "target": "**≈100%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "동일 지표 표기",
+        "F03 참조; 중복 가산하지 않음"
+      ]
+    },
+    {
+      "id": "K03",
+      "metric": "motor nerve conduction velocity",
+      "original": "**≥70 m/s**",
+      "target": "**≥70 m/s**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "K04",
+      "metric": "stimulus→EMG onset",
+      "original": "**≤100–120 ms**",
+      "target": "**≤100–120 ms**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "K05",
+      "metric": "force onset→peak meaningful force",
+      "original": "**≤100 ms급**",
+      "target": "**≤100 ms급**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "K06",
+      "metric": "force tracking CV",
+      "original": "**≤1.5%**",
+      "target": "**≤1.5%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "K07",
+      "metric": "좌우 neural output asymmetry",
+      "original": "**≤2%**",
+      "target": "**≤2%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "K08",
+      "metric": "joint-position error",
+      "original": "**≤1°**",
+      "target": "**≤1°**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "K09/L01과 측정 조건 및 중복 여부 확인."
+      ]
+    },
+    {
+      "id": "K09",
+      "metric": "elite target",
+      "original": "**≈0.5° 탐색**",
+      "target": "**≈0.5° 탐색**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "원문 elite target은 K08의 상향 목표일 수 있음. 별도 능력으로 자동 가산하지 않음."
+      ]
+    },
+    {
+      "id": "L01",
+      "metric": "Joint-position absolute error",
+      "original": "**≤0.5–1.0°**",
+      "target": "**≤0.5–1.0°**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "K08/K09와 중복 여부 확인."
+      ]
+    },
+    {
+      "id": "L02",
+      "metric": "force reproduction error",
+      "original": "**≤2%**",
+      "target": "**≤2%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "L03",
+      "metric": "visual simple reaction time",
+      "original": "**≈130–150 ms**",
+      "target": "**≈130–150 ms**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "L04",
+      "metric": "auditory simple reaction",
+      "original": "**≈120–140 ms**",
+      "target": "**≈120–140 ms**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "L05",
+      "metric": "choice reaction",
+      "original": "**≤200 ms급**",
+      "target": "**≤200 ms급**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "L06",
+      "metric": "VOR gain",
+      "original": "**≈0.95–1.05**",
+      "target": "**≈0.95–1.05**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "범위 유지 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "L07",
+      "metric": "좌우 감각차이",
+      "original": "**≤2%**",
+      "target": "**≤2%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "M01",
+      "metric": "HR recovery 1 min",
+      "original": "**≥45 bpm 감소**",
+      "target": "**≥45 bpm 감소**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↑ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "M02",
+      "metric": "HR recovery 2 min",
+      "original": "**≥65 bpm**",
+      "target": "**≥65 bpm**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↑ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "M03",
+      "metric": "HR recovery 3 min",
+      "original": "**≥85–90 bpm**",
+      "target": "**≥85–90 bpm**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↑ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "M04",
+      "metric": "운동 후 5 min HR",
+      "original": "최대심박 대비 **≤55–60%**",
+      "target": "최대심박 대비 **≤55–60%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "M05",
+      "metric": "24 h resting HR deviation",
+      "original": "**≤3 bpm**",
+      "target": "**≤3 bpm**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "M06",
+      "metric": "24 h HRV deviation",
+      "original": "baseline 대비 **≤10%**",
+      "target": "baseline 대비 **≤10%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "N01",
+      "metric": "PCr \\(t_{1/2}\\)",
+      "original": "**≤15 s**",
+      "target": "15–25 s (G04 동일 지표·비가산)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "동일 지표 표기",
+        "G04 참조; 중복 가산하지 않음"
+      ]
+    },
+    {
+      "id": "N02",
+      "metric": "CMJ 24 h",
+      "original": "**≥98% baseline**",
+      "target": "**≥98% baseline**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "N03",
+      "metric": "maximal force 24 h",
+      "original": "**≥98%**",
+      "target": "**≥98%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "N04",
+      "metric": "CMJ 48 h",
+      "original": "**100±2%**",
+      "target": "**100±2%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "범위 유지 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "N05",
+      "metric": "maximal force 48 h",
+      "original": "**100±2%**",
+      "target": "**100±2%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "범위 유지 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "N06",
+      "metric": "repeated sprint 24 h",
+      "original": "**≥98%**",
+      "target": "**≥98%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "속도·출력 회복인지 시간 회복인지 먼저 정의. 시간이면 역방향 환산."
+      ]
+    },
+    {
+      "id": "N07",
+      "metric": "DOMS 24 h after fixed workload",
+      "original": "**≤2/10**",
+      "target": "**≤2/10**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "N08",
+      "metric": "limb swelling after standard load",
+      "original": "**≤2%**",
+      "target": "**≤2%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "O01",
+      "metric": "CHO ingestion",
+      "original": "**120 g/h 기본 frontier**",
+      "target": "**120 g/h 기본 frontier**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "120 g/h는 섭취 시험 조건. 독립 능력 보상으로 자동 취급하지 않음."
+      ]
+    },
+    {
+      "id": "O02",
+      "metric": "확장실험",
+      "original": "**150 g/h**",
+      "target": "**150 g/h**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "150 g/h는 확장 시험 조건. 추가 능력으로 중복 가산하지 않음."
+      ]
+    },
+    {
+      "id": "O03",
+      "metric": "exogenous oxidation",
+      "original": "**≥1.8 g/min**",
+      "target": "**≥1.8 g/min**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "H02와 시험 조건이 같다면 한 번만 계산."
+      ]
+    },
+    {
+      "id": "O04",
+      "metric": "oxidation efficiency @120 g/h",
+      "original": "**≥85–90%**",
+      "target": "**≥85–90%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "O05",
+      "metric": "3-h high-output exercise nausea",
+      "original": "**≤1/10**",
+      "target": "**≤1/10**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "O06",
+      "metric": "bloating",
+      "original": "**≤1/10**",
+      "target": "**≤1/10**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "O07",
+      "metric": "abdominal pain",
+      "original": "**0–1/10**",
+      "target": "**0–1/10**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "O08",
+      "metric": "body-mass fluid deficit",
+      "original": "**≤2%**",
+      "target": "**≤2%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "P01",
+      "metric": "maximal sweat capacity",
+      "original": "**3.5–4.0 L/h**",
+      "target": "**3.5–4.0 L/h**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "P02",
+      "metric": "heat acclimation plasma volume expansion",
+      "original": "**≥7–10%**",
+      "target": "**≥7–10%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "P03",
+      "metric": "동일 heat test의 core-temp 감소",
+      "original": "acclimation 전 대비 **≥0.5°C**",
+      "target": "acclimation 전 대비 **≥0.5°C**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "P04",
+      "metric": "운동 말 HR 감소",
+      "original": "acclimation 전 대비 **≥20 bpm**",
+      "target": "acclimation 전 대비 **≥20 bpm**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "P05",
+      "metric": "고열 performance loss",
+      "original": "서늘한 환경 대비 **≤3%**",
+      "target": "서늘한 환경 대비 **≤3%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "P06",
+      "metric": "체중 감소",
+      "original": "**≤2%**",
+      "target": "**≤2%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "P07",
+      "metric": "serum Na after endurance test",
+      "original": "**135–145 mmol/L 유지**",
+      "target": "**135–145 mmol/L 유지**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "범위 유지 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "Q01",
+      "metric": "resting measured/eGFR",
+      "original": "**≈110–130 mL/min/1.73m²**",
+      "target": "**≈110–130 mL/min/1.73m²**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "범위 유지 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "Q02",
+      "metric": "exercise 직후 GFR 감소",
+      "original": "**≤10%**",
+      "target": "**≤10%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "Q03",
+      "metric": "6 h 후",
+      "original": "baseline의 **≥95%**",
+      "target": "baseline의 **≥95%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "Q04",
+      "metric": "24 h 후",
+      "original": "**100±5%**",
+      "target": "**100±5%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "범위 유지 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "Q05",
+      "metric": "serum Na",
+      "original": "**135–145 mmol/L**",
+      "target": "**135–145 mmol/L**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "범위 유지 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "Q06",
+      "metric": "serum K",
+      "original": "**3.5–5.0 mmol/L**",
+      "target": "**3.5–5.0 mmol/L**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "범위 유지 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "Q07",
+      "metric": "body-mass dehydration",
+      "original": "**≤2%**",
+      "target": "**≤2%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "Q08",
+      "metric": "osmolality deviation",
+      "original": "baseline 대비 **≤3%**",
+      "target": "baseline 대비 **≤3%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "R01",
+      "metric": "혈당",
+      "original": "**4.0–6.5 mmol/L 유지**",
+      "target": "**4.0–6.5 mmol/L 유지**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "범위 유지 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "R02",
+      "metric": "glucose <3.9 mmol/L 시간",
+      "original": "**0 min**",
+      "target": "**0 min**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "0 목표·별도 변환",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "R03",
+      "metric": "liver glycogen depletion",
+      "original": "**≤50%**",
+      "target": "**≤50%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "R04",
+      "metric": "lactate recovery \\(t_{1/2}\\)",
+      "original": "**≤10–15 min**",
+      "target": "**≤10–15 min**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "R05",
+      "metric": "60 min 후 lactate",
+      "original": "peak 대비 **≤20%**",
+      "target": "peak 대비 **≤20%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "R06",
+      "metric": "24 h AST/ALT 증가",
+      "original": "개인 baseline 대비 **≤20%**",
+      "target": "개인 baseline 대비 **≤20%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "S01",
+      "metric": "total Hb mass",
+      "original": "**17–18 g/kg**",
+      "target": "16.5 g/kg 체중 (D06 비가산)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "동일 지표 표기",
+        "D06 참조; 중복 가산하지 않음"
+      ]
+    },
+    {
+      "id": "S02",
+      "metric": "blood volume",
+      "original": "**115 mL/kg**",
+      "target": "110 mL/kg (D05 비가산)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "동일 지표 표기",
+        "D05 참조; 중복 가산하지 않음"
+      ]
+    },
+    {
+      "id": "S03",
+      "metric": "hypoxia/apnea spleen contraction",
+      "original": "resting volume 대비 **≥30–40% 감소**",
+      "target": "resting volume 대비 **≥30–40% 감소**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "S04",
+      "metric": "acute Hb rise",
+      "original": "**≈5–10% 탐색**",
+      "target": "**≈5–10% 탐색**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "S05",
+      "metric": "altitude Hbmass response",
+      "original": "3–4주에 **≥5% 증가**",
+      "target": "3–4주에 **≥5% 증가**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "S06",
+      "metric": "iron deficiency",
+      "original": "**0**",
+      "target": "**0**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "0 목표·별도 변환",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "T01",
+      "metric": "resting testosterone",
+      "original": "검사실 정상 상단 범위 내",
+      "target": "검사실 정상 상단 범위 내",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "범위 유지 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "T02",
+      "metric": "free T",
+      "original": "정상 연령범위 상단",
+      "target": "정상 연령범위 상단",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "범위 유지 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "T03",
+      "metric": "cortisol 24 h recovery",
+      "original": "baseline **±10%**",
+      "target": "baseline **±10%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "범위 유지 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "T04",
+      "metric": "thyroid TSH",
+      "original": "**≈0.5–2.5 mIU/L 범위**",
+      "target": "**≈0.5–2.5 mIU/L 범위**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "범위 유지 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "T05",
+      "metric": "fasting glucose",
+      "original": "**≈4.0–5.0 mmol/L**",
+      "target": "**≈4.0–5.0 mmol/L**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "범위 유지 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "T06",
+      "metric": "fasting insulin",
+      "original": "**≈2–5 µIU/mL**",
+      "target": "**≈2–5 µIU/mL**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "범위 유지 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "T07",
+      "metric": "HOMA-IR",
+      "original": "**<1.0**",
+      "target": "**<1.0**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "T08",
+      "metric": "HbA1c",
+      "original": "**≈4.8–5.2%**",
+      "target": "**≈4.8–5.2%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "범위 유지 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "U01",
+      "metric": "resting hs-CRP",
+      "original": "**<1 mg/L**",
+      "target": "**<1 mg/L**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "U02",
+      "metric": "24 h post-standard load CRP",
+      "original": "baseline의 **<2×**",
+      "target": "baseline의 **<2×**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "U03",
+      "metric": "48 h",
+      "original": "baseline의 **±20%**",
+      "target": "baseline의 **±20%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "범위 유지 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "U04",
+      "metric": "illness days/year",
+      "original": "**≤3–5일**",
+      "target": "**≤3–5일**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "U05",
+      "metric": "training days lost to illness",
+      "original": "**<1%**",
+      "target": "**<1%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "U06",
+      "metric": "chronic inflammation marker elevation",
+      "original": "**0회**",
+      "target": "**0회**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "0 목표·별도 변환",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "V01",
+      "metric": "Shoulder flexion",
+      "original": "**180°**",
+      "target": "**180°**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "V02",
+      "metric": "shoulder ER @90°",
+      "original": "**100–110°**",
+      "target": "**100–110°**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "V03",
+      "metric": "hip flexion",
+      "original": "**140°**",
+      "target": "**140°**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "V04",
+      "metric": "hip extension",
+      "original": "**25–30°**",
+      "target": "**25–30°**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "V05",
+      "metric": "hip IR",
+      "original": "**45°**",
+      "target": "**45°**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "V06",
+      "metric": "hip ER",
+      "original": "**55–60°**",
+      "target": "**55–60°**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "V07",
+      "metric": "ankle dorsiflexion knee-to-wall",
+      "original": "**15 cm**",
+      "target": "**15 cm**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "V08",
+      "metric": "thoracic rotation",
+      "original": "**55–60°/side**",
+      "target": "**55–60°/side**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "V09",
+      "metric": "좌우 ROM 차이",
+      "original": "**≤3°**",
+      "target": "**≤3°**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "V10",
+      "metric": "전 ROM에서 strength deficit",
+      "original": "mid-ROM 대비 **≤15%**",
+      "target": "mid-ROM 대비 **≤15%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "W01",
+      "metric": "연간 training availability",
+      "original": "**≥98%**",
+      "target": "**≥98%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↑ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "W02",
+      "metric": "injury-lost days/year",
+      "original": "**≤7일**",
+      "target": "**≤7일**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "W03",
+      "metric": "stress fracture",
+      "original": "**0**",
+      "target": "**0**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "0 목표·별도 변환",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "W04",
+      "metric": "tendon injury",
+      "original": "**0**",
+      "target": "**0**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "0 목표·별도 변환",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "W05",
+      "metric": "muscle strain",
+      "original": "**0 또는 극소화**",
+      "target": "**0 또는 극소화**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "0 목표·별도 변환",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "W06",
+      "metric": "동일 eccentric test 후 force loss",
+      "original": "즉시 **≤10%**",
+      "target": "즉시 **≤10%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "W07",
+      "metric": "24 h force loss",
+      "original": "**≤2%**",
+      "target": "**≤2%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "W08",
+      "metric": "repeated-impact session 다음날 CMJ",
+      "original": "**≥98%**",
+      "target": "**≥98%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "기능·조건 관계 검토",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "W09",
+      "metric": "좌우 load asymmetry",
+      "original": "**≤3%**",
+      "target": "**≤3%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "↓ 후보",
+        "측정 조건·기준값·변환 검토 전"
+      ]
+    },
+    {
+      "id": "Y01",
+      "metric": "IMTP",
+      "original": "**60 N/kg**",
+      "target": "50–55 N/kg (요약·비가산)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "요약·비가산",
+        "상세 표 참조"
+      ]
+    },
+    {
+      "id": "Y02",
+      "metric": "Deadlift",
+      "original": "**3.5×BW**",
+      "target": "2.8–3.0×BW (322–345 kg) (요약·비가산)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "요약·비가산",
+        "상세 표 참조"
+      ]
+    },
+    {
+      "id": "Y03",
+      "metric": "Squat",
+      "original": "**3.0×BW**",
+      "target": "2.4–2.6×BW (115 kg에서 276–299 kg) (요약·비가산)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "요약·비가산",
+        "상세 표 참조"
+      ]
+    },
+    {
+      "id": "Y04",
+      "metric": "Bench",
+      "original": "**2.3×BW**",
+      "target": "1.7–1.9×BW (195.5–218.5 kg) (요약·비가산)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "요약·비가산",
+        "상세 표 참조"
+      ]
+    },
+    {
+      "id": "Y05",
+      "metric": "strict CMJ",
+      "original": "**85 cm**",
+      "target": "70–80 cm (요약·비가산)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "요약·비가산",
+        "상세 표 참조"
+      ]
+    },
+    {
+      "id": "Y06",
+      "metric": "standing vertical",
+      "original": "**125 cm**",
+      "target": "90–105 cm (요약·비가산)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "요약·비가산",
+        "상세 표 참조"
+      ]
+    },
+    {
+      "id": "Y07",
+      "metric": "approach vertical",
+      "original": "**140 cm**",
+      "target": "105–120 cm (요약·비가산)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "요약·비가산",
+        "상세 표 참조"
+      ]
+    },
+    {
+      "id": "Y08",
+      "metric": "broad jump",
+      "original": "**4.0 m**",
+      "target": "3.3–3.6 m (요약·비가산)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "요약·비가산",
+        "상세 표 참조"
+      ]
+    },
+    {
+      "id": "Y09",
+      "metric": "최고속도",
+      "original": "**13.0 m/s**",
+      "target": "11.0–11.7 m/s (요약·비가산)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "요약·비가산",
+        "상세 표 참조"
+      ]
+    },
+    {
+      "id": "Y10",
+      "metric": "100 m",
+      "original": "**9.40 s**",
+      "target": "10.5–11.2 s (요약·비가산)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "요약·비가산",
+        "상세 표 참조"
+      ]
+    },
+    {
+      "id": "Y11",
+      "metric": "cycling peak power",
+      "original": "**28 W/kg**",
+      "target": "23–26 W/kg (요약·비가산)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "요약·비가산",
+        "상세 표 참조"
+      ]
+    },
+    {
+      "id": "Y12",
+      "metric": "VO₂max",
+      "original": "**100–105 mL/kg/min**",
+      "target": "65–70 mL/kg/min; 내부 가정 기준점 67.1 (요약·비가산)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "요약·비가산",
+        "상세 표 참조"
+      ]
+    },
+    {
+      "id": "Y13",
+      "metric": "absolute VO₂",
+      "original": "**8.0 L/min**",
+      "target": "7.475–8.05 L/min; 내부 가정 기준점 7.720812 (요약·비가산)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "요약·비가산",
+        "상세 표 참조"
+      ]
+    },
+    {
+      "id": "Y14",
+      "metric": "cardiac output",
+      "original": "**45 L/min**",
+      "target": "44 L/min (요약·비가산)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "요약·비가산",
+        "상세 표 참조"
+      ]
+    },
+    {
+      "id": "Y15",
+      "metric": "stroke volume",
+      "original": "**230–250 mL**",
+      "target": "231.58 mL (심박수 190/min 가정) (요약·비가산)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "요약·비가산",
+        "상세 표 참조"
+      ]
+    },
+    {
+      "id": "Y16",
+      "metric": "blood volume",
+      "original": "**115 mL/kg**",
+      "target": "110 mL/kg (12.65 L) (요약·비가산)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "요약·비가산",
+        "상세 표 참조"
+      ]
+    },
+    {
+      "id": "Y17",
+      "metric": "Hb mass",
+      "original": "**17–18 g/kg**",
+      "target": "16.5 g/kg 체중 (1897.5 g) (요약·비가산)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "요약·비가산",
+        "상세 표 참조"
+      ]
+    },
+    {
+      "id": "Y18",
+      "metric": "VEmax",
+      "original": "**250 L/min**",
+      "target": "238 L/min (E02 × E03) (요약·비가산)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "요약·비가산",
+        "상세 표 참조"
+      ]
+    },
+    {
+      "id": "Y19",
+      "metric": "muscle specific tension",
+      "original": "**30–35 N/cm²**",
+      "target": "30 N/cm² (계산용 가정) (요약·비가산)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "요약·비가산",
+        "상세 표 참조"
+      ]
+    },
+    {
+      "id": "Y20",
+      "metric": "muscle glycogen",
+      "original": "**850–900 mmol/kg DM**",
+      "target": "**850–900 mmol/kg DM**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "요약·비가산",
+        "상세 표 참조"
+      ]
+    },
+    {
+      "id": "Y21",
+      "metric": "mitochondria",
+      "original": "**12–13% volume**",
+      "target": "외측광근 6–8% (잠정 가정) (요약·비가산)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "요약·비가산",
+        "상세 표 참조"
+      ]
+    },
+    {
+      "id": "Y22",
+      "metric": "capillary density",
+      "original": "**850/mm²**",
+      "target": "외측광근 500–700/mm² (잠정 가정) (요약·비가산)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "요약·비가산",
+        "상세 표 참조"
+      ]
+    },
+    {
+      "id": "Y23",
+      "metric": "PCr half-recovery",
+      "original": "**≤15 s**",
+      "target": "15–25 s (잠정 가정) (요약·비가산)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "요약·비가산",
+        "상세 표 참조"
+      ]
+    },
+    {
+      "id": "Y24",
+      "metric": "Achilles SWE",
+      "original": "**15–16 m/s**",
+      "target": "**15–16 m/s**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "요약·비가산",
+        "상세 표 참조"
+      ]
+    },
+    {
+      "id": "Y25",
+      "metric": "Patellar stiffness",
+      "original": "**3.5–4.0 kN/mm**",
+      "target": "3.5 kN/mm (E=1.4 GPa, CSA=125 mm², 길이=50 mm) (요약·비가산)",
+      "status": "PROVISIONAL_REVISED",
+      "original_conditions": [
+        "요약·비가산",
+        "상세 표 참조"
+      ]
+    },
+    {
+      "id": "Y26",
+      "metric": "bone cortical thickness",
+      "original": "**+25%**",
+      "target": "**+25%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "요약·비가산",
+        "상세 표 참조"
+      ]
+    },
+    {
+      "id": "Y27",
+      "metric": "CHO absorption/tolerance",
+      "original": "**120–150 g/h**",
+      "target": "**120–150 g/h**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "요약·비가산",
+        "상세 표 참조"
+      ]
+    },
+    {
+      "id": "Y28",
+      "metric": "exogenous CHO oxidation",
+      "original": "**≥1.8 g/min**",
+      "target": "**≥1.8 g/min**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "요약·비가산",
+        "상세 표 참조"
+      ]
+    },
+    {
+      "id": "Y29",
+      "metric": "fat oxidation",
+      "original": "**≥2.0 g/min**",
+      "target": "**≥2.0 g/min**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "요약·비가산",
+        "상세 표 참조"
+      ]
+    },
+    {
+      "id": "Y30",
+      "metric": "HRR 1 min",
+      "original": "**≥45 bpm**",
+      "target": "**≥45 bpm**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "요약·비가산",
+        "상세 표 참조"
+      ]
+    },
+    {
+      "id": "Y31",
+      "metric": "proprioception error",
+      "original": "**≤0.5–1°**",
+      "target": "**≤0.5–1°**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "요약·비가산",
+        "상세 표 참조"
+      ]
+    },
+    {
+      "id": "Y32",
+      "metric": "force tracking CV",
+      "original": "**≤1.5%**",
+      "target": "**≤1.5%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "요약·비가산",
+        "상세 표 참조"
+      ]
+    },
+    {
+      "id": "Y33",
+      "metric": "24 h performance recovery",
+      "original": "**≥98%**",
+      "target": "**≥98%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "요약·비가산",
+        "상세 표 참조"
+      ]
+    },
+    {
+      "id": "Y34",
+      "metric": "48 h recovery",
+      "original": "**100±2%**",
+      "target": "**100±2%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "요약·비가산",
+        "상세 표 참조"
+      ]
+    },
+    {
+      "id": "Y35",
+      "metric": "연간 availability",
+      "original": "**≥98%**",
+      "target": "**≥98%**",
+      "status": "INHERITED_UNVERIFIED",
+      "original_conditions": [
+        "요약·비가산",
+        "상세 표 참조"
+      ]
+    }
+  ],
+  "additional_and_composite": [
+    {
+      "id": "X01",
+      "metric": "R24",
+      "target": "≥98; 原構成 CMJ24/Force24/Sprint24/HRV24; 비가산 참고"
+    },
+    {
+      "id": "X02",
+      "metric": "R48",
+      "target": "100±2; 비가산 참고"
+    },
+    {
+      "id": "ADD01",
+      "metric": "설계 체중",
+      "target": "115 kg; 승인 범위 110–120 kg 유지"
+    },
+    {
+      "id": "ADD02",
+      "metric": "체지방률",
+      "target": "12% 가정"
+    },
+    {
+      "id": "ADD03",
+      "metric": "지방량",
+      "target": "13.8 kg 계산"
+    },
+    {
+      "id": "ADD04",
+      "metric": "제지방량",
+      "target": "101.2 kg 계산; 혈액·장기·뼈 포함"
+    },
+    {
+      "id": "ADD05",
+      "metric": "계산용 최대운동 심박수",
+      "target": "190/min 가정; 개인 최대심박 예측 아님"
+    },
+    {
+      "id": "ADD06",
+      "metric": "혈중 Hb",
+      "target": "15.0 g/dL 계산"
+    },
+    {
+      "id": "ADD07",
+      "metric": "전신 산소추출률",
+      "target": "90% 계산 가정; D08 근육 추출률과 별개"
+    },
+    {
+      "id": "ADD08",
+      "metric": "슬개건 길이",
+      "target": "50 mm 가정"
+    },
+    {
+      "id": "ADD09",
+      "metric": "골격 기하 모델",
+      "target": "대조군 내경/외경=0.6; 원형 고리; 피질 두께 +25%"
+    }
+  ],
+  "unresolved": [
+    "G03 capillaries/fiber requires fiber geometry",
+    "Original qualitative targets (e.g. T01/T02) retained; no universal numeric lab limits invented",
+    "Inherited and revised targets not demonstrated jointly feasible",
+    "Protocol and population references required; muscle and whole-body extraction not interchangeable"
+  ]
+}

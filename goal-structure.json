@@ -1,0 +1,384 @@
+{
+  "schema_version": 2,
+  "structure_id": "combat_capability_linked_maps_v2",
+  "goal_id": "combat_capability_beterbiev_style_v3",
+  "kind": "linked_maps",
+  "relationship_status": "RESEARCH_ROUTING_HYPOTHESES",
+  "boundaries": [
+    "이 구조는 goal.json의 인간 한계 통합 전투력이라는 NorthStar, 24개월, 체중 범위, 27개 동시 목표와 기술 목표를 추가하거나 대체하지 않는다.",
+    "전투 과제와 성능 능력의 연결은 연구할 기여 관계이며 개인 인과효과의 증명이 아니다.",
+    "진단 시스템은 설명 후보이고, 개입군은 연구 후보이며, 관측값은 검사·프로토콜·오차 조건 안에서만 해석한다.",
+    "연구 질문과 관련된 가지부터 확장하며 전체 지도를 매번 읽거나 모든 변수를 항상 측정하지 않는다."
+  ],
+  "whole_person_views": [
+    {
+      "id": "human_limit_integrated_combat_capability",
+      "name": "목표 체중에서 실제 전투에 통합되는 인간 한계 전투력",
+      "source": "goal.json#north_star,goal.json#physical_goal,goal.json#performance_context,goal.json#physical_targets"
+    },
+    {
+      "id": "beterbiev_technical_success",
+      "name": "실제 복싱에서 베테르비예프의 기술·의사결정 체계 동일 구현",
+      "source": "goal.json#technical_goal"
+    },
+    {
+      "id": "time_and_sustainability_constraints",
+      "name": "24개월 동안 목표 체중·훈련 지속성·중대 부상 제약 충족",
+      "source": "goal.json#horizon,goal.json#performance_context,goal.json#physical_targets"
+    }
+  ],
+  "goal_constraints": [
+    {
+      "id": "target_body_mass",
+      "name": "성공 판정 체중 110–120 kg",
+      "source": "goal.json#performance_context.target_body_mass_kg"
+    },
+    {
+      "id": "activation_relative_horizon",
+      "name": "승인된 전략 활성화일부터 24개월",
+      "source": "goal.json#horizon"
+    },
+    {
+      "id": "simultaneous_attainment",
+      "name": "27개 물리 목표를 동시에 충족",
+      "source": "goal.json#performance_context.all_physical_targets_required_simultaneously"
+    }
+  ],
+  "combat_tasks": [
+    {
+      "id": "pressure_advance_and_exit_cutting",
+      "name": "압박 전진과 퇴로 차단",
+      "description": "상대의 이동 선택지를 줄이면서 균형과 방어 준비를 잃지 않고 유효 거리로 진입하는 과제.",
+      "capacity_ids": [
+        "force_production",
+        "impulse_power",
+        "repeated_output",
+        "movement_control",
+        "sensorimotor_control",
+        "structural_load_tolerance"
+      ],
+      "technical_elements": ["스탠스", "압박", "거리 절단", "리듬", "타이밍", "상대 반응 의사결정"]
+    },
+    {
+      "id": "strike_defend_and_recover",
+      "name": "타격·방어·자세 복귀",
+      "description": "타격 선택과 연속 동작 중 힘을 전달하고 방어 가능한 자세로 복귀하는 과제.",
+      "capacity_ids": [
+        "force_production",
+        "impulse_power",
+        "repeated_output",
+        "fatigue_resistance_recovery",
+        "movement_control",
+        "sensorimotor_control"
+      ],
+      "technical_elements": ["가드", "타격 선택", "콤비네이션", "공수 전환", "리듬", "타이밍"]
+    },
+    {
+      "id": "close_range_posture_and_hand_fighting",
+      "name": "근거리 자세·인파이팅·손싸움",
+      "description": "접촉과 외란 속에서 머리·몸통·관절 정렬과 유효 출력을 유지하는 과제.",
+      "capacity_ids": [
+        "force_production",
+        "repeated_output",
+        "fatigue_resistance_recovery",
+        "movement_control",
+        "structural_load_tolerance"
+      ],
+      "technical_elements": ["인파이팅", "가드", "타격 선택", "공수 전환"]
+    },
+    {
+      "id": "defensive_repositioning",
+      "name": "방어 반응과 재배치",
+      "description": "시각·상황 단서를 선택하고 균형을 유지하며 회피·차단·재진입으로 연결하는 과제.",
+      "capacity_ids": [
+        "impulse_power",
+        "movement_control",
+        "sensorimotor_control",
+        "fatigue_resistance_recovery"
+      ],
+      "technical_elements": ["가드", "공수 전환", "거리 절단", "상대 반응 의사결정"]
+    },
+    {
+      "id": "round_output_management",
+      "name": "라운드 내·라운드 간 출력 유지",
+      "description": "고강도 교환을 반복하면서 힘·파워·운동제어·판단의 저하를 제한하고 회복하는 과제.",
+      "capacity_ids": [
+        "repeated_output",
+        "fatigue_resistance_recovery",
+        "movement_control",
+        "sensorimotor_control",
+        "structural_load_tolerance"
+      ],
+      "technical_elements": ["압박", "타격 선택", "콤비네이션", "리듬", "상대 반응 의사결정"]
+    }
+  ],
+  "capacity_nodes": [
+    {
+      "id": "force_production",
+      "success_target_id": "force_production",
+      "name": "Force Production",
+      "description": "최대·방향별·분절별 힘과 토크를 만들어 전달하는 능력.",
+      "target_ids": [
+        "imtp_peak_force",
+        "one_hand_crush_grip",
+        "neck_flexion_force",
+        "neck_extension_force",
+        "neck_lateral_flexion_force",
+        "trunk_rotation_antirotation_torque"
+      ]
+    },
+    {
+      "id": "impulse_power",
+      "success_target_id": "explosiveness",
+      "name": "Impulse, Power and Explosiveness",
+      "description": "제한된 시간 안에 충격량과 파워를 만들어 운동 속도를 바꾸는 능력.",
+      "target_ids": [
+        "rfd_0_50_ms",
+        "rfd_0_250_ms",
+        "cmj_height",
+        "cmj_relative_peak_power",
+        "cmj_absolute_peak_power",
+        "wingate_peak_power"
+      ]
+    },
+    {
+      "id": "repeated_output",
+      "success_target_id": "repeated_combat_output",
+      "name": "Repeated Combat Output",
+      "description": "반복 과제에서 결과 출력과 등척성 힘을 유지하는 수행 능력.",
+      "target_ids": [
+        "wingate_mean_power",
+        "repeated_explosive_output_decrement",
+        "grip_endurance_60s",
+        "isometric_force_retention_30s",
+        "post_high_intensity_max_force_decrement",
+        "post_high_intensity_explosive_power_decrement"
+      ]
+    },
+    {
+      "id": "fatigue_resistance_recovery",
+      "success_target_id": "fatigue_resistance_recovery",
+      "name": "Fatigue Resistance and Recovery",
+      "description": "출력·제어 저하의 발생 속도와 과제 사이 회복을 설명하는 능력군.",
+      "target_ids": [
+        "wingate_mean_power",
+        "repeated_explosive_output_decrement",
+        "post_high_intensity_max_force_decrement",
+        "post_high_intensity_explosive_power_decrement",
+        "vo2max",
+        "heart_rate_recovery_1min"
+      ]
+    },
+    {
+      "id": "movement_control",
+      "success_target_id": "movement_control",
+      "name": "Movement Control",
+      "description": "균형, 방향 전환, 외란 대응, 좌우 힘 분배와 피로 중 관절 제어 능력.",
+      "target_ids": [
+        "dynamic_balance_asymmetry",
+        "whole_body_force_power_asymmetry",
+        "fatigued_dynamic_joint_stability_decrement"
+      ]
+    },
+    {
+      "id": "sensorimotor_control",
+      "success_target_id": "sensorimotor_performance",
+      "name": "Sensorimotor and Perception-Action Control",
+      "description": "단서를 탐지·선택하고 상황에 맞는 동작을 시작·수정하는 능력.",
+      "target_ids": [
+        "simple_visual_reaction_time",
+        "choice_reaction_time",
+        "dynamic_balance_asymmetry",
+        "fatigued_dynamic_joint_stability_decrement"
+      ]
+    },
+    {
+      "id": "structural_load_tolerance",
+      "success_target_id": "structural_durability",
+      "name": "Structural Load Tolerance and Training Sustainability",
+      "description": "요구 부하와 반복 노출을 견디며 훈련 가능 상태를 유지하는 능력·제약군.",
+      "target_ids": [
+        "neck_flexion_force",
+        "neck_extension_force",
+        "neck_lateral_flexion_force",
+        "trunk_rotation_antirotation_torque",
+        "whole_body_force_power_asymmetry",
+        "fatigued_dynamic_joint_stability_decrement",
+        "annual_training_adherence",
+        "major_injury_count"
+      ]
+    }
+  ],
+  "target_role_assignments": {
+    "imtp_peak_force": {"primary_role": "performance_endpoint", "secondary_roles": []},
+    "rfd_0_50_ms": {"primary_role": "performance_endpoint", "secondary_roles": ["diagnostic_control"]},
+    "rfd_0_250_ms": {"primary_role": "performance_endpoint", "secondary_roles": ["diagnostic_control"]},
+    "cmj_height": {"primary_role": "performance_endpoint", "secondary_roles": ["diagnostic_control"]},
+    "cmj_relative_peak_power": {"primary_role": "performance_endpoint", "secondary_roles": ["diagnostic_control"]},
+    "cmj_absolute_peak_power": {"primary_role": "performance_endpoint", "secondary_roles": ["diagnostic_control"]},
+    "wingate_peak_power": {"primary_role": "performance_endpoint", "secondary_roles": []},
+    "wingate_mean_power": {"primary_role": "performance_endpoint", "secondary_roles": ["diagnostic_control"]},
+    "repeated_explosive_output_decrement": {"primary_role": "performance_endpoint", "secondary_roles": ["diagnostic_control"]},
+    "one_hand_crush_grip": {"primary_role": "performance_endpoint", "secondary_roles": []},
+    "grip_endurance_60s": {"primary_role": "performance_endpoint", "secondary_roles": ["diagnostic_control"]},
+    "neck_flexion_force": {"primary_role": "performance_endpoint", "secondary_roles": ["sustainability_floor"]},
+    "neck_extension_force": {"primary_role": "performance_endpoint", "secondary_roles": ["sustainability_floor"]},
+    "neck_lateral_flexion_force": {"primary_role": "performance_endpoint", "secondary_roles": ["sustainability_floor"]},
+    "trunk_rotation_antirotation_torque": {"primary_role": "performance_endpoint", "secondary_roles": ["sustainability_floor"]},
+    "isometric_force_retention_30s": {"primary_role": "performance_endpoint", "secondary_roles": ["diagnostic_control"]},
+    "simple_visual_reaction_time": {"primary_role": "performance_endpoint", "secondary_roles": ["diagnostic_control"]},
+    "choice_reaction_time": {"primary_role": "performance_endpoint", "secondary_roles": ["diagnostic_control"]},
+    "dynamic_balance_asymmetry": {"primary_role": "performance_endpoint", "secondary_roles": ["diagnostic_control", "sustainability_floor"]},
+    "whole_body_force_power_asymmetry": {"primary_role": "sustainability_floor", "secondary_roles": ["diagnostic_control"]},
+    "fatigued_dynamic_joint_stability_decrement": {"primary_role": "sustainability_floor", "secondary_roles": ["diagnostic_control"]},
+    "post_high_intensity_max_force_decrement": {"primary_role": "performance_endpoint", "secondary_roles": ["diagnostic_control"]},
+    "post_high_intensity_explosive_power_decrement": {"primary_role": "performance_endpoint", "secondary_roles": ["diagnostic_control"]},
+    "vo2max": {"primary_role": "performance_endpoint", "secondary_roles": ["diagnostic_control"]},
+    "heart_rate_recovery_1min": {"primary_role": "performance_endpoint", "secondary_roles": ["diagnostic_control"]},
+    "annual_training_adherence": {"primary_role": "sustainability_floor", "secondary_roles": ["diagnostic_control"]},
+    "major_injury_count": {"primary_role": "sustainability_floor", "secondary_roles": ["diagnostic_control"]}
+  },
+  "diagnostic_nodes": [
+    {
+      "id": "neuromuscular_system",
+      "name": "신경근 힘 생성·활성화",
+      "examples": ["수의 활성", "운동단위 동원·발화", "전기기계적 지연", "피로 중 활성 전략"],
+      "capacity_ids": ["force_production", "impulse_power", "movement_control", "sensorimotor_control"]
+    },
+    {
+      "id": "muscle_system",
+      "name": "근육 형태·수축 특성",
+      "examples": ["근단면과 구조", "길이-장력·힘-속도 관계", "국소 피로", "근육 간 협응"],
+      "capacity_ids": ["force_production", "impulse_power", "repeated_output", "structural_load_tolerance"]
+    },
+    {
+      "id": "tendon_aponeurosis_system",
+      "name": "건·건막 힘 전달과 부하 내성",
+      "examples": ["강성", "에너지 저장·반환", "힘 전달 지연", "노출량 대비 증상"],
+      "capacity_ids": ["force_production", "impulse_power", "movement_control", "structural_load_tolerance"]
+    },
+    {
+      "id": "bone_joint_connective_tissue_system",
+      "name": "골·관절·결합조직 상태",
+      "examples": ["관절 가동범위", "부하 분배", "조직별 허용 부하", "통증·기능 제한"],
+      "capacity_ids": ["movement_control", "structural_load_tolerance"]
+    },
+    {
+      "id": "cardiorespiratory_system",
+      "name": "심폐 산소 운반과 회복",
+      "examples": ["환기", "심박출", "말초 산소 이용", "운동 후 회복 동역학"],
+      "capacity_ids": ["repeated_output", "fatigue_resistance_recovery"]
+    },
+    {
+      "id": "metabolic_system",
+      "name": "에너지 공급·대사 회복",
+      "examples": ["ATP-PCr 재합성", "해당성 에너지 공급", "산화 대사", "기질 이용"],
+      "capacity_ids": ["impulse_power", "repeated_output", "fatigue_resistance_recovery"]
+    },
+    {
+      "id": "perception_action_system",
+      "name": "지각-판단-운동 연결",
+      "examples": ["단서 탐지", "선택 정확도", "속도-정확도 상충", "피로 중 반응 수정"],
+      "capacity_ids": ["movement_control", "sensorimotor_control"]
+    },
+    {
+      "id": "recovery_state",
+      "name": "현재 회복·훈련 준비 상태",
+      "examples": ["수면", "통증", "주관적 준비도", "최근 훈련 노출", "동일 과제 성능 변화"],
+      "capacity_ids": ["repeated_output", "fatigue_resistance_recovery", "movement_control", "structural_load_tolerance"]
+    }
+  ],
+  "intervention_nodes": [
+    {
+      "id": "resistance_training",
+      "name": "저항·등척성 훈련",
+      "examples": ["운동 선택", "강도", "세트·반복", "속도 의도", "관절각", "주당 노출"],
+      "capacity_ids": ["force_production", "impulse_power", "repeated_output", "structural_load_tolerance"],
+      "approval_required_before_activation": true
+    },
+    {
+      "id": "ballistic_plyometric_training",
+      "name": "탄도성·플라이오메트릭 훈련",
+      "examples": ["운동 형태", "접촉·반복 수", "부하", "의도 속도", "회복 간격"],
+      "capacity_ids": ["impulse_power", "movement_control", "structural_load_tolerance"],
+      "approval_required_before_activation": true
+    },
+    {
+      "id": "conditioning",
+      "name": "에너지 시스템·회복 훈련",
+      "examples": ["작업-휴식 비", "구간 길이", "강도", "총량", "종목 특이성"],
+      "capacity_ids": ["repeated_output", "fatigue_resistance_recovery", "structural_load_tolerance"],
+      "approval_required_before_activation": true
+    },
+    {
+      "id": "boxing_practice",
+      "name": "복싱 기술·지각-행동 훈련",
+      "examples": ["제약 스파링", "패드·백 과제", "의사결정 단서", "라운드 구조", "피드백"],
+      "capacity_ids": ["impulse_power", "repeated_output", "movement_control", "sensorimotor_control", "fatigue_resistance_recovery"],
+      "approval_required_before_activation": true
+    },
+    {
+      "id": "load_tolerance_progression",
+      "name": "조직 부하 내성·복귀 진행",
+      "examples": ["부하 증가율", "운동 범위", "통증·기능 반응", "노출 간 회복"],
+      "capacity_ids": ["movement_control", "structural_load_tolerance"],
+      "approval_required_before_activation": true
+    },
+    {
+      "id": "nutrition_body_mass_support",
+      "name": "영양·체중 증가 지원",
+      "examples": ["에너지 섭취", "단백질·탄수화물 배분", "체중 변화율", "훈련 전후 섭취"],
+      "capacity_ids": ["force_production", "impulse_power", "repeated_output", "fatigue_resistance_recovery", "structural_load_tolerance"],
+      "approval_required_before_activation": true
+    },
+    {
+      "id": "sleep_recovery_support",
+      "name": "수면·회복 행동",
+      "examples": ["수면 기회", "일정 일관성", "훈련 간격", "스트레스·회복 관리"],
+      "capacity_ids": ["repeated_output", "fatigue_resistance_recovery", "movement_control", "sensorimotor_control", "structural_load_tolerance"],
+      "approval_required_before_activation": true
+    }
+  ],
+  "observation_semantics": {
+    "construct": "알고 싶은 능력 또는 상태",
+    "test_task": "그 능력을 드러내도록 표준화한 수행 과제",
+    "metric": "과제에서 계산한 값",
+    "instrument": "원자료를 수집하는 장비 또는 기록수단",
+    "rules": [
+      "CMJ와 IMTP는 검사 과제이고 force plate 또는 dynamometer는 장비다.",
+      "프로토콜·장비·오차가 다른 값은 자동으로 같은 개인 시계열로 합치지 않는다.",
+      "개인 측정이 없으면 참고값·경계값·민감도 입력으로만 표기하고 개인 관측값을 만들지 않는다.",
+      "값 변화가 훈련 결정 또는 가설 판별을 바꿀 때만 상시 측정 후보로 유지한다.",
+      "장비가 없다는 이유로 고정 성공조건의 측정값을 추정값으로 대체하지 않는다."
+    ]
+  },
+  "target_observations": {
+    "imtp_peak_force": {"construct": "최대 등척성 전신 힘", "test_task": "IMTP", "metric": "체중당 peak force", "instrument": "교정된 force platform 또는 dynamometer", "protocol_status": "표준 프로토콜 확정 필요"},
+    "rfd_0_50_ms": {"construct": "초기 힘 상승", "test_task": "표준화된 등척성 당기기", "metric": "onset 이후 0–50 ms RFD", "instrument": "고주파 force acquisition system", "protocol_status": "onset·필터·샘플링 규칙 확정 필요"},
+    "rfd_0_250_ms": {"construct": "초기-중기 힘 상승", "test_task": "표준화된 등척성 당기기", "metric": "onset 이후 0–250 ms RFD", "instrument": "고주파 force acquisition system", "protocol_status": "onset·필터·샘플링 규칙 확정 필요"},
+    "cmj_height": {"construct": "수직 도약 수행", "test_task": "CMJ", "metric": "flight-time 기반 높이", "instrument": "force platform 또는 검증된 flight-time system", "protocol_status": "손 위치·시도 수·피로 조건 확정 필요"},
+    "cmj_relative_peak_power": {"construct": "체중당 전신 파워", "test_task": "CMJ", "metric": "relative peak power", "instrument": "force platform", "protocol_status": "계산식·샘플링 규칙 확정 필요"},
+    "cmj_absolute_peak_power": {"construct": "절대 전신 파워", "test_task": "CMJ", "metric": "absolute peak power", "instrument": "force platform", "protocol_status": "계산식·샘플링 규칙 확정 필요"},
+    "wingate_peak_power": {"construct": "단시간 무산소 peak output", "test_task": "표준화된 Wingate cycling test", "metric": "체중당 peak power", "instrument": "교정된 cycle ergometer", "protocol_status": "저항·워밍업·채택 구간 확정 필요"},
+    "wingate_mean_power": {"construct": "단시간 평균 출력", "test_task": "표준화된 Wingate cycling test", "metric": "체중당 mean power", "instrument": "교정된 cycle ergometer", "protocol_status": "저항·워밍업·평균 구간 확정 필요"},
+    "repeated_explosive_output_decrement": {"construct": "반복 폭발 출력 유지", "test_task": "사전 정의된 반복 폭발 과제", "metric": "best-to-final output decrement", "instrument": "과제별 교정된 power measurement", "protocol_status": "과제·반복 수·휴식 간격 미정"},
+    "one_hand_crush_grip": {"construct": "한손 crush 최대힘", "test_task": "표준 손잡이 위치 최대 악력", "metric": "peak kgf", "instrument": "교정된 hand dynamometer", "protocol_status": "손잡이·자세·시도 수 확정 필요"},
+    "grip_endurance_60s": {"construct": "그립 힘 유지", "test_task": "60초 반복 또는 등척성 그립", "metric": "초기 대비 최종 힘 유지율", "instrument": "연속 기록 가능한 hand dynamometer", "protocol_status": "반복과 등척성 중 하나로 고정 필요"},
+    "neck_flexion_force": {"construct": "목 굴곡 최대힘", "test_task": "표준 자세 최대 등척성 굴곡", "metric": "peak force", "instrument": "교정된 neck dynamometry setup", "protocol_status": "관절각·고정·레버암 확정 필요"},
+    "neck_extension_force": {"construct": "목 신전 최대힘", "test_task": "표준 자세 최대 등척성 신전", "metric": "peak force", "instrument": "교정된 neck dynamometry setup", "protocol_status": "관절각·고정·레버암 확정 필요"},
+    "neck_lateral_flexion_force": {"construct": "목 좌우 측굴 최대힘", "test_task": "표준 자세 최대 등척성 측굴", "metric": "약한 쪽 peak force", "instrument": "교정된 neck dynamometry setup", "protocol_status": "관절각·고정·레버암 확정 필요"},
+    "trunk_rotation_antirotation_torque": {"construct": "몸통 회전·항회전 토크", "test_task": "표준화된 회전 또는 항회전 과제", "metric": "동체급 참고분포 percentile", "instrument": "교정된 rotational dynamometry setup", "protocol_status": "과제와 적합한 참고분포 미정"},
+    "isometric_force_retention_30s": {"construct": "등척성 힘 유지", "test_task": "사전 정의된 30초 등척성 과제", "metric": "초기 대비 30초 힘 유지율", "instrument": "연속 기록 가능한 dynamometer", "protocol_status": "신체 부위·관절각·초기값 구간 미정"},
+    "simple_visual_reaction_time": {"construct": "단순 시각 반응", "test_task": "단일 자극-단일 반응 과제", "metric": "reaction time", "instrument": "지연이 교정된 자극·응답 시스템", "protocol_status": "표시장치·입력지연·시도 수 확정 필요"},
+    "choice_reaction_time": {"construct": "선택 반응", "test_task": "복수 자극-반응 선택 과제", "metric": "정답 trial reaction time과 정확도", "instrument": "지연이 교정된 자극·응답 시스템", "protocol_status": "선택 수·정확도 기준·장비 지연 확정 필요"},
+    "dynamic_balance_asymmetry": {"construct": "동적 균형 좌우 차이", "test_task": "표준화된 좌우 동적 균형 과제", "metric": "좌우 asymmetry", "instrument": "force·motion system 또는 검증된 field setup", "protocol_status": "과제·정규화·오차 한계 미정"},
+    "whole_body_force_power_asymmetry": {"construct": "전신 힘·파워 좌우 차이", "test_task": "동일 조건의 좌우 수행 과제", "metric": "larger-side denominator asymmetry", "instrument": "과제별 force 또는 power system", "protocol_status": "대표 과제와 방향별 집계 규칙 미정"},
+    "fatigued_dynamic_joint_stability_decrement": {"construct": "피로 중 동적 관절 제어 유지", "test_task": "표준 피로 전후 동적 안정성 과제", "metric": "pre-post decrement", "instrument": "force·motion system 또는 검증된 field setup", "protocol_status": "피로 유도·관절·안정성 지표 미정"},
+    "post_high_intensity_max_force_decrement": {"construct": "고강도 후 최대힘 유지", "test_task": "표준 고강도 과제 전후 동일 최대힘 검사", "metric": "pre-post maximum force decrement", "instrument": "동일 교정 force measurement", "protocol_status": "고강도 과제·측정 시점 미정"},
+    "post_high_intensity_explosive_power_decrement": {"construct": "고강도 후 폭발력 유지", "test_task": "표준 고강도 과제 전후 동일 폭발력 검사", "metric": "pre-post explosive power decrement", "instrument": "동일 교정 power measurement", "protocol_status": "고강도 과제·측정 시점 미정"},
+    "vo2max": {"construct": "최대 산소섭취 능력", "test_task": "표준화된 점증 운동검사", "metric": "체중당 oxygen consumption", "instrument": "교정된 metabolic cart", "protocol_status": "운동 방식·최대 판정 기준 확정 필요"},
+    "heart_rate_recovery_1min": {"construct": "운동 후 심박 회복", "test_task": "표준 운동 종료 후 1분 회복", "metric": "exercise-end minus 1-minute heart rate", "instrument": "검증된 ECG 또는 heart-rate monitor", "protocol_status": "운동 종료 조건·회복 자세 확정 필요"},
+    "annual_training_adherence": {"construct": "계획 훈련 지속성", "test_task": "연간 계획 대비 수행 기록", "metric": "completed/planned sessions", "instrument": "감사 가능한 training log", "protocol_status": "계획 변경·부분 수행·질병 처리 규칙 미정"},
+    "major_injury_count": {"construct": "중대 부상 없는 훈련 지속성", "test_task": "훈련·스파링 노출 중 부상 감시", "metric": "사전 정의된 major injury count", "instrument": "노출량·기능 제한·의료 평가가 연결된 injury log", "protocol_status": "중대 부상 정의·노출 분모·중복 사건 규칙 미정"}
+  }
+}

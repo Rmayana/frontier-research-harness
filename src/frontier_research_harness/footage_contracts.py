@@ -42,6 +42,7 @@ class FootageObservation(ScientificModel):
             "retained_claims": claims,
             "applicability": self.applicability,
             "limitations": list(self.limitations),
+            "target_ids": ["technical_goal"],
             "source_record": source_record,
         }
 

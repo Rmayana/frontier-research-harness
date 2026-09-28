@@ -28,8 +28,8 @@ execution only, never scientific or personal predictive validity.
 
 ## Runtime placement rule
 
-The laptop owns Codex orchestration, typed input construction, immutable
-experiment records, small reproducibility checks, and result analysis. Remote runners own high-resolution
+The laptop supports Codex, question-specific input files and scripts, small
+reproducibility checks, and result analysis. Use the [short model guide](EXTERNAL_MODELS.md). Remote runners own high-resolution
 FEBio, SimVascular 3D/FSI, large PhysiCell populations, MyoSuite learning, Sim4Life,
 and large parameter sweeps. Remote results must return versioned artifact hashes,
 simulated time, terminal status, units, provenance, and limitations before they can

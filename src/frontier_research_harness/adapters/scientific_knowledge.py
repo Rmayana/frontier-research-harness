@@ -2,12 +2,13 @@
 from __future__ import annotations
 
 import json
+import re
 import socket
 import time
 import urllib.error
 import urllib.parse
 import urllib.request
-from dataclasses import dataclass
+import xml.etree.ElementTree as ET
 from typing import Any, Callable
 
 
@@ -74,6 +75,27 @@ SOURCES: dict[str, dict[str, Any]] = {
         "authentication": "No key required at low rate; NCBI API key optional.",
         "limitation": "This is an explicit NSCA-focused PubMed view, not an NSCA private-content API.",
     },
+    "openalex": {
+        "name": "OpenAlex",
+        "base_url": "https://api.openalex.org/works",
+        "coverage": "Scholarly work metadata, citation relationships, and open-access locations.",
+        "search": True,
+        "fetch": True,
+        "full_text": "Metadata and abstract indexes only; linked full text is not downloaded.",
+        "authentication": "Anonymous basic use; this client does not attach keys or enable paid usage.",
+        "usage_policy_url": "https://help.openalex.org/api/authentication/",
+    },
+    "zenodo": {
+        "name": "Zenodo published records",
+        "base_url": "https://zenodo.org/api/records",
+        "coverage": "Published datasets, software, model files, and research outputs.",
+        "search": True,
+        "fetch": True,
+        "full_text": "Record metadata and file manifests only; file contents are not downloaded.",
+        "authentication": "Public published-record endpoints; restricted files require separate authorization.",
+        "max_search_limit": 25,
+        "api_documentation_url": "https://developers.zenodo.org/#records",
+    },
 }
 
 
@@ -128,8 +150,10 @@ class ScientificKnowledgeClient:
             raise ValueError(f"unknown literature source: {source}")
         if not query.strip():
             raise ValueError("query must not be empty")
-        if limit < 1 or limit > 50:
+        if type(limit) is not int or limit < 1 or limit > 50:
             raise ValueError("limit must be between 1 and 50")
+        if source == "zenodo" and limit > 25:
+            raise ValueError("Zenodo anonymous search limit must be between 1 and 25")
         if cursor is not None and not isinstance(cursor, str):
             raise ValueError("cursor must be a string")
         if source == "pubmed":
@@ -142,6 +166,10 @@ class ScientificKnowledgeClient:
             return self._search_europe_pmc(query, limit, cursor)
         if source == "crossref":
             return self._search_crossref(query, limit, cursor)
+        if source == "openalex":
+            return self._search_openalex(query, limit, cursor)
+        if source == "zenodo":
+            return self._search_zenodo(query, limit, cursor)
         return self._search_clinical_trials(query, limit, cursor)
 
     def fetch(self, source: str, identifier: str) -> dict[str, Any]:
@@ -152,17 +180,91 @@ class ScientificKnowledgeClient:
         if source in {"pubmed", "nsca"}:
             url = SOURCES[source]["base_url"] + "efetch.fcgi?" + urllib.parse.urlencode({"db": "pubmed", "id": identifier, "retmode": "xml"})
             raw = self._request(self.text_transport, url)
-            return {"source": source, "identifier": identifier, "format": "PubMed XML", "content_level": "record_with_abstract", "has_full_text": False, "raw": raw, "url": url}
+            record = {
+                "source": source,
+                "identifier": identifier,
+                "format": "PubMed XML",
+                "content_level": "record_with_abstract",
+                "has_full_text": False,
+                "raw": raw,
+                "url": url,
+            }
+            pmcid = self._pubmed_pmcid(raw)
+            if not pmcid:
+                return record
+            full_text_url = (
+                f"{SOURCES['europe_pmc']['base_url']}"
+                f"{urllib.parse.quote(pmcid, safe='')}/fullTextXML"
+            )
+            try:
+                full_text = self._request(self.text_transport, full_text_url)
+                self._validate_full_text(full_text)
+            except Exception as exc:
+                return {
+                    **record,
+                    "pmcid": pmcid,
+                    "full_text_resolution": {
+                        "attempted": True,
+                        "resolved": False,
+                        "error_type": type(exc).__name__,
+                        "error": str(exc),
+                    },
+                }
+            return {
+                "source": source,
+                "identifier": identifier,
+                "pmcid": pmcid,
+                "format": "JATS XML",
+                "content_level": "full_text",
+                "has_full_text": True,
+                "raw": full_text,
+                "url": full_text_url,
+                "source_record": record,
+                "full_text_resolution": {
+                    "attempted": True,
+                    "resolved": True,
+                    "resolver": "Europe PMC",
+                },
+            }
         if source == "europe_pmc":
-            encoded = urllib.parse.quote(identifier, safe="")
-            result_url = f"{SOURCES[source]['base_url']}search?query={urllib.parse.quote('EXT_ID:'+identifier)}&format=json&pageSize=1"
+            normalized = identifier.strip()
+            if re.fullmatch(r"PMC\d+", normalized, re.IGNORECASE):
+                database_query = f"PMCID:{normalized.upper()}"
+            elif re.fullmatch(r"(?:PMID:)?\d+", normalized, re.IGNORECASE):
+                database_query = f"EXT_ID:{normalized.split(':')[-1]} AND SRC:MED"
+            else:
+                doi = re.sub(r"^(?:https?://(?:dx\.)?doi\.org/|doi:)", "", normalized, flags=re.IGNORECASE)
+                if not re.fullmatch(r"10\.\d{4,9}/[^\s\"]+", doi):
+                    raise ValueError("Europe PMC identifier must be a PMID, PMCID, or DOI")
+                database_query = f'DOI:"{doi}"'
+            result_url = SOURCES[source]["base_url"] + "search?" + urllib.parse.urlencode({"query": database_query, "format": "json", "pageSize": 1, "resultType": "core"})
             result = self._request(self.json_transport, result_url)
             records = result.get("resultList", {}).get("result", [])
             pmcid = records[0].get("pmcid") if records else None
+            if pmcid and not re.fullmatch(r"PMC\d+", str(pmcid), re.IGNORECASE):
+                raise ValueError("Europe PMC returned an invalid PMCID")
+            if pmcid:
+                pmcid = pmcid.upper()
+            record = {"source": source, "identifier": identifier, "format": "metadata", "content_level": "record_with_abstract" if records and records[0].get("abstractText") else "metadata_only", "has_full_text": False, "raw": records[0] if records else None, "url": result_url}
             if pmcid:
                 url = f"{SOURCES[source]['base_url']}{urllib.parse.quote(pmcid, safe='')}/fullTextXML"
-                return {"source": source, "identifier": identifier, "format": "JATS XML", "content_level": "full_text", "has_full_text": True, "raw": self._request(self.text_transport, url), "url": url}
-            return {"source": source, "identifier": identifier, "format": "metadata", "content_level": "metadata_only", "has_full_text": False, "raw": records[0] if records else None, "url": result_url, "limitation": "No open-access full text was available."}
+                try:
+                    raw = self._request(self.text_transport, url)
+                    self._validate_full_text(raw)
+                except Exception as exc:
+                    return {**record, "pmcid": pmcid, "full_text_resolution": {"attempted": True, "resolved": False, "error_type": type(exc).__name__, "error": str(exc)}, "limitation": "Full text could not be retrieved; metadata or abstract only."}
+                return {**record, "pmcid": pmcid, "format": "JATS XML", "content_level": "full_text", "has_full_text": True, "raw": raw, "url": url, "source_record": record, "full_text_resolution": {"attempted": True, "resolved": True, "resolver": "Europe PMC"}}
+            return {**record, "full_text_resolution": {"attempted": False, "resolved": False}, "limitation": "No PMCID was returned for this identifier; full-text availability elsewhere is unknown."}
+        if source == "openalex":
+            work_id = self._openalex_identifier(identifier)
+            url = SOURCES[source]["base_url"] + "/" + urllib.parse.quote(work_id, safe=":/")
+            raw = self._request(self.json_transport, url)
+            return {"source": source, "identifier": work_id, "format": "OpenAlex JSON", "content_level": "metadata_only", "has_full_text": False, "raw": raw, "record": self._openalex_record(raw), "url": url, "limitation": "Linked locations and abstract indexes are metadata, not retrieved full text."}
+        if source == "zenodo":
+            record_id = self._zenodo_identifier(identifier)
+            url = SOURCES[source]["base_url"] + "/" + record_id
+            raw = self._request(self.json_transport, url)
+            return {"source": source, "identifier": record_id, "format": "Zenodo JSON", "content_level": "metadata_only", "has_full_text": False, "raw": raw, "record": self._zenodo_record(raw), "url": url, "limitation": "File manifest only; no dataset, model, or document file has been downloaded."}
         if source == "crossref":
             doi = identifier.removeprefix("https://doi.org/").removeprefix("doi:")
             url = f"{SOURCES[source]['base_url']}/{urllib.parse.quote(doi, safe='')}"
@@ -170,6 +272,34 @@ class ScientificKnowledgeClient:
         nct_id = identifier.upper()
         url = f"{SOURCES[source]['base_url']}/{urllib.parse.quote(nct_id, safe='')}"
         return {"source": source, "identifier": nct_id, "format": "ClinicalTrials.gov JSON", "content_level": "structured_registry_record", "has_full_text": False, "raw": self._request(self.json_transport, url), "url": url}
+
+    @staticmethod
+    def _validate_full_text(raw: str) -> None:
+        """Do not promote a successful HTTP error page or abstract-only XML to full text."""
+        try:
+            root = ET.fromstring(raw)
+        except ET.ParseError as exc:
+            raise ValueError("full-text endpoint did not return valid article XML") from exc
+        if root.tag.split("}")[-1] not in {"article", "article-set"} or not any(
+            element.tag.split("}")[-1] == "body" and "".join(element.itertext()).strip()
+            for element in root.iter()
+        ):
+            raise ValueError("full-text endpoint did not return an article body")
+
+    @staticmethod
+    def _pubmed_pmcid(raw: str) -> str | None:
+        """Extract the exact PMC article ID without interpreting article content."""
+        try:
+            root = ET.fromstring(raw)
+        except ET.ParseError:
+            return None
+        for article_id in root.findall(".//ArticleId"):
+            if str(article_id.attrib.get("IdType", "")).casefold() != "pmc":
+                continue
+            value = (article_id.text or "").strip()
+            if re.fullmatch(r"PMC\d+", value, re.IGNORECASE):
+                return value.upper()
+        return None
 
     @staticmethod
     def _page_fields(
@@ -264,6 +394,94 @@ class ScientificKnowledgeClient:
         next_cursor = payload.get("nextPageToken") if results else None
         total = payload.get("totalCount")
         return {"source": "clinical_trials", "query": query, **self._page_fields(results, total_count=int(total) if isinstance(total, int) else None, next_cursor=next_cursor), "search_url": url}
+
+    @staticmethod
+    def _openalex_identifier(identifier: str) -> str:
+        value = identifier.strip()
+        value = re.sub(r"^https?://openalex\.org/", "", value, flags=re.IGNORECASE)
+        if re.fullmatch(r"W\d+", value, re.IGNORECASE):
+            return value.upper()
+        doi = re.sub(r"^(?:https?://(?:dx\.)?doi\.org/|doi:)", "", value, flags=re.IGNORECASE)
+        if re.fullmatch(r"10\.\d{4,9}/[^\s?#]+", doi):
+            return "https://doi.org/" + doi
+        raise ValueError("OpenAlex identifier must be a work ID (W...) or DOI")
+
+    @staticmethod
+    def _zenodo_identifier(identifier: str) -> str:
+        value = identifier.strip()
+        value = re.sub(r"^https?://zenodo\.org/records?/", "", value, flags=re.IGNORECASE).rstrip("/")
+        value = re.sub(r"^(?:https?://doi\.org/|doi:)?10\.5281/zenodo\.", "", value, flags=re.IGNORECASE)
+        if not re.fullmatch(r"\d+", value):
+            raise ValueError("Zenodo identifier must be a record ID, record URL, or Zenodo DOI")
+        return value
+
+    @staticmethod
+    def _openalex_record(item: dict[str, Any]) -> dict[str, Any]:
+        return {
+            "id": item.get("id"), "doi": item.get("doi"),
+            "title": item.get("title") or item.get("display_name"),
+            "published": item.get("publication_date"), "type": item.get("type"),
+            "authors": [row.get("author", {}).get("display_name") for row in item.get("authorships", [])],
+            "cited_by_count": item.get("cited_by_count"),
+            "referenced_works": item.get("referenced_works", []),
+            "related_works": item.get("related_works", []),
+            "open_access": item.get("open_access"),
+            "locations": item.get("locations", []),
+            "ids": item.get("ids", {}), "is_retracted": item.get("is_retracted"),
+            "abstract_inverted_index": item.get("abstract_inverted_index"),
+            "content_level": "metadata_only", "has_full_text": False,
+            "url": item.get("id"),
+        }
+
+    @staticmethod
+    def _zenodo_record(item: dict[str, Any]) -> dict[str, Any]:
+        metadata = item.get("metadata", {})
+        files = item.get("files", [])
+        # Invenio responses may expose a keyed entries map; preserve both APIs.
+        if isinstance(files, dict):
+            files = [{"key": key, **value} for key, value in files.get("entries", {}).items()]
+        return {
+            "id": str(item.get("id", "")), "doi": item.get("doi") or metadata.get("doi"),
+            "title": metadata.get("title"), "published": metadata.get("publication_date"),
+            "description": metadata.get("description"),
+            "authors": [row.get("name") for row in metadata.get("creators", [])],
+            "resource_type": metadata.get("resource_type") or metadata.get("upload_type"),
+            "license": metadata.get("license") or metadata.get("rights"),
+            "access_right": metadata.get("access_right") or item.get("access"),
+            "related_identifiers": metadata.get("related_identifiers", []),
+            "version": metadata.get("version"),
+            "files": [{"name": row.get("key") or row.get("filename"), "size_bytes": row.get("size"), "checksum": row.get("checksum"), "links": row.get("links", {})} for row in files],
+            "content_level": "metadata_only", "has_full_text": False,
+            "url": item.get("links", {}).get("html") or item.get("links", {}).get("self_html"),
+        }
+
+    def _search_openalex(self, query: str, limit: int, cursor: str | None) -> dict[str, Any]:
+        url = SOURCES["openalex"]["base_url"] + "?" + urllib.parse.urlencode({"search": query, "per_page": limit, "cursor": cursor or "*"})
+        payload = self._request(self.json_transport, url)
+        results = [self._openalex_record(item) for item in payload.get("results", [])]
+        meta = payload.get("meta", {})
+        candidate = meta.get("next_cursor")
+        next_cursor = candidate if results and candidate and candidate != (cursor or "*") else None
+        return {"source": "openalex", "query": query, **self._page_fields(results, total_count=meta.get("count"), next_cursor=next_cursor), "search_url": url, "usage": {key: meta[key] for key in ("cost_usd", "credits_used", "rate_limit_remaining") if key in meta}, "authentication_mode": "anonymous", "limitation": "One bounded page per request; no automatic crawl, API key, or paid fallback."}
+
+    def _search_zenodo(self, query: str, limit: int, cursor: str | None) -> dict[str, Any]:
+        try:
+            page = int(cursor or "1")
+        except ValueError as exc:
+            raise ValueError("Zenodo cursor must be a positive integer page") from exc
+        if page < 1:
+            raise ValueError("Zenodo cursor must be a positive integer page")
+        url = SOURCES["zenodo"]["base_url"] + "?" + urllib.parse.urlencode({"q": query, "size": limit, "page": page, "sort": "bestmatch"})
+        payload = self._request(self.json_transport, url)
+        hits = payload.get("hits", {})
+        results = [self._zenodo_record(item) for item in hits.get("hits", [])]
+        total = hits.get("total")
+        relation = total.get("relation") if isinstance(total, dict) else "eq"
+        total = total.get("value") if isinstance(total, dict) else total
+        exact_total = total if relation == "eq" else None
+        has_next = bool(payload.get("links", {}).get("next")) or (isinstance(total, int) and page * limit < total)
+        next_cursor = str(page + 1) if results and has_next else None
+        return {"source": "zenodo", "query": query, **self._page_fields(results, total_count=exact_total, next_cursor=next_cursor), "search_url": url, "total_count_lower_bound": total if relation != "eq" else None, "limitation": "Published-record metadata and file manifests only; no files downloaded."}
 
 
 __all__ = ["SOURCES", "ScientificKnowledgeClient"]

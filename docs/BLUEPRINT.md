@@ -1,141 +1,198 @@
-# Lean Codex Research Environment
+# Codex-led scientific research environment
 
 ## Purpose
 
-Give Codex the smallest reliable environment needed to research a user-defined
-goal well. Scientific judgment stays in Codex; code connects evidence and
-external models and preserves reproducible records.
+Keep the environment light enough for Codex to use its knowledge, reasoning,
+coding and tools as a human researcher would. Expose useful context, evidence,
+observations, models and recoverable records. Codex combines mechanism-based
+reasoning, chained estimates and question-specific calculations; a complete
+simulation model is not a prerequisite for useful research.
 
-## Active architecture
+## Authority boundary
 
-```text
-natural-language goal and updates
-              |
-              v
-            Codex
-       /        |         \
-small state   evidence   external models
- workspace     search     and exact runs
-       \        |         /
-        concise retained record
-```
+Codex owns:
 
-The workspace contains only:
+- question and hypothesis generation;
+- evidence and model selection;
+- experimental contrast and uncertainty analysis;
+- interpretation, causal diagnosis, cross-target synthesis, and strategy
+  revision; and
+- the judgment that another investigation is or is not useful.
 
-- the currently approved fixed goal;
-- current state supplied or accepted by the user;
-- constraints and important unknowns;
-- live hypotheses and promising methods;
-- concise research notes;
-- retained source records; and
-- immutable external-model experiment records.
-- immutable unit-checked calculations for the fixed physical targets.
+Code owns:
 
-Default reads are section-selective and token-bounded. Accepted local profile
-and body-composition snapshots are folded into current state automatically,
-with their uncertainty and provenance intact.
+- schema, unit, compatibility, horizon, calibration, and provenance checks;
+- the external engine's own input and execution checks; and
+- storage and retrieval of retained literature, observations and research notes.
 
-## Research behavior
+Codex writes question-specific calculations and comparisons when needed, using
+ordinary files for code, inputs and raw results.
 
-Codex understands the user conversationally and chooses the research route.
-It continually seeks more effective and efficient methods. Hypotheses are part
-of ordinary reasoning, not a special discovery subsystem. Comparisons,
-measurements, or stricter protocols are used when the question actually needs
-them, not because the workspace requires them.
+Code must not rank questions, choose the next experiment, invent a strategy
+score, declare research complete, or fabricate missing biological behavior.
+The user-approved equal-weight mean of normalized body metrics is an explicit
+optimization objective: code may calculate it and execute Codex-selected searches
+through qualified models. It does not determine the research agenda or establish
+that a model-bounded optimum is the absolute human maximum.
 
-Substantial research uses current primary evidence and relevant connected
-external scientific models. Investigation proceeds top-down: whole-person
-first, then organ, tissue, cellular, or molecular detail where deeper modeling
-can alter the answer. Exact model inputs, model/runtime versions, provenance,
-raw outputs, and limitations are stored. Model execution success never implies
-personal predictive validity.
+## Active components
 
-For physical research, the catalog accepts target IDs and returns compatible
-models grouped by Model Layer. Broad research must execute a current-turn,
-target-compatible experiment in every relevant executable layer before it can
-claim synthesis. This is deterministic routing metadata inside the existing
-receipt, not a planner or persisted workflow. It prevents an easy cellular
-model from substituting for whole-person, organ, musculoskeletal, or tissue
-questions while Codex still chooses the scientific question and model.
+1. **Goal workspace** — fixed North Star, selected current state, constraints,
+   revisable free-text current understanding, hypotheses, promising methods,
+   and concise durable notes. Replacing the understanding preserves its history.
+2. **Goal Research Map** — historical passive links among combat tasks,
+   capacities, diagnostic systems and observations. It does not define the
+   current whole-body objective or require coverage of its old categories.
+3. **Evidence layer** — multi-source discovery, record/full-text retrieval,
+   claim-linked evidence retention, and source-bounded appraisal.
+4. **Observation layer** — immutable protocol-aware personal measurements and
+   descriptive comparable series.
+5. **External models** — installed engines, necessary file-format helpers and a
+   [short usage guide](EXTERNAL_MODELS.md). Codex creates inputs and experiment
+   scripts when needed and preserves useful raw files. No experiment registration,
+   shared calculator, graph, population sampler or simulator API is required.
+6. **Joint research log** — optional free-text contributions and reply links,
+   separate from verified evidence, observations and activation authority.
 
-The boxing technical goal is an explicit exception to model execution: Codex
-uses broad primary fight and training footage, retains timestamped
-observations, separates repeated technique from opponent-specific variation,
-and converts the evidence into drills. A physiological model is not called for
-a footage-only question.
+Specialist plugins extend these peer capabilities directly. Gene manipulation
+and drug discovery are separate tool groups alongside evidence, observations,
+simulation, analysis and experiments; they do not define phases or fallback
+levels. Follow the skill's [tool guide](../plugins/frontier-science-model/skills/goal-research/references/tools-and-development.md)
+when selecting them. No new broker, registry or per-provider store is required.
 
-Footage observations use a strict primary-source contract carrying the exact
-interval, athlete and context, observed actions, situational conditions,
-explicit repeated-pattern status, possible drills, applicability, limitations,
-and a content hash. A single clip is never promoted to a repeated pattern by
-the storage layer.
+Default reads are section-selective and byte-bounded. Internal IDs and schemas
+stay out of ordinary conversation until needed for execution or reproducibility.
+Default `load_research` restores the approved objective, reverse-design intent,
+artifact paths and action boundary as well as current understanding. Its computed
+`recent_activity` section contains chronological experiment, retained-evidence,
+research-entry and simulation-request locators with exact reload calls. It is
+read-only and does not rank results, generate questions, or promote notes to evidence.
+The host Codex model/tool loop performs the ongoing reasoning; this workspace
+supports resumption and does not introduce a second autonomous scheduler.
+An opt-in foreground operation adapter can own a native Codex goal, retain
+transport events and human steering, and enforce explicitly supplied resource
+limits. It never issues synthetic continuation turns or judges science. See
+[ADR 0005](adr/0005-native-research-operation.md) and [RUNNER.md](RUNNER.md).
+Evidence and observations may link to the approved goal ID before a fixed list
+of subtargets exists. Validation uses the workspace's saved goal, not a different
+goal read from a global file. Model-scope checks still apply to model-bound claims.
 
-Model inventory separates installation and reference-run verification from
-research callability, target relevance, and personal calibration. A smoke test
-never claims the latter three. Deterministic target calculations preserve the
-exact input, units, formula version, output, and hash while labeling the result
-as arithmetic or measurement-derived rather than a longitudinal forecast.
-The latest calculations may be projected into a non-persistent measurement-
-readiness view; missing observations remain explicit rather than being filled
-with reference values.
+Keep the environment small. Codex chooses its own research methods and may use
+question-specific code; no added agent organization or scientific phase is
+required. The ordinary chat carries intermediate findings and user questions.
+Native parallel researchers can pursue independent approaches and exchange
+intermediate findings. Attributed append-only contributions survive synthesis;
+the synthesis writer uses an expected timestamp and reconciles conflicts.
+The human researcher may challenge results and redirect work without becoming
+a required approval gate for every next investigation.
 
-The highest-priority OpenSim, Pulse, and FEBio paths add engine-specific typed
-study inputs above the generic registered-runtime bridge. They validate
-workspace-local artifacts and calibration labels while leaving question choice
-and result interpretation to Codex. Deterministic normalizers expose bounded
-engine observables plus the original receipt: they parse neither convergence
-nor simulated peaks as personal efficacy, injury risk, or adaptation.
+The JSON CLI uses the same Module Interface as MCP. Environment inspection
+separates configured sources, local runtime discovery, untested network access
+and host tool exposure. Fetched content includes reference and linked-material
+locators without marking those links as read evidence. Existing MCP SDK and model
+adapters are reused; the laboratory adds no solver, question generator or planner.
 
-A Personal Combat Athlete Digital Twin may federate these external models
-through strict exchange contracts. Every exchanged value carries units, time
-resolution, uncertainty, calibration level, applicability, and immutable
-provenance. Reference-boundary or population-prior inputs fail closed if a
-caller attempts to label their output as a personal endpoint prediction. The
-twin supplies state estimates and research constraints; Codex still chooses
-scientific questions and strategies, and the twin never activates an
-intervention.
+The Module Interface has three explicit layers. `research_tool_contracts` owns
+transport-neutral public schemas, `research_tool_dispatch` maps validated tool
+calls to the workspace facade, and the MCP/JSON CLI adapters translate transport
+input and output only. The workspace facade keeps its stable import path and
+composes separate core persistence, evidence, observation, audit, model, and
+experiment-operation modules. These are engineering boundaries; they do not add
+scientific phases, workflow authority, or a second source of research state.
 
-Candidate discovery is paginated and fault-isolated across queries. Codex
-decides when useful coverage has plateaued, then fetches selected primary
-records and retains only evidence actually used. Retained evidence includes the
-inspected payload, claims used, applicability, limitations, and a content hash;
-metadata-only scholarly records are rejected.
+## Scientific behavior
 
-A deterministic execution receipt notices unresolved tool failures, duplicate
-fetches, omitted Model Layers, model-to-target mismatches, invalid persistence,
-or explicit goal targets that were not mapped to retained evidence. It permits
-one bounded continuation. A whole-goal receipt covers every structured physical
-target and the technical goal; a narrow receipt is allowed only for a declared
-target subset. The receipt is validated during `save_research` but is not
-persisted as a workflow object. It does not judge scientific validity, rank
-hypotheses, or prescribe the next scientific action.
+Broad research begins from the strongest current human evidence and documented
+elite practice. Codex keeps a revisable whole-goal causal explanation and
+strategy. Every source, observation, calculation, and model result becomes a
+new observation to think from, not a cue to finish and summarize. Codex
+integrates its consequences, derives newly calculable or bounded quantities,
+and notices what remains unexplained. The resulting questions lead naturally
+to mechanism-constrained hypotheses and the smallest qualified investigations
+able to change the strategy.
+
+This repeats naturally while more available work can change the decision. It
+is not encoded as phases, fixed counts, a question-value formula, or a lifecycle
+object. Several topics in one request form a temporary portfolio and are
+synthesized back into the single North Star.
+
+Research reverse-designs the desired whole-body outcome into candidate structures,
+physiology, mechanisms, and feasible methods, then tests the consequences forward.
+Codex moves naturally between whole-person synthesis and organ, tissue, cellular,
+molecular, or mathematical detail, and across interacting systems. The question
+and evidence determine the useful resolution and next investigation; broad-to-fine
+and fine-to-broad reasoning have no prescribed order. New findings can revise the
+causal explanation, model assumptions, candidate combinations, and realization
+methods. Numerical optimization is one instrument of this research, not its entire
+loop. The target and score tables are linked from `goal.json`, with uncomputed
+results and unresolved definitions explicit.
+
+Substantial research can unfold as a live conversation. Codex surfaces material
+intermediate results, their concise scientific implications, questions that
+actually emerged, and strategy revisions while continuing safe in-scope work.
+The user's challenges and observations improve the research but do not replace
+Codex's responsibility for the next question.
+
+## Direct external-model use
+
+An external model is usable only inside its documented endpoint, population,
+inputs, units, calibration level, horizon, validation evidence, and runtime
+version. A successful run is not evidence outside that scope.
+
+Codex may infer relationships from existing knowledge, connect model outputs,
+repeat calculations with updated state and history, and write question-specific
+analyses. Explain assumptions and test consequential connections; no predeclared
+graph, qualification packet, reference-body object, time-window plan or universal
+response equation is required. External adapters retain their actual input and
+unit checks. Preserve code and exact inputs/results when computations are run.
+
+Reference-data JSON and existing experiment databases are preserved as historical
+files. No new experiment database or registry is required. Use each engine directly
+and create experiment files only when needed. See [EXTERNAL_MODELS.md](EXTERNAL_MODELS.md)
+and [ADR 0007](adr/0007-direct-external-models.md).
+
+## Retained records
+
+Evidence records preserve inspected content, bounded claims, located passages,
+applicability, limitations, identifiers, and content hashes. Experiment records
+preserve question, full input, model/runtime identity and version, provenance,
+raw output, output hash, uncertainty, failures, and optional interpretation.
+Personal observations preserve time, unit, protocol, instrument, uncertainty,
+and provenance.
+
+Exploratory hypotheses and inferences may remain plain language. Strong labels
+such as evidence-supported, user-observed, model-bounded, or
+measurement-derived require matching receipts.
 
 ## Deliberately absent
 
-These components are not part of the repository:
-
-- Harness Kernel control flow and StateLedger orchestration;
-- custom whole-body and long-horizon simulators;
-- mandatory measurement contracts;
-- frontier-candidate generation/promotion schemas;
-- predeclared Protocol -> Result -> Synthesis lineage; and
-- fixed 24-month strategy screening.
-
-Several research topics in one message form a temporary portfolio. Codex
-researches each topic, then integrates shared mechanisms, conflicts, and
-trade-offs into one goal-level answer without creating a workflow object.
-
-## Authority
-
-Codex may research, search, calculate, run passive external models, compare
-results, diagnose, and revise. Explicit user approval is required before a
-real-world strategy is activated, the fixed goal changes, money is spent, an
-external action is booked, external data is mutated, or medical/drug/supplement
-action is taken.
+- Planner, Reviewer, StateLedger, phase, gate, or stop hook;
+- fixed question scoring or mandatory hypothesis counts;
+- mandatory measurement contracts or predeclared workflow forms;
+- fixed-target calculators or coverage audits in the active research surface;
+- repository-invented biological coefficients, adaptation endpoints, or
+  whole-body longitudinal simulators;
+- coverage or model-layer completion requirements; and
+- automatic real-world strategy activation.
 
 ## Engineering
 
-When extending the environment, first inspect strong maintained open-source
-implementations and scientific model adapters. Reuse compatible code when its
-license and fit are clear. Add a dependency or subsystem only when it removes a
-demonstrated bottleneck in the active Codex loop.
+Literature fetches retain their exact responses automatically. A fetch ID lets
+Codex attach claims and a natural-language or structured appraisal without
+resending the source payload; fetching alone does not establish read evidence.
+New model executions write the files selected for that experiment. Preserve useful
+engine diagnostics, including failures. Historical failed experiments cannot support
+successful model-result claims.
+Earlier experiment rows without a status migrate as successful legacy receipts.
+
+Keep model contracts independent from MCP, storage, and search adapters. Use
+typed validation for tool-facing scientific artifacts and fail closed on
+invalid units, model compatibility, calibration, horizon, or provenance.
+Inspect maintained open-source designs and official model adapters before
+adding a subsystem, but add a dependency only when it removes a demonstrated
+bottleneck in the active Codex loop.
+Compare relevant existing implementations and record reuse/adaptation/rejection
+reasons in the change report. During real use, improve observed friction in small
+increments. Evaluate research behavior and actual resource use separately from
+format checks, test counts or installed tool counts; see
+[research environment evaluation](RESEARCH_ENVIRONMENT_EVAL.md).

@@ -1,1 +1,0 @@
-"""Frontier Research Harness tests."""

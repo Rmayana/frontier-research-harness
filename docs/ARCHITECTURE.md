@@ -8,15 +8,65 @@
 
 ## 하네스 구성도
 
-![외부 하네스의 여섯 기능 영역과 기술 후보, Codex 연결 계층 및 Codex Core 구성도](diagrams/harness-architecture.svg)
+```mermaid
+%%{init: {"flowchart": {"nodeSpacing": 24, "rankSpacing": 24, "wrappingWidth": 280}}}%%
+flowchart TB
+    subgraph EH["외부 하네스 · 직접 설계"]
+        direction TB
+        subgraph R1[" "]
+            direction LR
+            W["워크플로 제어<br/>LangGraph · Temporal<br/>Prefect · Dagster<br/>직접 구현: Python 등"]
+            A["다중 에이전트<br/>LangGraph · Pydantic AI · CrewAI<br/>Microsoft Agent Framework<br/>자체 Orchestrator"]
+            W ~~~ A
+        end
+        subgraph R2[" "]
+            direction LR
+            T["도구 통합<br/>MCP · OpenAPI<br/>FastMCP · 공식 MCP SDK<br/>FastAPI · Python 함수"]
+            S["상태 및 기억<br/>SQLite · PostgreSQL · Redis<br/>pgvector · Qdrant<br/>LlamaIndex · Haystack"]
+            T ~~~ S
+        end
+        subgraph R3[" "]
+            direction LR
+            V["검증<br/>pytest · Hypothesis<br/>Pydantic · JSON Schema<br/>promptfoo · DeepEval"]
+            O["모니터링<br/>LangSmith · Langfuse<br/>OpenTelemetry<br/>Phoenix · MLflow"]
+            V ~~~ O
+        end
+        R1 ~~~ R2
+        R2 ~~~ R3
+    end
+    B["연결 계층<br/>Codex SDK / App Server / CLI"]
+    C["Codex Core<br/>기존 Agent Loop · 모델 추론<br/>도구 실행 · 컨텍스트 관리"]
+    EH <--> B
+    B <--> C
 
-[크게 보기](diagrams/harness-architecture.svg) · [편집 가능한 그래프 원본](diagrams/harness-architecture.dot)
+    classDef area fill:#ffffff,stroke:#568878,color:#172b25
+    classDef bridge fill:#eff6ff,stroke:#6589bb,color:#172b4d
+    classDef core fill:#f3f4f6,stroke:#747d8c,color:#1f2937
+    class W,A,T,S,V,O area
+    class B bridge
+    class C core
+    style EH fill:#edf7f1,stroke:#568878,color:#172b25
+    style R1 fill:transparent,stroke:transparent
+    style R2 fill:transparent,stroke:transparent
+    style R3 fill:transparent,stroke:transparent
+```
+
+외부 하네스의 여섯 영역에 적힌 기술은 비교 후보이며, 영역 사이의 실행 순서를 뜻하지 않는다.
 
 ## 사용 구조
 
-![인터페이스와 하네스, 하네스와 모델이 양방향으로 연결되는 사용 구조](diagrams/usage-flow.svg)
+```mermaid
+flowchart LR
+    I["인터페이스"]
+    H["하네스"]
+    M["모델"]
+    I <--> H
+    H <--> M
 
-[크게 보기](diagrams/usage-flow.svg) · [편집 가능한 그래프 원본](diagrams/usage-flow.dot)
+    style I fill:#eff6ff,stroke:#6589bb,color:#172b4d
+    style H fill:#edf7f1,stroke:#568878,color:#172b25
+    style M fill:#f3f4f6,stroke:#747d8c,color:#1f2937
+```
 
 여기서 하네스는 위의 외부 하네스, Codex 연결 계층과 Codex Core를 포함한다.
 
@@ -95,10 +145,5 @@ OpenTelemetry는 계측 기반이며 관찰 화면을 제공하는 제품과 함
 
 ## 그래프 편집
 
-두 그래프는 GitHub에서 직접 표시되는 SVG다. HTML이나 Mermaid 실행을 요구하지 않는다.
-DOT 원본을 수정한 뒤 Graphviz로 SVG를 다시 만든다.
-
-```sh
-dot -Tsvg docs/diagrams/harness-architecture.dot -o docs/diagrams/harness-architecture.svg
-dot -Tsvg docs/diagrams/usage-flow.dot -o docs/diagrams/usage-flow.svg
-```
+두 그래프는 이 문서의 `mermaid` 코드 블록으로 작성되어 GitHub에서 직접 렌더링된다.
+노드·연결·문구는 해당 코드 블록에서 수정한다.

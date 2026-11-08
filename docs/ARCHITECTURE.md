@@ -1,4 +1,5 @@
 # 시스템 아키텍처
+```mermaid
 flowchart TD
     G["최종 목표 G"]
 

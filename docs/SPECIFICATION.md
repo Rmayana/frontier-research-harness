@@ -62,7 +62,7 @@ flowchart TD
     C["에이전트: 과학에 기반한 판단"]
     D["연구: 근거·원리·가설 검토"]
     E["개발: 더 나은 수련법 설계·개선"]
-    F["나의 훈련"]
+    F["운영"]
     G["데이터: 수행·상태·변화"]
     H["피드백: 예측과 실제 비교"]
     I["나의 성장 평가"]
@@ -70,6 +70,7 @@ flowchart TD
     A --> B --> C --> D --> E --> F --> G --> H --> I
     H -->|"설명·방법 수정"| C
     I -->|"새 상태·다음 목표"| A
+    G -->|"데이터 기반 운영"| F
 
     style A fill:#dbeafe,color:#1e40af,stroke:#60a5fa
     style B fill:#dbeafe,color:#1e40af,stroke:#60a5fa

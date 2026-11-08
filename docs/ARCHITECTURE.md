@@ -1,6 +1,6 @@
 # 시스템 아키텍처
 
-2026-11-06 (Asia/Seoul) · 정한 기술 구현 방향을 바탕으로 시스템 전체 운영 구조와 모듈 경계를 설계한다.
+2026-11-08 (Asia/Seoul) · 정한 기술 구현 방향을 바탕으로 시스템 전체 운영 구조와 모듈 경계를 설계한다.
 
 **기술 구현 방향:** 외부 하네스 ↔ Codex SDK / App Server / CLI ↔ Codex Core.
 
@@ -36,9 +36,150 @@ flowchart TB
 Worker 내부에 서브에이전트나 팀을 둘 수 있다. 글은 아키텍처 탐구와 일부 구현된
 프로토타입을 다루며, 제품의 현재 기능을 설명하는 문서와 구분한다.
 
-현재 설계에서는 Router·Worker의 책임, 작업 분담·전달·통합과 문맥·상태·실행·복구의
-모듈 경계를 구체화한다. 글의 이벤트 처리, 문맥 관리, 비동기 실행, 계산·상태·환경 분리,
-Watchdog은 우리 요구사항에 맞춰 채택 범위를 정할 참고 기법이다.
+현재 설계에서는 아래 원본 그래프를 기준으로 Router·Worker의 책임, 작업 분담·전달·통합과
+문맥·상태·실행·복구의 모듈 경계를 구체화한다.
+
+### 슈퍼에이전트 원본 그래프
+
+2026-11-08 사용자는 아래 슈퍼에이전트 원본 그래프를 그대로 아키텍처 설계의 기준으로
+사용하기로 했다. 사용자가 대화에 제공한 Mermaid의 노드·문구·연결을 수정 없이 보존한다.
+이는 설계 기준이며 실제 구현·실행 검증 상태와 구분한다.
+
+```mermaid
+flowchart TB
+    U["사용자"]
+    EXT["외부 시스템<br/>GitHub · 채팅 · CI · 이메일"]
+
+    subgraph INPUT["① 이벤트 수집 및 라우팅"]
+        SRC["Event Sources<br/>Webhook · Polling"]
+        POL["Policy / Fast Path<br/>권한 · 필터 · 중복 검사"]
+        SUB{"기존 Thread 구독<br/>Worker 존재?"}
+        ASS["Assessor / Slow Path<br/>LLM 기반 이벤트 평가"]
+    end
+
+    subgraph ORCH["② 작업 오케스트레이션"]
+        R["Router Agent<br/>전역 맥락 · 작업 판단 · 분배"]
+        ENG["Engine<br/>명령 적용 · 작업 상태 전이"]
+        TASK["Task / Ticket Manager<br/>작업 · 담당자 · 구독 관리"]
+    end
+
+    subgraph EXEC["③ 병렬 에이전트 실행"]
+        WM["Worker / Session Manager"]
+        W1["Worker A<br/>Agent Loop"]
+        W2["Worker B<br/>Agent Loop"]
+        W3["Worker C<br/>Agent Loop"]
+    end
+
+    subgraph TOOLS["④ 도구 및 실행 환경"]
+        RT["Agent Runtime<br/>모델 호출 · 도구 실행"]
+        LOCAL["Local Machine<br/>파일 · 터미널"]
+        CLOUD["Cloud Sandbox<br/>컨테이너 · 개발 환경"]
+        API["External APIs<br/>GitHub · MCP · 서비스"]
+    end
+
+    subgraph STATE["⑤ 상태 및 메시지 관리"]
+        DB[("Persistent Store<br/>세션 · 작업 · 이벤트")]
+        OUT["Outbox<br/>결과 전달 · 재시도"]
+    end
+
+    subgraph CONTROL["⑥ 외부 감독"]
+        WD["Watchdog<br/>진행 감시 · 장애 감지"]
+        REC["Recovery<br/>재시도 · 재개 · 보고"]
+    end
+
+    U --> SRC
+    EXT --> SRC
+    SRC --> POL
+    POL --> SUB
+
+    SUB -->|"기존 담당자 있음"| WM
+    SUB -->|"신규 / 미구독"| ASS
+    ASS --> R
+
+    R --> ENG
+    ENG --> TASK
+    TASK --> WM
+
+    WM --> W1
+    WM --> W2
+    WM --> W3
+
+    W1 --> RT
+    W2 --> RT
+    W3 --> RT
+
+    RT --> LOCAL
+    RT --> CLOUD
+    RT --> API
+
+    W1 -->|"결과"| ENG
+    W2 -->|"결과"| ENG
+    W3 -->|"결과"| ENG
+
+    ENG <--> DB
+    WM <--> DB
+    ENG --> OUT
+    OUT --> U
+    OUT --> EXT
+
+    WD -.-> DB
+    WD -.-> WM
+    WD --> REC
+    REC --> ENG
+```
+
+## 연구개발 워크플로
+
+요구사항의 과학적 추론·프론티어 연구·지능적인 연구를 통합하고 역설계 경로를 추가한
+연구개발 흐름이다. 아래 두 그래프는 대화에서 작성한 워크플로를 그대로 저장한 것이다.
+시스템 구조의 각 모듈에 배치하는 방식과 모듈 내부 실행 제어는 후속 설계에서 구체화한다.
+
+### 통합 연구개발 워크플로
+
+```mermaid
+flowchart TD
+    A["문제: 목표·지식·불확실성"]
+    R["역설계: 관측된 성과·원리 추론"]
+    B["구상: 설명·해결안·예측"]
+    C["판단: 다음 작업 선택"]
+    D["수행: 조사·개발·검증"]
+    E["평가: 근거·효과·전략"]
+    F["성과: 지식·방법·한계 정리"]
+
+    A --> B --> C --> D --> E
+    A -->|"참고 대상 분석"| R --> B
+    E -->|"추가 작업"| C
+    E -->|"설명·방법 수정"| B
+    E -->|"문제·전제 재검토"| A
+    E -->|"현재 성과 정리"| F
+    F -->|"운영 데이터·후속 질문"| A
+
+    style R fill:#dbeafe,color:#1e40af,stroke:#60a5fa
+    style F fill:#dcfce7,color:#166534,stroke:#4ade80
+```
+
+역설계는 참고할 성과나 구현이 있을 때 선택하는 연구 경로다. 연구 결과에 따라
+추가 작업·설명 수정·문제 재정의로 돌아가며, 모든 연구에 같은 단계 순서를 강제하지 않는다.
+
+### 역설계 내부 워크플로
+
+```mermaid
+flowchart TD
+    A["관측: 성과·수행·훈련 자료"]
+    B["분해: 구성 요소·조건·상호작용"]
+    C["추론: 작동 원리·경쟁 설명"]
+    D["검증: 예측·근거·반례 비교"]
+    E["설계: 목표에 맞는 방법 도출"]
+
+    A --> B --> C --> D
+    D -->|"자료 부족"| A
+    D -->|"설명 불일치"| C
+    D -->|"근거·적용 조건 정리"| E
+    E -->|"실제 결과로 재검토"| D
+```
+
+직접 관측한 사실, 근거로 추론한 설명, 새로 설계한 방법을 구분한다.
+선수의 퍼포먼스·훈련뿐 아니라 기존 연구 방법·도구·시스템에도 적용할 수 있다.
 
 ## 하네스 구성도
 

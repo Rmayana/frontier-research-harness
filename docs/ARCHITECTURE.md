@@ -9,23 +9,6 @@
 
 **기술 후보:** 각 영역의 제품·라이브러리는 비교할 후보이며, 모두 도입하거나 특정 조합을 확정한 것은 아니다.
 
-## 시스템 운영 구조
-
-```mermaid
-flowchart TB
-    U["사용자 · 인터페이스"]
-    R["Router 계층"]
-    subgraph W["Worker 계층"]
-        W1["Worker 1"]
-        WN["Worker N"]
-    end
-    U <--> R
-    R <--> W1
-    R <--> WN
-```
-
-이 그래프는 선택한 운영 구조의 두 계층을 나타낸다. Worker의 수·전문 역할과
-계층 내부의 세부 구성은 모듈화 설계에서 정한다.
 
 설계 참고: DeepSeek Harness 팀,
 [Super-agent 设计探索：迈向更自主的 Agent 系统](https://mp.weixin.qq.com/s/zoS7GlReWPhfCjENGxXCdg)

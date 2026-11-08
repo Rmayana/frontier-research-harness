@@ -57,21 +57,21 @@
 
 ```mermaid
 flowchart TD
-    A["나: 현재 상태·환경"]
+    
     B["목표: 최대 성장 추구"]
     C["에이전트: 과학에 기반한 판단"]
     D["연구: 근거·원리·가설 검토"]
     E["개발: 더 나은 수련법 설계·개선"]
-    F["운영:훈련,영양,휴식등 제공"]
+    F["운영:훈련·영양·휴식등 제공"]
     G["데이터: 수행·상태·변화"]
-    H["피드백: 예측과 실제 비교"]
-    I["나의 성장 평가"]
+    
+  
 
-    A --> B --> C --> D --> E --> F --> G 
+   B --> C --> D --> E --> F --> G 
    
     G -->|"데이터 기반 운영"| F
 
-    style A fill:#dbeafe,color:#1e40af,stroke:#60a5fa
+    
     style B fill:#dbeafe,color:#1e40af,stroke:#60a5fa
     style I fill:#dcfce7,color:#166534,stroke:#4ade80
 ```

@@ -1,4 +1,40 @@
 # 시스템 아키텍처
+flowchart TD
+    G["최종 목표 G"]
+
+    A["필요조건 A"]
+    B["필요조건 B"]
+    C["필요조건 C"]
+
+    A1["해결 방법 A1"]
+    A2["대안 A2"]
+    B1["필요조건 B1"]
+    B2["필요조건 B2"]
+    C1["해결 방법 C1"]
+
+    X["공통 핵심 문제 X"]
+    Y["새로운 해결 전략 Y"]
+    Z["실행·검증"]
+    R["결과 평가 및 재계획"]
+
+    G --> A & B & C
+    A --> A1 & A2
+    B --> B1 & B2
+    C --> C1
+
+    A1 --> X
+    B1 --> X
+    X --> Y
+    A2 --> Z
+    B2 --> Z
+    C1 --> Z
+    Y --> Z
+    Z --> R
+    R -.->|"목표·조건 재검토"| G
+
+    style G fill:#dbeafe,color:#1e40af,stroke:#60a5fa
+    style X fill:#fef3c7,color:#92400e,stroke:#f59e0b
+    style Y fill:#dcfce7,color:#166534,stroke:#4ade80
 
 2026-11-08 (Asia/Seoul) · 정한 기술 구현 방향을 바탕으로 시스템 전체 운영 구조와 모듈 경계를 설계한다.
 

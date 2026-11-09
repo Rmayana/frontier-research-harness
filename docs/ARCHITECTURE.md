@@ -1,6 +1,6 @@
 # 시스템 아키텍처
-`
-2026-11-08 (Asia/Seoul) · 정한 기술 구현 방향을 바탕으로 시스템 전체 운영 구조와 모듈 경계를 설계한다.
+
+2026-11-09 (Asia/Seoul) · 정한 기술 구현 방향을 바탕으로 시스템 전체 운영 구조와 모듈 경계를 설계한다.
 
 **기술 구현 방향:** 외부 하네스 ↔ Codex SDK / App Server / CLI ↔ Codex Core.
 
@@ -9,6 +9,100 @@
 
 **기술 후보:** 각 영역의 제품·라이브러리는 비교할 후보이며, 모두 도입하거나 특정 조합을 확정한 것은 아니다.
 
+
+## 전체 구조 아키텍처
+
+2026-11-09 사용자가 저장하기로 한 시스템 전체 구조다. 슈퍼에이전트 원본을 바탕으로
+목표별 연구 상태의 지속, 연구와 운영의 병렬 수행, 결과 통합 기능을 반영했다.
+구체적인 내부 동작과 실제 구현·검증은 후속 설계에서 진행한다.
+
+```mermaid
+flowchart TB
+    U["사용자"]
+    EXT["외부 시스템<br/>연결 범위 미정"]
+
+    subgraph INPUT["① 입력 및 라우팅"]
+        SRC["Event Sources<br/>사용자 입력 · 외부 이벤트"]
+        ER["Event Routing<br/>필터 · 기존 작업 연결 · 신규 입력 평가"]
+    end
+
+    subgraph CONTROL["② 목표 전달 및 작업 관리"]
+        R["Router<br/>목표 이해 · 분해 · Worker에 전달"]
+        ENG["Engine<br/>명령 적용 · 작업 상태 전이"]
+        TASK["Task / Ticket Manager<br/>목표 · 작업 · 담당 배정 관리"]
+    end
+
+    subgraph WORKERS["③ Worker 실행"]
+        WM["Worker / Session Manager<br/>생성 · 재개 · 담당 교체"]
+        RW["Workers<br/>목표별 연구개발"]
+        OW["Workers<br/>운영 요청 처리"]
+    end
+
+    subgraph EXEC["④ Worker 하네스 및 실행 환경"]
+        WH["Worker Harness<br/>Context · Agent Loop · Tools"]
+        RT["Agent Runtime<br/>Codex 연결 · 모델 및 도구 실행"]
+        ENV["Execution Environment<br/>파일 · 계산 · 개발 · 시뮬레이션"]
+        API["External Tools<br/>검색 · 지식원 · MCP · 서비스"]
+    end
+
+    subgraph DATA["⑤ 지식·상태·결과 관리"]
+        DB[("Persistent Store<br/>목표별 연구 상태 · 작업 · 세션")]
+        KNOW["Knowledge / Data Store<br/>근거 · 산출물 · 개인 데이터"]
+        INT["결과 통합<br/>통합안 생성 · 담당 미정"]
+        OUT["Outbox<br/>보고 · 질문 · 결과 전달"]
+    end
+
+    subgraph RECOVERY["⑥ 감시 및 복구"]
+        WD["Watchdog<br/>진행 감시 · 장애 감지"]
+        REC["Recovery<br/>실패 처리 · 중단 · 재개"]
+    end
+
+    U --> SRC
+    EXT --> SRC
+    SRC --> ER
+    ER -->|"새 목표·작업"| R
+    ER -->|"기존 작업의 후속 입력"| WM
+
+    R --> ENG --> TASK --> WM
+    WM --> RW
+    WM --> OW
+
+    RW <--> WH
+    OW <--> WH
+    WH <--> RT
+    RT <--> ENV
+    RT <--> API
+
+    WH <-->|"필요한 자료·연구 결과"| KNOW
+    ENG <--> DB
+    WM <--> DB
+
+    RW -->|"연구 결과·진행 상태"| ENG
+    OW -->|"운영 결과·진행 상태"| ENG
+    ENG -->|"통합할 결과"| INT
+    KNOW -.->|"관련 근거·산출물"| INT
+    INT --> OUT
+    ENG -->|"진행·질문·개별 결과"| OUT
+    OUT --> U
+
+    WD -.-> WM
+    WD -.-> DB
+    WD --> REC --> ENG
+
+    style RW fill:#dbeafe,color:#1e40af,stroke:#60a5fa
+    style OW fill:#dbeafe,color:#1e40af,stroke:#60a5fa
+    style INT fill:#fef3c7,color:#92400e,stroke:#f59e0b,stroke-dasharray:5 5
+```
+
+- Router는 목표를 이해·분해하고 Worker에 전달한다.
+- 연구 상태는 목표별로 보존하고 담당 Worker는 필요하면 교체할 수 있다.
+- 연구를 계속하면서 다른 Worker가 운영 요청을 처리한다. 두 Worker 상자는 역할 구분이며 고정된 수나 조직을 뜻하지 않는다.
+- Worker Harness는 각 Worker의 내부 실행 기반이다.
+- 개별 결과와 함께 적용할 통합안을 제공한다. 통합 담당과 배정 방식은 미정이다.
+- 외부 입력의 연결 범위, Worker 간 공유·질문·결과 전달 방식은 미정이다.
+- 재귀개선은 우선 Worker가 수행할 작업에 포함하며, 별도 담당·연결의 필요성은 기능별 워크플로에서 정한다.
+
+## 설계 참고
 
 설계 참고: DeepSeek Harness 팀,
 [Super-agent 设计探索：迈向更自主的 Agent 系统](https://mp.weixin.qq.com/s/zoS7GlReWPhfCjENGxXCdg)
@@ -19,14 +113,12 @@
 Worker 내부에 서브에이전트나 팀을 둘 수 있다. 글은 아키텍처 탐구와 일부 구현된
 프로토타입을 다루며, 제품의 현재 기능을 설명하는 문서와 구분한다.
 
-현재 설계에서는 아래 원본 그래프를 기준으로 Router·Worker의 책임, 작업 분담·전달·통합과
-문맥·상태·실행·복구의 모듈 경계를 구체화한다.
+현재 설계 기준은 위의 전체 구조 아키텍처다. 아래 원본은 출발점이 된 참고 자료로 보존한다.
 
 ### 슈퍼에이전트 원본 그래프
 
-2026-11-08 사용자는 아래 슈퍼에이전트 원본 그래프를 그대로 아키텍처 설계의 기준으로
-사용하기로 했다. 사용자가 대화에 제공한 Mermaid의 노드·문구·연결을 수정 없이 보존한다.
-이는 설계 기준이며 실제 구현·실행 검증 상태와 구분한다.
+2026-11-08 사용자가 설계의 출발점으로 선택한 슈퍼에이전트 원본이다.
+사용자가 대화에 제공한 Mermaid의 노드·문구·연결을 수정 없이 보존한다.
 
 ```mermaid
 flowchart TB
@@ -111,7 +203,7 @@ flowchart TB
     REC --> ENG
 ```
 
-#.
+## 연구 워크플로
 
 ### 역설계 기반 연구 워크플로
 

@@ -2,9 +2,9 @@
 
 | 문서 정보 | 내용 |
 | --- | --- |
-| 버전 · 기준일 | **0.28** · 2026-11-08 (Asia/Seoul) |
+| 버전 · 기준일 | **0.29** · 2026-11-12 (Asia/Seoul) |
 | 상태 | 정한 기술 구현 방향을 바탕으로 Router–Worker 멀티에이전트의 시스템 전체 운영 구조와 모듈 경계를 설계한다. |
-| 관련 문서 | [프로젝트 안내](../README.md) · [아키텍처](ARCHITECTURE.md) |
+| 관련 문서 | [프로젝트 안내](../README.md) |
 
 ## 빠른 탐색
 
@@ -18,6 +18,7 @@
 | 비용·구독·모바일 | [8. 비용·사용량·재개](#8-비용사용량재개) |
 | 첫 버전·기술 참고 | [9. 첫 버전의 필수 범위](#9-첫-버전의-필수-범위) · [10. 구현을 위한 기술 참고 요구와 이전 선택](#10-구현을-위한-기술-참고-요구와-이전-선택) |
 | 미정 사항·문서 기준 | [11. 다음으로 구체화할 항목](#11-다음으로-구체화할-항목) · [12. 새 출발과 문서 기준](#12-새-출발과-문서-기준) |
+| 연구 워크플로·기술 참고 | [연구 워크플로](#연구-워크플로) · [하네스 구성도](#하네스-구성도) · [사용 구조](#사용-구조) · [도구·프레임워크 후보](#영역별-도구프레임워크-후보) · [Codex 연결](#codex-연결과-선택-범위) |
 | 관리·변경 기록 | [기록](#기록) · [변경 이력](#변경-이력) |
 
 ## 문서 안내
@@ -557,7 +558,7 @@ PC 종료 중 실행에는 대신 사용할 실행 환경이 필요하며, 공�
 2026-11-05 사용자는 첨부한 **외부 하네스 ↔ Codex SDK / App Server / CLI ↔ Codex Core**
 구조를 확정하고, 이전 아키텍처를 지운 뒤 설계를 다시 진행하기로 했다.
 사용 구조는 **인터페이스 ↔ 하네스 ↔ 모델**이다.
-[하네스 구성도와 사용 구조](ARCHITECTURE.md)를 현재 아키텍처 설계의 기준으로 삼는다.
+[하네스 구성도](#하네스-구성도)와 [사용 구조](#사용-구조)를 현재 아키텍처 설계의 기준으로 삼는다.
 
 기존 Codex 구독 사용량, 모바일 사용과 ChatGPT 공식 앱 우선 원칙,
 추가 비용의 공동 결정은 유지한다. 구체적인 연결·배치·실행 위치는 후속 설계에서 정한다.
@@ -572,7 +573,7 @@ PC 종료 중 실행에는 대신 사용할 실행 환경이 필요하며, 공�
 설계 참고는 사용자가 제시한 DeepSeek Harness 팀의
 [Super-agent 아키텍처 탐구](https://mp.weixin.qq.com/s/zoS7GlReWPhfCjENGxXCdg)다.
 Router와 Worker의 구체적인 책임, 작업 분담·전달·통합, 문맥·상태 관리와
-실행·복구 모듈의 경계는 [아키텍처](ARCHITECTURE.md)에서 구체화한다.
+실행·복구 모듈의 경계는 후속 아키텍처 설계에서 구체화한다.
 참고 글의 추가 기법과 특정 프레임워크의 채택 여부는 해당 설계에서 정한다.
 
 #### 실행 검증이 필요한 사항
@@ -742,10 +743,198 @@ Codex 메인, 뇌 연구 에이전트의 기능과 연구 방식, DeepSeek의 �
 새 시스템의 요구나 실행 기준으로 승계하지 않는다.
 
 현재는 이 요구사항과 정한 기술 구현 방향을 바탕으로,
-Router–Worker 기반 시스템 운영 구조와 모듈 경계를 [아키텍처](ARCHITECTURE.md)에서 설계한다.
+Router–Worker 기반 시스템 운영 구조와 모듈 경계를 후속 논의에서 설계한다.
 기능별 세부안·상세 기술 설계와 구현은 이후 논의를 통해 진행한다.
 이 정리는 새로운 연구 실행이나 개인 실험·수련 프로그램의
 실제 적용을 뜻하지 않는다.
+
+## 연구 워크플로
+
+### 역설계 기반 연구 워크플로
+
+```mermaid
+flowchart TD
+    G["최종 목표 G"]
+
+    A["필요조건 A"]
+    B["필요조건 B"]
+    C["필요조건 C"]
+
+    A1["해결 방법 A1"]
+    A2["대안 A2"]
+    B1["필요조건 B1"]
+    B2["필요조건 B2"]
+    C1["해결 방법 C1"]
+
+    X["공통 핵심 문제 X"]
+    Y["새로운 해결 전략 Y"]
+    Z["실행·검증"]
+    R["결과 평가 및 재계획"]
+
+    G --> A & B & C
+    A --> A1 & A2
+    B --> B1 & B2
+    C --> C1
+
+    A1 --> X
+    B1 --> X
+    X --> Y
+    A2 --> Z
+    B2 --> Z
+    C1 --> Z
+    Y --> Z
+    Z --> R
+    R -.->|"목표·조건 재검토"| G
+
+    style G fill:#dbeafe,color:#1e40af,stroke:#60a5fa
+    style X fill:#fef3c7,color:#92400e,stroke:#f59e0b
+    style Y fill:#dcfce7,color:#166534,stroke:#4ade80
+```
+
+직접 관측한 사실, 근거로 추론한 설명, 새로 설계한 방법을 구분한다.
+선수의 퍼포먼스·훈련뿐 아니라 기존 연구 방법·도구·시스템에도 적용할 수 있다.
+
+## 하네스 구성도
+
+```mermaid
+%%{init: {"flowchart": {"nodeSpacing": 24, "rankSpacing": 24, "wrappingWidth": 280}}}%%
+flowchart TB
+    subgraph EH["외부 하네스 · 직접 설계"]
+        direction TB
+        subgraph R1[" "]
+            direction LR
+            W["워크플로 제어<br/>LangGraph · Temporal<br/>Prefect · Dagster<br/>직접 구현: Python 등"]
+            A["다중 에이전트<br/>LangGraph · Pydantic AI · CrewAI<br/>Microsoft Agent Framework<br/>자체 Orchestrator"]
+            W ~~~ A
+        end
+        subgraph R2[" "]
+            direction LR
+            T["도구 통합<br/>MCP · OpenAPI<br/>FastMCP · 공식 MCP SDK<br/>FastAPI · Python 함수"]
+            S["상태 및 기억<br/>SQLite · PostgreSQL · Redis<br/>pgvector · Qdrant<br/>LlamaIndex · Haystack"]
+            T ~~~ S
+        end
+        subgraph R3[" "]
+            direction LR
+            V["검증<br/>pytest · Hypothesis<br/>Pydantic · JSON Schema<br/>promptfoo · DeepEval"]
+            O["모니터링<br/>LangSmith · Langfuse<br/>OpenTelemetry<br/>Phoenix · MLflow"]
+            V ~~~ O
+        end
+        R1 ~~~ R2
+        R2 ~~~ R3
+    end
+    B["연결 계층<br/>Codex SDK / App Server / CLI"]
+    C["Codex Core<br/>기존 Agent Loop · 모델 추론<br/>도구 실행 · 컨텍스트 관리"]
+    EH <--> B
+    B <--> C
+
+    classDef area fill:#ffffff,stroke:#568878,color:#172b25
+    classDef bridge fill:#eff6ff,stroke:#6589bb,color:#172b4d
+    classDef core fill:#f3f4f6,stroke:#747d8c,color:#1f2937
+    class W,A,T,S,V,O area
+    class B bridge
+    class C core
+    style EH fill:#edf7f1,stroke:#568878,color:#172b25
+    style R1 fill:transparent,stroke:transparent
+    style R2 fill:transparent,stroke:transparent
+    style R3 fill:transparent,stroke:transparent
+```
+
+외부 하네스의 여섯 영역에 적힌 기술은 비교 후보이며, 영역 사이의 실행 순서를 뜻하지 않는다.
+
+## 사용 구조
+
+```mermaid
+flowchart LR
+    I["인터페이스"]
+    H["하네스"]
+    M["모델"]
+    I <--> H
+    H <--> M
+
+    style I fill:#eff6ff,stroke:#6589bb,color:#172b4d
+    style H fill:#edf7f1,stroke:#568878,color:#172b25
+    style M fill:#f3f4f6,stroke:#747d8c,color:#1f2937
+```
+
+여기서 하네스는 위의 외부 하네스, Codex 연결 계층과 Codex Core를 포함한다.
+
+## 영역별 도구·프레임워크 후보
+
+Python은 프로그래밍 언어, MCP·OpenAPI는 연결·API 규격이다. 프레임워크, SDK, 저장소와 역할을 구분해 비교한다.
+아래 링크는 각 프로젝트의 공식 문서·저장소다.
+
+### 워크플로 제어
+
+| 종류 | 후보 | 역할 |
+| --- | --- | --- |
+| 상태·그래프 실행 | [LangGraph](https://docs.langchain.com/oss/python/langgraph/overview) | 분기·반복·상태 보존과 사용자 개입을 포함하는 실행 흐름 |
+| 지속 실행 | [Temporal](https://docs.temporal.io/workflows) | 장시간 작업·대기·실패 후 복구를 관리하는 실행 기반 |
+| 작업 흐름 관리 | [Prefect](https://docs.prefect.io/v3/get-started) | Python 작업의 실행·상태·스케줄·실패 처리 |
+| 데이터 작업 관리 | [Dagster](https://docs.dagster.io/) | 데이터 자산과 분석 파이프라인의 의존 관계·생성 이력 관리 |
+| 직접 구현 | Python 등으로 작성한 제어 코드 | 프로젝트에 필요한 실행 규칙을 직접 구성 |
+
+### 다중 에이전트
+
+| 종류 | 후보 | 역할 |
+| --- | --- | --- |
+| 그래프 기반 구성 | [LangGraph](https://docs.langchain.com/oss/python/langgraph/overview) | 에이전트 작업과 일반 함수를 연결하는 흐름 구성 |
+| 타입 기반 에이전트 SDK | [Pydantic AI](https://ai.pydantic.dev/) | 타입·구조화 결과를 활용하는 에이전트와 하위 에이전트 구성 |
+| 팀·작업 흐름 | [CrewAI](https://docs.crewai.com/en/introduction) | 협력하는 에이전트 팀과 상태를 가진 작업 흐름 구성 |
+| 에이전트·워크플로 프레임워크 | [Microsoft Agent Framework](https://learn.microsoft.com/en-us/agent-framework/overview/) | 에이전트와 함수를 연결하는 다중 에이전트 실행 구성 |
+| 직접 구현 | 자체 Orchestrator | Codex 실행들을 프로젝트에 맞게 배정·조정 |
+
+### 도구 통합
+
+| 종류 | 후보 | 역할 |
+| --- | --- | --- |
+| 연결 규격 | [MCP](https://modelcontextprotocol.io/), [OpenAPI](https://spec.openapis.org/oas/latest.html) | 각각 모델용 도구 연결과 HTTP API 명세 |
+| MCP 프레임워크 | [FastMCP](https://gofastmcp.com/getting-started/welcome) | 함수·데이터를 MCP 도구로 제공하고 서버·클라이언트 구성 |
+| 프로토콜 SDK | [공식 MCP SDK](https://github.com/modelcontextprotocol/python-sdk) | MCP 서버·클라이언트와 도구 연결을 직접 구현 |
+| API 프레임워크 | [FastAPI](https://fastapi.tiangolo.com/) | 분석·계산 기능을 HTTP API로 제공 |
+| 직접 연결 | Python 함수 등 | 같은 실행 환경의 기능을 직접 호출 |
+
+### 상태 및 기억
+
+| 종류 | 후보 | 역할 |
+| --- | --- | --- |
+| 상태 저장 | [SQLite](https://www.sqlite.org/docs.html), [PostgreSQL](https://www.postgresql.org/docs/), [Redis](https://redis.io/docs/latest/) | 각각 내장 관계형 DB, 서버형 관계형 DB, 메모리 중심 데이터 저장소 |
+| 벡터 저장·검색 | [pgvector](https://github.com/pgvector/pgvector), [Qdrant](https://qdrant.tech/documentation/) | 각각 PostgreSQL의 벡터 검색 확장과 벡터 검색 엔진 |
+| 자료 연결·검색 프레임워크 | [LlamaIndex](https://developers.llamaindex.ai/python/framework/), [Haystack](https://docs.haystack.deepset.ai/docs/intro) | 문서·자료를 연결하고 검색·문맥 제공 파이프라인 구성 |
+
+저장소와 검색 프레임워크는 서로 다른 역할이다. 저장소를 선택하는 것만으로 에이전트의 장기 기억이 완성되지는 않는다.
+
+### 검증
+
+| 종류 | 후보 | 역할 |
+| --- | --- | --- |
+| 코드·실행 검사 | [pytest](https://docs.pytest.org/), [Hypothesis](https://hypothesis.readthedocs.io/en/latest/) | 테스트 실행과 다양한 입력·경계 조건에 대한 속성 검사 |
+| 데이터 형식 검사 | [Pydantic](https://docs.pydantic.dev/), [JSON Schema](https://json-schema.org/) | 입력·출력의 타입과 구조 검사 |
+| 응답·에이전트 평가(Evals) | [promptfoo](https://www.promptfoo.dev/docs/intro/), [DeepEval](https://deepeval.com/docs/getting-started) | 사례별 결과 비교, 응답·에이전트 동작의 평가와 회귀 확인 |
+
+형식 검사, 실행 성공, 연구 결과의 과학적 타당성은 서로 다른 검증 대상이다.
+
+### 모니터링
+
+| 종류 | 후보 | 역할 |
+| --- | --- | --- |
+| 에이전트 실행 관찰 | [LangSmith](https://docs.langchain.com/langsmith/observability), [Langfuse](https://langfuse.com/docs) | 실행 추적·디버깅·평가 결과 확인 |
+| 계측 표준·도구 | [OpenTelemetry](https://opentelemetry.io/docs/what-is-opentelemetry/) | 추적·메트릭·로그의 생성·수집·전달 |
+| 추적·평가 도구 | [Phoenix](https://arize.com/docs/phoenix) | 도구·검색·모델 호출 추적과 평가·실험 비교 |
+| 추적·실험 관리 | [MLflow](https://mlflow.org/docs/latest/genai/tracing/) | 에이전트 실행 단계 추적과 실험·평가 관리 |
+
+OpenTelemetry는 계측 기반이며 관찰 화면을 제공하는 제품과 함께 사용할 수 있다.
+
+## Codex 연결과 선택 범위
+
+- 연결 계층은 [Codex SDK](https://learn.chatgpt.com/docs/codex-sdk), [app-server](https://learn.chatgpt.com/docs/app-server), [CLI](https://learn.chatgpt.com/docs/cli)다. 언어·워크플로 프레임워크와 다른 선택이다.
+- 모델 추론은 기존 Codex 계정의 사용량을 쓰는 실행 경로로 연결한다. 외부 에이전트 프레임워크의 기본 모델 API 연결이 Codex 구독 연동을 뜻하지는 않는다.
+- 각 프레임워크와 Codex를 연결하는 방식은 아직 실행 검증하지 않았다. 모델 기반 평가와 임베딩을 사용하는 경우도 해당 모델·인증·비용 경로를 별도로 정한다.
+- 이번에는 영역별 후보를 확장했다. 구체적인 채택 조합·배포 환경·서비스 비용은 후속 설계에서 정한다.
+
+## 그래프 편집
+
+그래프는 이 문서의 `mermaid` 코드 블록으로 작성되어 GitHub에서 직접 렌더링된다.
+노드·연결·문구는 해당 코드 블록에서 수정한다.
 
 ## 기록
 
@@ -758,6 +947,11 @@ Router–Worker 기반 시스템 운영 구조와 모듈 경계를 [아키텍처
 이는 설명의 구체성에 관한 원칙이며 모든 연구를 동일한 고정 순서로 실행한다는 뜻은 아니다.
 
 ## 변경 이력
+
+**0.29 — 연구 워크플로와 기술 참고 통합.** 아키텍처 문서의 연구 워크플로부터
+문서 끝까지 그래프·설명을 그대로 옮기고, 별도 아키텍처 문서를 삭제했다.
+이동 범위 위의 전체 구조·슈퍼에이전트 참고 그래프는 옮기지 않았다.
+도구·프레임워크의 후보 상태와 실행 검증 여부는 유지한다.
 
 **0.28 — 워크플로 그래프 간략화.** 사용자가 수정한 첫 큰그림을 기준으로 나머지
 7개 그래프의 세부 단계를 묶고 문구를 줄였다. 핵심 판단·피드백 흐름과 본문의 요구사항은 유지한다.

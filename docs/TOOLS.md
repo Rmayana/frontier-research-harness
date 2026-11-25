@@ -1,5 +1,22 @@
 # Codex 연구 도구 사용
 
+## 프로젝트 MCP와 스킬
+
+Codex에서 프로젝트 루트를 연다. 프로젝트 설정을 허용한 작업공간에서 `.codex/config.toml`이 Windows용 `frontier-training` stdio 서버를 등록한다. `.agents/skills`의 네 스킬은 요청 내용으로 선택한다. 다른 PC에 설치할 때는 아래 전용 환경의 Python에 `uv pip install --python <python.exe> -r tools/requirements.txt`로 SDK를 포함한 의존성을 설치하고, 그 PC의 실행기 및 비공개 저장소를 local-tools.json에 설정한다.
+
+| MCP 도구 | 입출력 |
+| --- | --- |
+| search_papers · read_source | 공개 검색어로 논문 후보를 조회한다. PMID는 초록, PMCID는 공개 본문을 읽고 발췌 위치와 다음 읽기 위치를 반환한다. |
+| inspect_video · read_activity | 지정된 비공개 records/inbox 아래의 파일명을 받는다. 영상은 타임스탬프별 프레임, CSV·FIT는 페이지별 관측을 반환한다. |
+| run_analysis | 같은 단위의 전후 수열을 받아 평균·변화·변동 폭을 반환한다. 역학 시뮬레이션은 아래 별도 로컬 실행기를 쓴다. |
+| append_record · read_record | records/training.sqlite3에 기록을 추가하거나 ID·주제로 조회한다. 같은 쓰기 요청은 한 번만 반영하고 정정은 기존 항목에 연결한다. 읽기만 하면 빈 DB를 만들지 않는다. |
+
+공개 문헌 조회만 외부 문헌 서비스로 요청한다. 영상 프레임·개인 기록을 도구 결과로 요청하면 해당 내용이 사용 중인 Codex 모델 문맥에 들어간다. 개인 자료나 식별자를 공개 검색에 포함하지 않는다. 사용자에게서 분석 권한을 받은 파일만 inbox에 넣는다. Exa·Firecrawl과 전문 시뮬레이터는 아래 기존 연결을 그대로 이용한다.
+
+프로젝트 설정을 읽었는지는 루트에서 `codex mcp list`로 확인한다. 변경 후 새 세션을 연다. Windows의 다른 폴더에서 MCP를 단독 검증하려면 프로젝트 루트로 이동해 `tools/start-mcp.ps1`을 stdio 클라이언트로 실행한다.
+
+## CLI와 개별 도구
+
 프로젝트 루트에서 공개 문헌을 검색한다. Windows 연구 환경은 사용자 앱 데이터의 `FrontierTraining`이다. 아래 명령은 개인 자료를 전송하지 않는다.
 
 ```powershell

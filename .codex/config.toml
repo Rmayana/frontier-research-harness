@@ -1,0 +1,5 @@
+[mcp_servers.frontier-training]
+command = "powershell.exe"
+args = ["-NoLogo", "-NoProfile", "-NonInteractive", "-Command", "& { $ErrorActionPreference = 'Stop'; $root = Get-Item -LiteralPath .; while ($root -and !(Test-Path -LiteralPath (Join-Path $root.FullName '.git'))) { $root = $root.Parent }; if (!$root) { throw 'Project root missing' }; & (Join-Path $root.FullName 'tools/start-mcp.ps1'); exit $LASTEXITCODE }"]
+startup_timeout_sec = 45
+tool_timeout_sec = 100
